@@ -1,0 +1,18 @@
+QLabel#normalLabel {
+    font: 75 12pt;
+}
+
+QLabel#sectionLabel {
+    font: bold 12pt \"黑体\";
+    color : white;
+}
+
+QLabel#headerLabel {
+    font: bold 16pt \"黑体\";
+    color : blue;
+}
+
+QPushButton {
+    font: 75 12pt;
+}
+
