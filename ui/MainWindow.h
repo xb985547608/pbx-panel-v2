@@ -35,6 +35,8 @@ public slots :
     void onEmergencyCallDlgSlot(QString strDisplayName,QString strNumber, QString strChannel, QString strUniqueid);
 protected:
     void timerEvent(QTimerEvent* event);
+    virtual void closeEvent(QCloseEvent *event);
+
 
 private:
     bool mStopOnError;

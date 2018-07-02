@@ -93,7 +93,7 @@ private:
     QString mHost;
     int mPort;
 };
-
+/************************ 监听事件 ************************/
 class EventMonitor : public QThread
 {
     Q_OBJECT

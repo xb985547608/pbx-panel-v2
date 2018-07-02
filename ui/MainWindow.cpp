@@ -13,6 +13,9 @@
 #include "message_queue/RPCCommand.h"
 #include "ui/meetme/MeetMeWidget.h"
 #include "ui/timedbroadcast/TimedBroadcastEditor.h"
+#include "VideoLinkage/videolinkagewidget.h"
+#include "mainwidget/OperatorZone.h"
+#include "mainwidget/ExtensionsZone.h"
 
 static MainWindow* sMainWindow = NULL;
 static void EventCallback(MessageClient::EventType e, QMap<QString, QString>& eventMessage) {
@@ -169,6 +172,19 @@ MainWindow::MainWindow(QStringList args, QWidget *parent) :
     QMap<QString, QVariant> params;
     loadActivity(BaseWidget::eMainWidget, params);
 
+    /************************ 视频联动 ************************/
+    VideoLinkageWidget *v = new VideoLinkageWidget();
+    MainWidget *mainWidget = dynamic_cast<MainWidget *>(getActivity(BaseWidget::eMainWidget));
+    Q_ASSERT_X(mainWidget != NULL, "MainWindow::MainWindow()", "MainWidget create error!!");
+    connect(mainWidget->getOperatorZone(), &OperatorZone::operatorExtenStateChagne,
+            v, &VideoLinkageWidget::operatorExtenStateChanged);
+    connect(mainWidget->getExtensionsZone(), &ExtensionsZone::extenStateChangedSignal,
+            v, &VideoLinkageWidget::extenStateChanged);
+    v->move(rect().topRight());
+    v->show();
+    connect(this, &MainWindow::destroyed, v, [v](){ v->deleteLater(); });
+    /************************ 视频联动 ************************/
+
     sMainWindow = this;
     sCallbackUuid = MessageClient::Instance()->getEventMonitor()->addCallback(EventCallback);
     connect(this, SIGNAL(onHAEventReceivedSignal(QString)), this, SLOT(onHAEventReceivedSlot(QString)));
@@ -254,6 +270,12 @@ void MainWindow::timerEvent(QTimerEvent* event)
 #endif
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    Q_UNUSED(event)
+    qApp->quit();
+}
+
 #ifdef EEPBX
 void MainWindow::storageFullNotice()
 {
@@ -286,24 +308,33 @@ void MainWindow::stopOnErrorSlot()
 
 void MainWindow::initActivities()
 {
+    /* 首页 */
     BaseWidget* mainWidget = new MainWidget(this, this);
     mActivities.insert(BaseWidget::eMainWidget, mainWidget);
+    /* 系统设置 */
     BaseWidget* settingsWidget = new SettingsWidget(this, this);
     mActivities.insert(BaseWidget::eSettings, settingsWidget);
-    BaseWidget* phoneBook = new UiPhoneBook(this, this);
-    mActivities.insert(BaseWidget::ePhoneBook, phoneBook);
     BaseWidget* eventPlanEditor = new EventPlanEditor(this, this);
     mActivities.insert(BaseWidget::eEventPlanEditor, eventPlanEditor);
+    /* 通讯录 */
+    BaseWidget* phoneBook = new UiPhoneBook(this, this);
+    mActivities.insert(BaseWidget::ePhoneBook, phoneBook);
+    /* 应急预案 */
     BaseWidget* emergencyWidget = new EventWidget(EventModel::eEmergency, this, this);
     mActivities.insert(BaseWidget::eEmergency, emergencyWidget);
+    /* 事件处理 */
     BaseWidget* eventWidget = new EventWidget(EventModel::eNormal, this, this);
     mActivities.insert(BaseWidget::eEvent, eventWidget);
+    /* 呼叫记录 */
     BaseWidget* cdrWidget = new CallLogWidget(this, this);
     mActivities.insert(BaseWidget::eCDR, cdrWidget);
+    /* 事件记录 */
     BaseWidget* eventlogWidget = new EventLog(this, this);
     mActivities.insert(BaseWidget::eEventLog, eventlogWidget);
+    /* 会议控制 */
     BaseWidget* meetMeWidget = new MeetMeWidget(this, this);
     mActivities.insert(BaseWidget::eMeetme, meetMeWidget);
+
     //zll
     BaseWidget* timedBroadcastEditor = new TimedBroadcastEditor(this, this);
     mActivities.insert(BaseWidget::eTimedBroadcastEditor, timedBroadcastEditor);

@@ -20,7 +20,8 @@ public:
     PBX::Extension getSelectedOpExten();
     
 signals:
-    
+    void operatorExtenStateChagne(QString number);
+
 public slots:
     
 private:

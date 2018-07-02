@@ -38,6 +38,7 @@ void OperatorZone::eventMessageReceived(QMap<QString, QString> &msg)
     */
     OperatorExten* e = mOpExtens.value(number);
     e->onStateChanged();
+    emit operatorExtenStateChagne(e->getPbxExten().number);
 }
 
 OperatorZone::OperatorZone(MainWidget *mw, QWidget *parent) :

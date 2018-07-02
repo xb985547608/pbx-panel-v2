@@ -78,7 +78,9 @@ void PBX::fireCallback(MessageClient::EventType e, QMap<QString, QString> &messa
 
 bool PBX::initialise()
 {
+    /* 获取分机详情 */
     mExtensions = RPCCommand::getExtensionDetailed();
+    /* 增加消息回调函数 */
     MessageClient::Instance()->getEventMonitor()->addCallback(EventCallback);
     return true;
 }
