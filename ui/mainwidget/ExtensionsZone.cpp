@@ -155,6 +155,7 @@ ExtensionsZone::ExtensionsZone(MainWidget *mainWidget, QWidget *parent) :
     mTextArea->setOnlineExtensCount(0);
     mTextArea->setConferenceRoomCount(0);
     //QString callbackUuid = MessageClient::Instance()->getEventMonitor()->addCallback(EventCallback);
+    /* 获取实时消息 */
     QString callbackUuid = PBX::Instance()->addCallback(EventCallback);
     sCallbacks.append(callbackUuid);
     connect(this, SIGNAL(extenStateChangedSignal(QString,int)), this, SLOT(extenStateChangedSlot(QString,int)));

@@ -215,6 +215,7 @@ Makefile: PbxPanel.pro D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++/qmake.co
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/toolchain.prf \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/default_pre.prf \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/win32/default_pre.prf \
+		VideoLinkage/VideoLinkage.pri \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/resolve_config.prf \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/exclusive_builds_post.prf \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/default_post.prf \
@@ -394,6 +395,7 @@ D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/exclusive_builds.prf:
 D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/toolchain.prf:
 D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/default_pre.prf:
 D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/win32/default_pre.prf:
+VideoLinkage/VideoLinkage.pri:
 D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/resolve_config.prf:
 D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/exclusive_builds_post.prf:
 D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/default_post.prf:

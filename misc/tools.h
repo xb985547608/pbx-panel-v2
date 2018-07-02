@@ -15,6 +15,7 @@ public:
     static long getTimeStamp();
 };
 
+/************************ 调用外部程序 ************************/
 class CmdProcessor : public QObject
 {
     Q_OBJECT

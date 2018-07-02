@@ -275,6 +275,7 @@ bool EventMonitor::initialise()
     amqp_rpc_reply_t rpc_reply;
 
     LOG(Logger::Debug, "EventMonitor starting\n");
+    /* 建立连接 */
     mConnection = amqp_new_connection();
     sockfd = amqp_open_socket(mHost.toStdString().c_str(), mPort);
     if (sockfd < 0) {
@@ -283,17 +284,20 @@ bool EventMonitor::initialise()
         return false;
     }
     amqp_set_sockfd(mConnection, sockfd);
+    /* 登录设备 */
     rpc_reply = amqp_login(mConnection, "/", 0, 131072, 0, AMQP_SASL_METHOD_PLAIN, mUser.toStdString().c_str(), mPasswd.toStdString().c_str());
     if (!rabbit_mq_reply_is_ok(rpc_reply, "rabbit_mq_receiver_run: Logging in")){
         fireSystemEventCallback("receiver_thread_func loging in failed");
         return false;
     }
+    /* 打开通道 */
     amqp_channel_open(mConnection, 1);
     rpc_reply = amqp_get_rpc_reply(mConnection);
     if (!rabbit_mq_reply_is_ok(rpc_reply, "rabbit_mq_receiver_run: Opening channel")){
         fireSystemEventCallback("receiver_thread_func open channel failed");
         return false;
     }
+    /* 声明一个队列 */
     amqp_queue_declare_ok_t *r = amqp_queue_declare(mConnection, 1, amqp_empty_bytes_local, 0, 0, 0, 1,
                             amqp_empty_table_local);
     rpc_reply = amqp_get_rpc_reply(mConnection);
@@ -307,6 +311,7 @@ bool EventMonitor::initialise()
         fireSystemEventCallback("receiver_thread_func out of memory");
         return false;
     }
+    /* Exchange与queue进行绑定 */
     amqp_queue_bind(mConnection, 1, queuename,
                     amqp_cstring_bytes(mExchange.toStdString().c_str()),
                     amqp_cstring_bytes(mBindingkey.toStdString().c_str()),

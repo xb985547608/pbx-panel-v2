@@ -21,7 +21,7 @@ DEFINES += OEM
 DEFINES += V5
 
 #win32: LIBS += -lole32 -lws2_32 -L$$PWD/lib -lcwebpage -lrabbitmq "D:\Qt\Qt5.1.1\5.1.1\mingw48_32\bin\Qt5Ftp.dll"
-win32: LIBS += -lole32 -lws2_32 -L$$PWD/lib -lcwebpage -lrabbitmq -lQt5Ftp
+win32: LIBS += -lole32 -lws2_32 -L$$PWD/lib -lcwebpage -lrabbitmq
 
 
 SOURCES += main.cpp \
@@ -75,7 +75,9 @@ SOURCES += main.cpp \
     ui/meetme/MeetMeWidget.cpp \
     ui/settings/TimingBroadcastZone.cpp \
     ui/timedbroadcast/TimedBroadcastEditor.cpp \
-    ui/dialogs/dlgemergencycall.cpp
+    ui/dialogs/dlgemergencycall.cpp \
+    misc/qftp.cpp \
+    misc/qurlinfo.cpp
 
 HEADERS += \
     message_queue/amqp_framing.h \
@@ -140,3 +142,6 @@ OTHER_FILES += \
     stylesheet.qss \
     en.qm
 RC_FILE = panel.rc
+
+include ( $$PWD/VideoLinkage/VideoLinkage.pri )
+
