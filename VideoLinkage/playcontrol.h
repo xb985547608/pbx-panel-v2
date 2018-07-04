@@ -27,24 +27,20 @@ public:
     ~PlayControl();
 
     bool isPlaying();
-    bool isInit();
 
 public slots:
     bool play(QString url);
     void stop();
     void pause();
-    void reset();
 
 signals:
 
 
 private:
     static libvlc_instance_t    *mspVlcInstance;
-    static QMutex               *mspMutex;
 
     libvlc_media_t              *mpVlcMedia;
     libvlc_media_player_t       *mpVlcMediaPlayer;
-    QMutex                      *mpMutex;
     WId                         mVlcWId;
 };
 

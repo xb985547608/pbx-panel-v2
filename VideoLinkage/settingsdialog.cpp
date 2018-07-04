@@ -8,53 +8,61 @@
 #include <QMessageBox>
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::ExtensionCfgWidget)
+    QDialog(parent)
 {
+    /************************ top ************************/
+    QLabel *header = new QLabel("视频联动", this);
+    header->setAlignment(Qt::AlignCenter);
+    QFont font;
+    font.setPixelSize(24);
+    font.setBold(true);
+    header->setFont(font);
+
+    /************************ center ************************/
+    QLabel *topLine = new QLabel(this);
+    topLine->setFixedHeight(2);
+    topLine->setStyleSheet("background: red");
+
     mpBaseWidget = new QWidget(this);
     mpScrollArea = new QScrollArea(this);
     mpScrollArea->setWidget(mpBaseWidget);
     mpScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     mpScrollArea->setFrameStyle(QFrame::NoFrame);
+    mpScrollArea->setAlignment(Qt::AlignTop);
 
-    QLabel *header = new QLabel("视频联动", this);
-    header->setAlignment(Qt::AlignCenter);
-    header->setStyleSheet("border: solid black; border-width:0 0 2 0");
-    QFont font;
-    font.setPixelSize(24);
-    font.setBold(true);
-    header->setFont(font);
+    QLabel *bottomLine = new QLabel(this);
+    bottomLine->setFixedHeight(2);
+    bottomLine->setStyleSheet("background: red");
+
+    /************************ center ************************/
     QPushButton *footer = new QPushButton("添加", this);
     footer->setFixedSize(80, 30);
 
-    QVBoxLayout *col = new QVBoxLayout();
-    setLayout(col);
+    /************************ Layout ************************/
+    QVBoxLayout *col = new QVBoxLayout(this);
     col->addWidget(header);
+    col->addWidget(topLine);
     col->addWidget(mpScrollArea);
+    col->addWidget(bottomLine);
     col->addWidget(footer, 0, Qt::AlignCenter);
 
-    QVBoxLayout *listLayout = new QVBoxLayout();
+    QVBoxLayout *listLayout = new QVBoxLayout(mpBaseWidget);
     listLayout->setSpacing(4);
-    listLayout->setContentsMargins(0, 0, 4, 0);
-    mpBaseWidget->setLayout(listLayout);
+    listLayout->setContentsMargins(0, 0, 0, 0);
 
-    setMinimumWidth(450);
-    resize(450, 500);
+    setFixedSize(450, 500);
     mpBaseWidget->setMinimumWidth(409);
 
+    /* 初始化配置信息列表 */
     mpSettings = new QSettings("settings.ini", QSettings::IniFormat, this);
     mpSettings->beginGroup(INIPREFIX);
     foreach (QString key, mpSettings->allKeys()) {
-        QStringList list = mpSettings->value(key).toStringList();
-        if (list.isEmpty())
-            continue;
-
-        append(key, list);
+        addConfigWidget(key, mpSettings->value(key).toStringList());
     }
     mpSettings->endGroup();
 
     connect(footer, &QPushButton::clicked, this, [this](){
-        append();
+        makeConfigWidget();
     });
 }
 
@@ -79,27 +87,29 @@ void SettingsDialog::resizeEvent(QResizeEvent *event)
     mpBaseWidget->resize(mpScrollArea->viewport()->width(), mpBaseWidget->size().height());
 }
 
-void SettingsDialog::append(QString extenName, QStringList urls)
+void SettingsDialog::addConfigWidget(QString extenName, QStringList urls)
 {
-    QWidget *cfgWidget = makeExtensionConfigWidget(extenName, urls);
-    mpBaseWidget->layout()->addWidget(cfgWidget);
-
-
-    /* 新增项后调整长度 */
-    QSize size(mpBaseWidget->width(),
-               mpBaseWidget->children().count() * cfgWidget->height());
-    mpBaseWidget->resize(size);
+    qDebug() << urls;
+    QFrame *cfgWidget = makeConfigWidget();
+    if (!extenName.isEmpty()) {
+        mWidgetOfUi[cfgWidget]->extenNum->setText(extenName);
+        mWidgetOfUi[cfgWidget]->url1->setText(urls.count() > 0 ? urls.at(0) : "");
+        mWidgetOfUi[cfgWidget]->url2->setText(urls.count() > 1 ? urls.at(1) : "");
+    }
 }
 
-QWidget *SettingsDialog::makeExtensionConfigWidget(QString extenName, QStringList urls)
+QFrame *SettingsDialog::makeConfigWidget()
 {
+    Ui::ExtensionCfgWidget *ui = new Ui::ExtensionCfgWidget;
     QFrame *cfgWidget = new QFrame(this);
+    cfgWidget->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    mWidgetOfUi.insert(cfgWidget, ui);
+    mpBaseWidget->layout()->addWidget(cfgWidget);
+
     ui->setupUi(cfgWidget);
-    ui->extenNum->setText(extenName);
-    ui->url1->setText(urls.count() > 0 ? urls.at(0) : "");
-    ui->url2->setText(urls.count() > 1 ? urls.at(1) : "");
-    ui->url1->setEnabled(!ui->extenNum->text().isEmpty());
-    ui->url2->setEnabled(!ui->extenNum->text().isEmpty());
+    ui->extenNum->setEnabled(true);
+    ui->url1->setEnabled(false);
+    ui->url2->setEnabled(false);
     ui->save->setEnabled(false);
 
     QLineEdit *exten = ui->extenNum;
@@ -123,28 +133,47 @@ QWidget *SettingsDialog::makeExtensionConfigWidget(QString extenName, QStringLis
     });
     connect(ui->save, &QPushButton::clicked, this, [this, exten, url1, url2, save](){
         save->setEnabled(false);
-        addExtension(exten->text(), QStringList()
+        append(exten->text(), QStringList()
                      << url1->text()
                      << url2->text());
     });
     connect(ui->remove, &QPushButton::clicked, this, [this, exten, cfgWidget](){
-        if (mpSettings->contains(INIPREFIX + exten->text()))
+        if (mpSettings->contains(INIPREFIX + exten->text())) {
             if (QMessageBox::question(this, "询问", "是否删除该分机在配置文件里的信息") == QMessageBox::No)
                 return;
-        delExtension(exten->text());
+        }
+        remove(exten->text());
+        mWidgetOfUi.remove(cfgWidget);
         delete cfgWidget;
+        refresh();
     });
 
-    cfgWidget->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    refresh();
     return cfgWidget;
 }
 
-void SettingsDialog::delExtension(QString extenName)
+void SettingsDialog::append(QString number, QStringList urls)
 {
-    mpSettings->remove(INIPREFIX + extenName);
+    mpSettings->setValue(INIPREFIX + number, urls);
 }
 
-void SettingsDialog::addExtension(QString extenName, QStringList urls)
+void SettingsDialog::remove(QString number)
 {
-    mpSettings->setValue(INIPREFIX + extenName, urls);
+    if (!mpSettings->contains(INIPREFIX + number))
+        return;
+
+    mpSettings->remove(INIPREFIX + number);
+}
+
+void SettingsDialog::refresh()
+{
+    if (mWidgetOfUi.count() == 0) {
+
+        mpBaseWidget->setFixedSize(mpBaseWidget->width(), 4);
+    } else {
+
+        int h = mWidgetOfUi.count() * mWidgetOfUi.firstKey()->height();
+        h += (mWidgetOfUi.count() - 1) * mpBaseWidget->layout()->spacing();
+        mpBaseWidget->setFixedSize(mpBaseWidget->width(), h);
+    }
 }

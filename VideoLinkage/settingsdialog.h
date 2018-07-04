@@ -24,14 +24,17 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 
 private:
-    void append(QString extenName = "", QStringList urls = QStringList());
-    QWidget *makeExtensionConfigWidget(QString extenName, QStringList urls);
-    void delExtension(QString extenName);
-    void addExtension(QString extenName, QStringList urls);
+    void addConfigWidget(QString number, QStringList urls);
+    QFrame *makeConfigWidget();
+
+    void append(QString number, QStringList urls);
+    void remove(QString number);
+    void refresh();
 
 public slots:
+
 private:
-    Ui::ExtensionCfgWidget *ui;
+    QMap<QFrame *, Ui::ExtensionCfgWidget *> mWidgetOfUi;
     QScrollArea *mpScrollArea;
     QWidget *mpBaseWidget;
     QSettings *mpSettings;
