@@ -4,12 +4,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QPropertyAnimation>
-//#include "playcontrol.h"
-
-class VlcInstance;
-class VlcMedia;
-class VlcMediaPlayer;
-class VlcWidgetVideo;
+#include "playcontrol.h"
 
 class VideoWidget : public QFrame
 {
@@ -21,11 +16,9 @@ public:
     void setTimeHint(const QDateTime &time);
     void reset();
     bool isPlaying();
-    bool isBusy();
     QString ExtensionNum();
 
 protected:
-    void resizeEvent(QResizeEvent *event) override;
     bool eventFilter(QObject *watched, QEvent *event);
 
 signals:
@@ -41,18 +34,11 @@ signals:
 public slots:
 
 private:
-//    QWidget *mpVideoWidget;
-    QFrame *mpBottomWidget;
-    VlcWidgetVideo *mpVideoWidget;
-    QFrame *mpTopWidget;
+    QWidget *mpVideoWidget;
     QLabel *mpExtensionLbl;
     QLabel *mpTimeLbl;
 
-    static VlcInstance *mspInstance;
-    VlcMedia *mpMedia;
-    VlcMediaPlayer *mpPlayer;
-
-//    PlayControl *mpPlayer;
+    PlayControl *mpPlayer;
 };
 
 #endif // VIDEOWIDGET_H

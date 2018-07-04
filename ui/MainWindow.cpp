@@ -16,6 +16,7 @@
 #include "VideoLinkage/videolinkagewidget.h"
 #include "mainwidget/OperatorZone.h"
 #include "mainwidget/ExtensionsZone.h"
+#include "CustomWidget/titlebar.h"
 
 static MainWindow* sMainWindow = NULL;
 static void EventCallback(MessageClient::EventType e, QMap<QString, QString>& eventMessage) {
@@ -173,7 +174,7 @@ MainWindow::MainWindow(QStringList args, QWidget *parent) :
     loadActivity(BaseWidget::eMainWidget, params);
 
     /************************ 视频联动 ************************/
-    VideoLinkageWidget *v = new VideoLinkageWidget();
+    VideoLinkageWidget *v = new VideoLinkageWidget(this);
     MainWidget *mainWidget = dynamic_cast<MainWidget *>(getActivity(BaseWidget::eMainWidget));
     Q_ASSERT_X(mainWidget != NULL, "MainWindow::MainWindow()", "MainWidget create error!!");
     connect(mainWidget->getOperatorZone(), &OperatorZone::operatorExtenStateChagne,
@@ -182,7 +183,6 @@ MainWindow::MainWindow(QStringList args, QWidget *parent) :
             v, &VideoLinkageWidget::extenStateChanged);
     v->move(rect().topRight());
     v->show();
-    connect(this, &MainWindow::destroyed, v, [v](){ v->deleteLater(); });
     /************************ 视频联动 ************************/
 
     sMainWindow = this;

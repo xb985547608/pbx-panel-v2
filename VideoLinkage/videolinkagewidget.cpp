@@ -6,31 +6,31 @@
 #include <QDateTime>
 #include <QMap>
 #include <QMouseEvent>
+#include <QStringList>
+#include <QMessageBox>
 
 #include "../pbx/pbx.h"
 #include "../misc/logger.h"
 
 VideoLinkageWidget::VideoLinkageWidget(QWidget *parent) :
-    QWidget(parent)
+    QDialog(parent)
 {
-    setWindowFlags(Qt::WindowTitleHint | Qt::CustomizeWindowHint |
-                   Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint);
-
     /* 实例9个视频窗口 */
     for (int i=0; i<9; i++) {
         VideoWidget *vw = new VideoWidget(this);
         vw->setVisible(false);
         vw->installEventFilter(this);
-        connect(vw, &VideoWidget::doubleClicked, this, &VideoLinkageWidget::fullWidget);
+        connect(vw, &VideoWidget::doubleClicked, this, &VideoLinkageWidget::fullScreen);
         mVideoWidgets.append(vw);
     }
     /* top */
-    mpVideoWidgetsZone = new QWidget(this);
+    mpVideoWidgetsZone = new QFrame(this);
     mpVideoWidgetsZone->setObjectName("zone");
-    mpVideoWidgetsZone->setStyleSheet("QWidget#zone{background-color:green}");
+    mpVideoWidgetsZone->setStyleSheet("QFrame#zone{background-color:black; border: 2px solid green}");
+    mpVideoWidgetsZone->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     mpGridLayout = new QGridLayout();
-    mpGridLayout->setSpacing(2);
-    mpGridLayout->setContentsMargins(2, 2, 2, 2);
+    mpGridLayout->setSpacing(0);
+    mpGridLayout->setContentsMargins(0, 0, 0, 0);
     mpVideoWidgetsZone->setLayout(mpGridLayout);
 
     /* bottom */
@@ -54,8 +54,7 @@ VideoLinkageWidget::VideoLinkageWidget(QWidget *parent) :
     row->addWidget(settingsBtn);
 
     /* merge */
-    QVBoxLayout *col = new QVBoxLayout();
-    setLayout(col);
+    QVBoxLayout *col = new QVBoxLayout(this);
     col->addWidget(mpVideoWidgetsZone);
     col->addWidget(operatorFrame);
 
@@ -80,14 +79,36 @@ VideoLinkageWidget::VideoLinkageWidget(QWidget *parent) :
     timer->start(1000);
 }
 
-void VideoLinkageWidget::keyReleaseEvent(QKeyEvent *event)
+bool VideoLinkageWidget::eventFilter(QObject *watched, QEvent *event)
 {
-    /* 退出全屏 */
-    if (event->key() == Qt::Key_Escape &&
-            !mpLayoutSelectCombo->isEnabled()) {
-        mpLayoutSelectCombo->setEnabled(true);
-        changeLayout(mpLayoutSelectCombo->currentText());
+    if (mFullScreen && event->type() == QEvent::KeyPress) {
+
+        VideoWidget *w = dynamic_cast<VideoWidget *>(watched);
+        if (w == NULL || !w->isPlaying())
+            return false;
+
+        QKeyEvent *e = dynamic_cast<QKeyEvent *>(event);
+        if (e->key() == Qt::Key_Escape) {
+            emit w->doubleClicked();
+//            changeLayout(mpLayoutSelectCombo->currentText());
+        }
     }
+    return true;
+}
+
+void VideoLinkageWidget::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Escape) {
+        event->accept();
+    } else {
+        QDialog::keyPressEvent(event);
+    }
+}
+
+void VideoLinkageWidget::closeEvent(QCloseEvent *event)
+{
+    QMessageBox::about(this, "提示", "无法关闭视频联动窗口");
+    event->ignore();
 }
 
 void VideoLinkageWidget::changeLayout(const QString &text)
@@ -101,7 +122,7 @@ void VideoLinkageWidget::changeLayout(const QString &text)
     QList<VideoWidget *> temps = mVideoWidgets;
     for (int i=0; i<length; i++) {
         VideoWidget *vw = temps.takeLast();
-        if (vw->isBusy())
+        if (vw->isPlaying())
             sortVideoWidgets.prepend(vw);
         else
             sortVideoWidgets.append(vw);
@@ -126,18 +147,21 @@ void VideoLinkageWidget::changeLayout(const QString &text)
     mVideoWidgets = sortVideoWidgets;
 }
 
-void VideoLinkageWidget::fullWidget()
+void VideoLinkageWidget::fullScreen()
 {
     VideoWidget *w = dynamic_cast<VideoWidget *>(sender());
-    if (w == NULL || !w->isBusy())
+    if (w == NULL || !w->isPlaying())
         return;
 
-    /* 隐藏双击窗口之外的其余窗口 */
-    foreach (VideoWidget *vw, mVideoWidgets)
-        vw->setVisible(vw == sender());
-
-    if (w != NULL)
-        mpLayoutSelectCombo->setEnabled(false);
+    if (w->isFullScreen()) {
+        w->setWindowFlags(Qt::SubWindow);
+        w->showNormal();
+        mFullScreen = false;
+    } else {
+        w->setWindowFlags(Qt::Window);
+        w->showFullScreen();
+        mFullScreen = true;
+    }
 }
 
 void VideoLinkageWidget::open(QStringList extensions)
@@ -158,7 +182,7 @@ void VideoLinkageWidget::open(QStringList extensions)
 
     int index = 0;
     /* 排除被占用的视频窗口 */
-    while (mVideoWidgets.at(index)->isBusy())
+    while (mVideoWidgets.at(index)->isPlaying())
         index++;
     if (index >= 9)
         return;
@@ -231,7 +255,7 @@ void VideoLinkageWidget::operatorExtenStateChanged(QString number)
     if (!exten.contains(number))
         return;
 
-    qDebug() << "operatorExtenStateChanged" << number;
+    LOG(Logger::Debug, "operatorExtenStateChanged %s\n", number.toLocal8Bit().data());
 
     if (exten.value(number).peers.count() != 0) {
         foreach (PBX::PeerInfo peer, exten.value(number).peers.values()) {
@@ -263,6 +287,9 @@ void VideoLinkageWidget::operatorExtenStateChanged(QString number)
 
     open(openNumbers);
     close(closeNumbers);
+
+    LOG(Logger::Debug, "open number: %s\n", openNumbers.join(',').toLocal8Bit().data());
+    LOG(Logger::Debug, "close number: %s\n", closeNumbers.join(',').toLocal8Bit().data());
 }
 #endif
 
@@ -280,16 +307,23 @@ void VideoLinkageWidget::extenStateChanged(QString number)
     if (!exten.contains(number))
         return;
 
-    LOG(Logger::Debug, "extenStateChanged %s", number.toStdString().c_str());
+    LOG(Logger::Debug, "extenStateChanged %s\n", number.toLocal8Bit().data());
 
     bool isPasv = false;  //调度员是否被呼
+    bool isBroadcast = false;
     foreach (PBX::PeerInfo peer, exten.value(number).peers.values()) {
         if (peer.state == PBX::eIncall) {
             /* 如果分机呼叫的是调度员所在的振铃组号码，且在配置中能找到分机的信息 */
-            if (peer.number == OPERATOR_RING_GROUNP && mpSettingsDialog->contains(number)) {
+            if (peer.number == OPERATOR_RING_GROUNP) {
                 isPasv = true;
                 if (!mPasvExtenNumber.contains(number)) {
                     mPasvExtenNumber.append(number);
+                    openNumbers.append(number);
+                }
+            } else if (peer.number.isEmpty() && peer.name.isEmpty()) {
+                isBroadcast = true;
+                if (!mBroadcastExtenNumber.contains(number)) {
+                    mBroadcastExtenNumber.append(number);
                     openNumbers.append(number);
                 }
             }
@@ -302,7 +336,15 @@ void VideoLinkageWidget::extenStateChanged(QString number)
         closeNumbers.append(number);
     }
 
+    if (!isBroadcast && mBroadcastExtenNumber.contains(number)) {
+        mBroadcastExtenNumber.removeAll(number);
+        closeNumbers.append(number);
+    }
+
     open(openNumbers);
     close(closeNumbers);
+
+    LOG(Logger::Debug, "open number: %s\n", openNumbers.join(',').toLocal8Bit().data());
+    LOG(Logger::Debug, "close number: %s\n", closeNumbers.join(',').toLocal8Bit().data());
 }
 

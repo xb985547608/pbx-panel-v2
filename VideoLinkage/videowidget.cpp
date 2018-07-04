@@ -7,43 +7,31 @@
 #include <QTimer>
 #include <QBoxLayout>
 
-#include <VLCQtCore/Common.h>
-#include <VLCQtCore/Instance.h>
-#include <VLCQtCore/Media.h>
-#include <VLCQtCore/Audio.h>
-#include <VLCQtCore/MediaPlayer.h>
-#include <VLCQtWidgets/WidgetVideo.h>
-
-VlcInstance *VideoWidget::mspInstance = new VlcInstance(VlcCommon::args());
-
 VideoWidget::VideoWidget(QWidget *parent) :
-    QFrame(parent),
-    mpMedia(NULL)
+    QFrame(parent)
 {
-    setStyleSheet("background-color: black");
+    setStyleSheet("background-color: black; border: 2px solid green");
     /************************ top ************************/
-    mpTopWidget = new QFrame(this);
-    QHBoxLayout *row1 = new QHBoxLayout(mpTopWidget);
-    row1->setContentsMargins(4, 0, 4, 0);
-    mpExtensionLbl = new QLabel(mpTopWidget);
-    mpExtensionLbl->setStyleSheet("color:white;background-color: transparent");
+    mpExtensionLbl = new QLabel(this);
+    mpExtensionLbl->setStyleSheet("color:white;background-color: transparent; border: 0px");
     mpExtensionLbl->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    mpTimeLbl = new QLabel(mpTopWidget);
-    mpTimeLbl->setStyleSheet("color:white;background-color: transparent");
+    mpTimeLbl = new QLabel(this);
+    mpTimeLbl->setStyleSheet("color:white;background-color: transparent; border: 0px");
     mpTimeLbl->setAlignment(Qt::AlignRight | Qt::AlignTop);
-    row1->addWidget(mpExtensionLbl);
-    row1->addWidget(mpTimeLbl);
 
     /************************ bottom ************************/
-    mpBottomWidget = new QFrame(this);
-    QHBoxLayout *row2 = new QHBoxLayout(mpBottomWidget);
-    mpVideoWidget = new VlcWidgetVideo(mpBottomWidget);
-    mpPlayer = new VlcMediaPlayer(mspInstance);
-    mpPlayer->setVideoWidget(mpVideoWidget);
-    mpPlayer->audio()->setVolume(0);
-    mpVideoWidget->setMediaPlayer(mpPlayer);
-    row2->addWidget(mpVideoWidget);
+    mpVideoWidget = new QWidget(this);
+    mpVideoWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    mpVideoWidget->setStyleSheet("border: 0px");
     mpVideoWidget->installEventFilter(this);
+    mpPlayer = new PlayControl(mpVideoWidget->winId(), this);
+
+    QGridLayout *grid = new QGridLayout(this);
+    grid->setContentsMargins(2, 2, 2, 2);
+    grid->setSpacing(0);
+    grid->addWidget(mpExtensionLbl, 0, 0);
+    grid->addWidget(mpTimeLbl, 0, 1);
+    grid->addWidget(mpVideoWidget, 1, 0, 1, 2);
 }
 
 void VideoWidget::setInfo(QString extensionName, QString url)
@@ -52,18 +40,13 @@ void VideoWidget::setInfo(QString extensionName, QString url)
         return;
     mpExtensionLbl->setText(extensionName);
 
-    if (mpMedia != NULL) {
-        delete mpMedia;
-        mpMedia = NULL;
-    }
-
-    mpMedia = new VlcMedia("rtsp://" + url, mspInstance);
-    mpPlayer->open(mpMedia);
+    mpVideoWidget->raise();
+    mpPlayer->play("rtsp://" + url);
 }
 
 void VideoWidget::setTimeHint(const QDateTime &time)
 {
-    if (isBusy()) {
+    if (isPlaying()) {
         mpTimeLbl->setText(time.toString("yyyy-MM-dd hh:mm:ss"));
     }
 }
@@ -74,34 +57,17 @@ void VideoWidget::reset()
     mpTimeLbl->setText("");
 
     mpPlayer->stop();
-    if (mpMedia != NULL) {
-        delete mpMedia;
-        mpMedia = NULL;
-    }
 }
 
 bool VideoWidget::isPlaying()
 {
-    return mpPlayer->hasVout();
-}
-
-bool VideoWidget::isBusy()
-{
-    return mpMedia != NULL;
+    return mpPlayer->isPlaying();
 }
 
 QString VideoWidget::ExtensionNum()
 {
     return mpExtensionLbl->text();
 }
-
-void VideoWidget::resizeEvent(QResizeEvent *event)
-{
-    Q_UNUSED(event)
-    mpTopWidget->setGeometry(0, 0, size().width(), 16);
-    mpBottomWidget->setGeometry(QRect(QPoint(0, 0), size()).adjusted(0, 16, 0, 0));
-}
-
 
 bool VideoWidget::eventFilter(QObject *watched, QEvent *event)
 {

@@ -14,10 +14,10 @@ CXX           = g++
 DEFINES       = -DUNICODE -D_UNICODE -DOEM -DV5 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -fno-keep-inline-dllexport -g -Wall -W -Wextra $(DEFINES)
 CXXFLAGS      = -g -std=gnu++11 -Wall -W -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I. -I. -Ih:\Libs\vlc-qt\include -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtWidgets -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtGui -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtANGLE -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtNetwork -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtSql -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtCore -Idebug -I. -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\win32-g++ 
+INCPATH       = -I. -I. -IVideoLinkage\sdk\include -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtWidgets -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtGui -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtANGLE -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtNetwork -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtSql -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\include\QtCore -Idebug -I. -ID:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        -lmingw32 -LD:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libqtmaind.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 -lole32 -lws2_32 -LH:\workspace\pbx\pbx-panel-v2\pbx-panel-v2\lib -lcwebpage -lrabbitmq -Lh:\Libs\vlc-qt\lib -lVLCQtCore -lVLCQtWidgets D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libQt5Widgetsd.a D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libQt5Guid.a D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libQt5Networkd.a D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libQt5Sqld.a D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libQt5Cored.a debug\panel_res.o 
+LIBS        =        -lmingw32 -LD:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libqtmaind.a -LC:\utils\my_sql\my_sql\lib -LC:\utils\postgresql\pgsql\lib -lshell32 -lole32 -lws2_32 -LH:\workspace\pbx\pbx-panel-v2\pbx-panel-v2\lib -lcwebpage -lrabbitmq -LH:\workspace\pbx\pbx-panel-v2\pbx-panel-v2\VideoLinkage\sdk\lib -lvlc -lvlccore D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libQt5Widgetsd.a D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libQt5Guid.a D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libQt5Networkd.a D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libQt5Sqld.a D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\libQt5Cored.a debug\panel_res.o 
 QMAKE         = D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -101,6 +101,7 @@ SOURCES       = main.cpp \
 		misc\qurlinfo.cpp \
 		VideoLinkage\videolinkagewidget.cpp \
 		VideoLinkage\videowidget.cpp \
+		VideoLinkage\playcontrol.cpp \
 		VideoLinkage\settingsdialog.cpp debug\qrc_pbx_panel.cpp \
 		debug\moc_tools.cpp \
 		debug\moc_MessageClient.cpp \
@@ -145,6 +146,7 @@ SOURCES       = main.cpp \
 		debug\moc_dlgemergencycall.cpp \
 		debug\moc_videolinkagewidget.cpp \
 		debug\moc_videowidget.cpp \
+		debug\moc_playcontrol.cpp \
 		debug\moc_settingsdialog.cpp
 OBJECTS       = debug/main.o \
 		debug/tools.o \
@@ -202,6 +204,7 @@ OBJECTS       = debug/main.o \
 		debug/qurlinfo.o \
 		debug/videolinkagewidget.o \
 		debug/videowidget.o \
+		debug/playcontrol.o \
 		debug/settingsdialog.o \
 		debug/qrc_pbx_panel.o \
 		debug/moc_tools.o \
@@ -247,6 +250,7 @@ OBJECTS       = debug/main.o \
 		debug/moc_dlgemergencycall.o \
 		debug/moc_videolinkagewidget.o \
 		debug/moc_videowidget.o \
+		debug/moc_playcontrol.o \
 		debug/moc_settingsdialog.o
 
 DIST          =  message_queue\amqp_framing.h \
@@ -305,6 +309,7 @@ DIST          =  message_queue\amqp_framing.h \
 		ui\dialogs\dlgemergencycall.h \
 		VideoLinkage\videolinkagewidget.h \
 		VideoLinkage\videowidget.h \
+		VideoLinkage\playcontrol.h \
 		VideoLinkage\settingsdialog.h main.cpp \
 		misc\tools.cpp \
 		misc\singleton.cpp \
@@ -361,6 +366,7 @@ DIST          =  message_queue\amqp_framing.h \
 		misc\qurlinfo.cpp \
 		VideoLinkage\videolinkagewidget.cpp \
 		VideoLinkage\videowidget.cpp \
+		VideoLinkage\playcontrol.cpp \
 		VideoLinkage\settingsdialog.cpp
 QMAKE_TARGET  = PbxPanel
 DESTDIR        = debug\ #avoid trailing-slash linebreak
@@ -384,11 +390,11 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) PbxPanel.zip $(SOURCES) $(DIST) PbxPanel.pro D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\spec_pre.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\qdevice.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\device_config.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\common\sanitize.conf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\common\gcc-base.conf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\common\g++-base.conf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\common\angle.conf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\qconfig.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3danimation.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3danimation_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3drender.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axbase.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axserver.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_charts.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_core.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_core_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_dbus.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_designer.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_gui.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_help.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_help_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_location.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_location_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_network.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_network_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_nfc.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_opengl.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_positioning.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qml.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quick.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_remoteobjects.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_remoteobjects_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_repparser.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_repparser_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_script.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_script_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_scxml.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_sensors.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_serialport.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_sql.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_svg.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_testlib.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_uitools.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_websockets.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_widgets.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_winextras.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_xml.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\qt_functions.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\qt_config.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\win32-g++\qmake.conf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\exclusive_builds.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\toolchain.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\default_pre.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\win32\default_pre.prf VideoLinkage\VideoLinkage.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\resolve_config.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\exclusive_builds_post.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\default_post.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\build_pass.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\precompile_header.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\warn_on.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\qt.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\resources.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\moc.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\win32\opengl.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\uic.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\qmake_use.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\file_copies.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\win32\windows.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\testcase_targets.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\exceptions.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\yacc.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\lex.prf PbxPanel.pro pbx_panel.qrc D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\qtmaind.prl D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\Qt5Widgetsd.prl D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\Qt5Guid.prl D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\Qt5Networkd.prl D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\Qt5Sqld.prl D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\Qt5Cored.prl en.ts en.ts  pbx_panel.qrc D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\data\dummy.cpp message_queue\amqp_framing.h message_queue\amqp.h misc\tools.h misc\singleton.h misc\logger.h misc\cwebpage.h message_queue\MessageClient.h misc\Config.h ui\base\uiwebbrowser.h ui\base\tablewidget.h ui\base\multitablewidgets.h ui\base\misccomponents.h ui\base\dingobutton.h message_queue\RPCCommand.h pbx\pbx.h pbx\PhoneBook.h ui\LoginForm.h misc\dbwrapper.h ui\base\uiextensionbase.h ui\mainwidget\SelectedExtensZone.h ui\mainwidget\RinggroupsZone.h ui\mainwidget\QueueZone.h ui\mainwidget\OperatorZone.h ui\mainwidget\MainWidget.h ui\mainwidget\FastFuncZone.h ui\mainwidget\ExtensionsZone.h ui\MainWindow.h ui\settings\SettingsWidget.h ui\settings\OpSettingsZone.h pbx\EventModel.h ui\settings\RecordingFileZone.h ui\base\BaseWidget.h ui\phonebook\UiPhoneBook.h ui\eventplan\EventPlanEditor.h ui\base\SectionZone.h ui\phonebook\UiPhoneBookList.h ui\settings\PlanListZone.h ui\event\EventWidget.h ui\event\PlanZone.h ui\event\EventExtensionsZone.h ui\event\FunctionZone.h ui\event\DescriptionZone.h ui\event\EventExten.h ui\event\EventChooser.h ui\calllog\CallLogWidget.h ui\eventlog\EventLog.h misc\ftpclient.h ui\dialogs\DialPad.h ui\dialogs\SMSWidget.h ui\dialogs\PlaySoundWidget.h ui\meetme\MeetMeWidget.h ui\settings\TimingBroadcastZone.h ui\timedbroadcast\TimedBroadcastEditor.h ui\dialogs\dlgemergencycall.h VideoLinkage\videolinkagewidget.h VideoLinkage\videowidget.h VideoLinkage\settingsdialog.h main.cpp misc\tools.cpp misc\singleton.cpp misc\logger.cpp message_queue\MessageClient.cpp misc\Config.cpp ui\base\uiwebbrowser.cpp ui\base\tablewidget.cpp ui\base\multitablewidgets.cpp ui\base\misccomponents.cpp ui\base\dingobutton.cpp message_queue\RPCCommand.cpp pbx\pbx.cpp pbx\PhoneBook.cpp ui\LoginForm.cpp misc\dbwrapper.cpp ui\base\uiextensionbase.cpp ui\mainwidget\SelectedExtensZone.cpp ui\mainwidget\RinggroupsZone.cpp ui\mainwidget\QueueZone.cpp ui\mainwidget\OperatorZone.cpp ui\mainwidget\MainWidget.cpp ui\mainwidget\FastFuncZone.cpp ui\mainwidget\ExtensionsZone.cpp ui\MainWindow.cpp ui\settings\SettingsWidget.cpp ui\settings\OpSettingsZone.cpp pbx\EventModel.cpp ui\settings\RecordingFileZone.cpp ui\base\BaseWidget.cpp ui\phonebook\UiPhoneBook.cpp ui\eventplan\EventPlanEditor.cpp ui\base\SectionZone.cpp ui\phonebook\UiPhoneBookList.cpp ui\settings\PlanListZone.cpp ui\event\PlanZone.cpp ui\event\EventWidget.cpp ui\event\EventExtensionsZone.cpp ui\event\FunctionZone.cpp ui\event\DescriptionZone.cpp ui\event\EventExten.cpp ui\event\EventChooser.cpp ui\calllog\CallLogWidget.cpp ui\eventlog\EventLog.cpp misc\ftpclient.cpp ui\dialogs\DialPad.cpp ui\dialogs\SMSWidget.cpp ui\dialogs\PlaySoundWidget.cpp ui\meetme\MeetMeWidget.cpp ui\settings\TimingBroadcastZone.cpp ui\timedbroadcast\TimedBroadcastEditor.cpp ui\dialogs\dlgemergencycall.cpp misc\qftp.cpp misc\qurlinfo.cpp VideoLinkage\videolinkagewidget.cpp VideoLinkage\videowidget.cpp VideoLinkage\settingsdialog.cpp VideoLinkage\extensioncfg.ui    
+	$(ZIP) PbxPanel.zip $(SOURCES) $(DIST) PbxPanel.pro D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\spec_pre.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\qdevice.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\device_config.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\common\sanitize.conf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\common\gcc-base.conf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\common\g++-base.conf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\common\angle.conf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\qconfig.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3danimation.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3danimation_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3drender.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axbase.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axserver.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_charts.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_core.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_core_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_dbus.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_designer.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_gui.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_help.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_help_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_location.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_location_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_network.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_network_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_nfc.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_opengl.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_positioning.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qml.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quick.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_remoteobjects.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_remoteobjects_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_repparser.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_repparser_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_script.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_script_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_scxml.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_sensors.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_serialport.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_sql.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_svg.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_testlib.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_uitools.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_websockets.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_widgets.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_winextras.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_xml.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\qt_functions.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\qt_config.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\win32-g++\qmake.conf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\exclusive_builds.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\toolchain.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\default_pre.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\win32\default_pre.prf VideoLinkage\VideoLinkage.pri D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\resolve_config.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\exclusive_builds_post.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\default_post.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\build_pass.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\precompile_header.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\warn_on.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\qt.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\resources.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\moc.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\win32\opengl.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\uic.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\qmake_use.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\file_copies.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\win32\windows.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\testcase_targets.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\exceptions.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\yacc.prf D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\lex.prf PbxPanel.pro pbx_panel.qrc D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\qtmaind.prl D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\Qt5Widgetsd.prl D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\Qt5Guid.prl D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\Qt5Networkd.prl D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\Qt5Sqld.prl D:\Qt\Qt5.9.4\5.9.4\mingw53_32\lib\Qt5Cored.prl en.ts en.ts  pbx_panel.qrc D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\data\dummy.cpp message_queue\amqp_framing.h message_queue\amqp.h misc\tools.h misc\singleton.h misc\logger.h misc\cwebpage.h message_queue\MessageClient.h misc\Config.h ui\base\uiwebbrowser.h ui\base\tablewidget.h ui\base\multitablewidgets.h ui\base\misccomponents.h ui\base\dingobutton.h message_queue\RPCCommand.h pbx\pbx.h pbx\PhoneBook.h ui\LoginForm.h misc\dbwrapper.h ui\base\uiextensionbase.h ui\mainwidget\SelectedExtensZone.h ui\mainwidget\RinggroupsZone.h ui\mainwidget\QueueZone.h ui\mainwidget\OperatorZone.h ui\mainwidget\MainWidget.h ui\mainwidget\FastFuncZone.h ui\mainwidget\ExtensionsZone.h ui\MainWindow.h ui\settings\SettingsWidget.h ui\settings\OpSettingsZone.h pbx\EventModel.h ui\settings\RecordingFileZone.h ui\base\BaseWidget.h ui\phonebook\UiPhoneBook.h ui\eventplan\EventPlanEditor.h ui\base\SectionZone.h ui\phonebook\UiPhoneBookList.h ui\settings\PlanListZone.h ui\event\EventWidget.h ui\event\PlanZone.h ui\event\EventExtensionsZone.h ui\event\FunctionZone.h ui\event\DescriptionZone.h ui\event\EventExten.h ui\event\EventChooser.h ui\calllog\CallLogWidget.h ui\eventlog\EventLog.h misc\ftpclient.h ui\dialogs\DialPad.h ui\dialogs\SMSWidget.h ui\dialogs\PlaySoundWidget.h ui\meetme\MeetMeWidget.h ui\settings\TimingBroadcastZone.h ui\timedbroadcast\TimedBroadcastEditor.h ui\dialogs\dlgemergencycall.h VideoLinkage\videolinkagewidget.h VideoLinkage\videowidget.h VideoLinkage\playcontrol.h VideoLinkage\settingsdialog.h main.cpp misc\tools.cpp misc\singleton.cpp misc\logger.cpp message_queue\MessageClient.cpp misc\Config.cpp ui\base\uiwebbrowser.cpp ui\base\tablewidget.cpp ui\base\multitablewidgets.cpp ui\base\misccomponents.cpp ui\base\dingobutton.cpp message_queue\RPCCommand.cpp pbx\pbx.cpp pbx\PhoneBook.cpp ui\LoginForm.cpp misc\dbwrapper.cpp ui\base\uiextensionbase.cpp ui\mainwidget\SelectedExtensZone.cpp ui\mainwidget\RinggroupsZone.cpp ui\mainwidget\QueueZone.cpp ui\mainwidget\OperatorZone.cpp ui\mainwidget\MainWidget.cpp ui\mainwidget\FastFuncZone.cpp ui\mainwidget\ExtensionsZone.cpp ui\MainWindow.cpp ui\settings\SettingsWidget.cpp ui\settings\OpSettingsZone.cpp pbx\EventModel.cpp ui\settings\RecordingFileZone.cpp ui\base\BaseWidget.cpp ui\phonebook\UiPhoneBook.cpp ui\eventplan\EventPlanEditor.cpp ui\base\SectionZone.cpp ui\phonebook\UiPhoneBookList.cpp ui\settings\PlanListZone.cpp ui\event\PlanZone.cpp ui\event\EventWidget.cpp ui\event\EventExtensionsZone.cpp ui\event\FunctionZone.cpp ui\event\DescriptionZone.cpp ui\event\EventExten.cpp ui\event\EventChooser.cpp ui\calllog\CallLogWidget.cpp ui\eventlog\EventLog.cpp misc\ftpclient.cpp ui\dialogs\DialPad.cpp ui\dialogs\SMSWidget.cpp ui\dialogs\PlaySoundWidget.cpp ui\meetme\MeetMeWidget.cpp ui\settings\TimingBroadcastZone.cpp ui\timedbroadcast\TimedBroadcastEditor.cpp ui\dialogs\dlgemergencycall.cpp misc\qftp.cpp misc\qurlinfo.cpp VideoLinkage\videolinkagewidget.cpp VideoLinkage\videowidget.cpp VideoLinkage\playcontrol.cpp VideoLinkage\settingsdialog.cpp VideoLinkage\extensioncfg.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\main.o debug\tools.o debug\singleton.o debug\logger.o debug\MessageClient.o debug\Config.o debug\uiwebbrowser.o debug\tablewidget.o debug\multitablewidgets.o debug\misccomponents.o debug\dingobutton.o debug\RPCCommand.o debug\pbx.o debug\PhoneBook.o debug\LoginForm.o debug\dbwrapper.o debug\uiextensionbase.o debug\SelectedExtensZone.o debug\RinggroupsZone.o debug\QueueZone.o debug\OperatorZone.o debug\MainWidget.o debug\FastFuncZone.o debug\ExtensionsZone.o debug\MainWindow.o debug\SettingsWidget.o debug\OpSettingsZone.o debug\EventModel.o debug\RecordingFileZone.o debug\BaseWidget.o debug\UiPhoneBook.o debug\EventPlanEditor.o debug\SectionZone.o debug\UiPhoneBookList.o debug\PlanListZone.o debug\PlanZone.o debug\EventWidget.o debug\EventExtensionsZone.o debug\FunctionZone.o debug\DescriptionZone.o debug\EventExten.o debug\EventChooser.o debug\CallLogWidget.o debug\EventLog.o debug\ftpclient.o debug\DialPad.o debug\SMSWidget.o debug\PlaySoundWidget.o debug\MeetMeWidget.o debug\TimingBroadcastZone.o debug\TimedBroadcastEditor.o debug\dlgemergencycall.o debug\qftp.o debug\qurlinfo.o debug\videolinkagewidget.o debug\videowidget.o debug\settingsdialog.o debug\qrc_pbx_panel.o debug\moc_tools.o debug\moc_MessageClient.o debug\moc_uiwebbrowser.o debug\moc_multitablewidgets.o debug\moc_dingobutton.o debug\moc_LoginForm.o debug\moc_uiextensionbase.o debug\moc_SelectedExtensZone.o debug\moc_RinggroupsZone.o debug\moc_QueueZone.o debug\moc_OperatorZone.o debug\moc_MainWidget.o debug\moc_FastFuncZone.o debug\moc_ExtensionsZone.o debug\moc_MainWindow.o debug\moc_SettingsWidget.o debug\moc_OpSettingsZone.o debug\moc_RecordingFileZone.o debug\moc_BaseWidget.o debug\moc_UiPhoneBook.o debug\moc_EventPlanEditor.o debug\moc_SectionZone.o debug\moc_UiPhoneBookList.o debug\moc_PlanListZone.o debug\moc_EventWidget.o debug\moc_PlanZone.o debug\moc_EventExtensionsZone.o debug\moc_FunctionZone.o debug\moc_DescriptionZone.o debug\moc_EventExten.o debug\moc_EventChooser.o debug\moc_CallLogWidget.o debug\moc_EventLog.o
-	-$(DEL_FILE) debug\moc_ftpclient.o debug\moc_DialPad.o debug\moc_SMSWidget.o debug\moc_PlaySoundWidget.o debug\moc_MeetMeWidget.o debug\moc_TimingBroadcastZone.o debug\moc_TimedBroadcastEditor.o debug\moc_dlgemergencycall.o debug\moc_videolinkagewidget.o debug\moc_videowidget.o debug\moc_settingsdialog.o
+	-$(DEL_FILE) debug\main.o debug\tools.o debug\singleton.o debug\logger.o debug\MessageClient.o debug\Config.o debug\uiwebbrowser.o debug\tablewidget.o debug\multitablewidgets.o debug\misccomponents.o debug\dingobutton.o debug\RPCCommand.o debug\pbx.o debug\PhoneBook.o debug\LoginForm.o debug\dbwrapper.o debug\uiextensionbase.o debug\SelectedExtensZone.o debug\RinggroupsZone.o debug\QueueZone.o debug\OperatorZone.o debug\MainWidget.o debug\FastFuncZone.o debug\ExtensionsZone.o debug\MainWindow.o debug\SettingsWidget.o debug\OpSettingsZone.o debug\EventModel.o debug\RecordingFileZone.o debug\BaseWidget.o debug\UiPhoneBook.o debug\EventPlanEditor.o debug\SectionZone.o debug\UiPhoneBookList.o debug\PlanListZone.o debug\PlanZone.o debug\EventWidget.o debug\EventExtensionsZone.o debug\FunctionZone.o debug\DescriptionZone.o debug\EventExten.o debug\EventChooser.o debug\CallLogWidget.o debug\EventLog.o debug\ftpclient.o debug\DialPad.o debug\SMSWidget.o debug\PlaySoundWidget.o debug\MeetMeWidget.o debug\TimingBroadcastZone.o debug\TimedBroadcastEditor.o debug\dlgemergencycall.o debug\qftp.o debug\qurlinfo.o debug\videolinkagewidget.o debug\videowidget.o debug\playcontrol.o debug\settingsdialog.o debug\qrc_pbx_panel.o debug\moc_tools.o debug\moc_MessageClient.o debug\moc_uiwebbrowser.o debug\moc_multitablewidgets.o debug\moc_dingobutton.o debug\moc_LoginForm.o debug\moc_uiextensionbase.o debug\moc_SelectedExtensZone.o debug\moc_RinggroupsZone.o debug\moc_QueueZone.o debug\moc_OperatorZone.o debug\moc_MainWidget.o debug\moc_FastFuncZone.o debug\moc_ExtensionsZone.o debug\moc_MainWindow.o debug\moc_SettingsWidget.o debug\moc_OpSettingsZone.o debug\moc_RecordingFileZone.o debug\moc_BaseWidget.o debug\moc_UiPhoneBook.o debug\moc_EventPlanEditor.o debug\moc_SectionZone.o debug\moc_UiPhoneBookList.o debug\moc_PlanListZone.o debug\moc_EventWidget.o debug\moc_PlanZone.o debug\moc_EventExtensionsZone.o debug\moc_FunctionZone.o debug\moc_DescriptionZone.o debug\moc_EventExten.o debug\moc_EventChooser.o debug\moc_CallLogWidget.o
+	-$(DEL_FILE) debug\moc_EventLog.o debug\moc_ftpclient.o debug\moc_DialPad.o debug\moc_SMSWidget.o debug\moc_PlaySoundWidget.o debug\moc_MeetMeWidget.o debug\moc_TimingBroadcastZone.o debug\moc_TimedBroadcastEditor.o debug\moc_dlgemergencycall.o debug\moc_videolinkagewidget.o debug\moc_videowidget.o debug\moc_playcontrol.o debug\moc_settingsdialog.o
 	-$(DEL_FILE) debug\panel_res.o
 
 distclean: clean 
@@ -480,9 +486,9 @@ compiler_moc_predefs_clean:
 debug/moc_predefs.h: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/features/data/dummy.cpp
 	g++ -g -std=gnu++11 -Wall -W -dM -E -o debug\moc_predefs.h D:\Qt\Qt5.9.4\5.9.4\mingw53_32\mkspecs\features\data\dummy.cpp
 
-compiler_moc_header_make_all: debug/moc_tools.cpp debug/moc_MessageClient.cpp debug/moc_uiwebbrowser.cpp debug/moc_multitablewidgets.cpp debug/moc_dingobutton.cpp debug/moc_LoginForm.cpp debug/moc_uiextensionbase.cpp debug/moc_SelectedExtensZone.cpp debug/moc_RinggroupsZone.cpp debug/moc_QueueZone.cpp debug/moc_OperatorZone.cpp debug/moc_MainWidget.cpp debug/moc_FastFuncZone.cpp debug/moc_ExtensionsZone.cpp debug/moc_MainWindow.cpp debug/moc_SettingsWidget.cpp debug/moc_OpSettingsZone.cpp debug/moc_RecordingFileZone.cpp debug/moc_BaseWidget.cpp debug/moc_UiPhoneBook.cpp debug/moc_EventPlanEditor.cpp debug/moc_SectionZone.cpp debug/moc_UiPhoneBookList.cpp debug/moc_PlanListZone.cpp debug/moc_EventWidget.cpp debug/moc_PlanZone.cpp debug/moc_EventExtensionsZone.cpp debug/moc_FunctionZone.cpp debug/moc_DescriptionZone.cpp debug/moc_EventExten.cpp debug/moc_EventChooser.cpp debug/moc_CallLogWidget.cpp debug/moc_EventLog.cpp debug/moc_ftpclient.cpp debug/moc_DialPad.cpp debug/moc_SMSWidget.cpp debug/moc_PlaySoundWidget.cpp debug/moc_MeetMeWidget.cpp debug/moc_TimingBroadcastZone.cpp debug/moc_TimedBroadcastEditor.cpp debug/moc_dlgemergencycall.cpp debug/moc_videolinkagewidget.cpp debug/moc_videowidget.cpp debug/moc_settingsdialog.cpp
+compiler_moc_header_make_all: debug/moc_tools.cpp debug/moc_MessageClient.cpp debug/moc_uiwebbrowser.cpp debug/moc_multitablewidgets.cpp debug/moc_dingobutton.cpp debug/moc_LoginForm.cpp debug/moc_uiextensionbase.cpp debug/moc_SelectedExtensZone.cpp debug/moc_RinggroupsZone.cpp debug/moc_QueueZone.cpp debug/moc_OperatorZone.cpp debug/moc_MainWidget.cpp debug/moc_FastFuncZone.cpp debug/moc_ExtensionsZone.cpp debug/moc_MainWindow.cpp debug/moc_SettingsWidget.cpp debug/moc_OpSettingsZone.cpp debug/moc_RecordingFileZone.cpp debug/moc_BaseWidget.cpp debug/moc_UiPhoneBook.cpp debug/moc_EventPlanEditor.cpp debug/moc_SectionZone.cpp debug/moc_UiPhoneBookList.cpp debug/moc_PlanListZone.cpp debug/moc_EventWidget.cpp debug/moc_PlanZone.cpp debug/moc_EventExtensionsZone.cpp debug/moc_FunctionZone.cpp debug/moc_DescriptionZone.cpp debug/moc_EventExten.cpp debug/moc_EventChooser.cpp debug/moc_CallLogWidget.cpp debug/moc_EventLog.cpp debug/moc_ftpclient.cpp debug/moc_DialPad.cpp debug/moc_SMSWidget.cpp debug/moc_PlaySoundWidget.cpp debug/moc_MeetMeWidget.cpp debug/moc_TimingBroadcastZone.cpp debug/moc_TimedBroadcastEditor.cpp debug/moc_dlgemergencycall.cpp debug/moc_videolinkagewidget.cpp debug/moc_videowidget.cpp debug/moc_playcontrol.cpp debug/moc_settingsdialog.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) debug\moc_tools.cpp debug\moc_MessageClient.cpp debug\moc_uiwebbrowser.cpp debug\moc_multitablewidgets.cpp debug\moc_dingobutton.cpp debug\moc_LoginForm.cpp debug\moc_uiextensionbase.cpp debug\moc_SelectedExtensZone.cpp debug\moc_RinggroupsZone.cpp debug\moc_QueueZone.cpp debug\moc_OperatorZone.cpp debug\moc_MainWidget.cpp debug\moc_FastFuncZone.cpp debug\moc_ExtensionsZone.cpp debug\moc_MainWindow.cpp debug\moc_SettingsWidget.cpp debug\moc_OpSettingsZone.cpp debug\moc_RecordingFileZone.cpp debug\moc_BaseWidget.cpp debug\moc_UiPhoneBook.cpp debug\moc_EventPlanEditor.cpp debug\moc_SectionZone.cpp debug\moc_UiPhoneBookList.cpp debug\moc_PlanListZone.cpp debug\moc_EventWidget.cpp debug\moc_PlanZone.cpp debug\moc_EventExtensionsZone.cpp debug\moc_FunctionZone.cpp debug\moc_DescriptionZone.cpp debug\moc_EventExten.cpp debug\moc_EventChooser.cpp debug\moc_CallLogWidget.cpp debug\moc_EventLog.cpp debug\moc_ftpclient.cpp debug\moc_DialPad.cpp debug\moc_SMSWidget.cpp debug\moc_PlaySoundWidget.cpp debug\moc_MeetMeWidget.cpp debug\moc_TimingBroadcastZone.cpp debug\moc_TimedBroadcastEditor.cpp debug\moc_dlgemergencycall.cpp debug\moc_videolinkagewidget.cpp debug\moc_videowidget.cpp debug\moc_settingsdialog.cpp
+	-$(DEL_FILE) debug\moc_tools.cpp debug\moc_MessageClient.cpp debug\moc_uiwebbrowser.cpp debug\moc_multitablewidgets.cpp debug\moc_dingobutton.cpp debug\moc_LoginForm.cpp debug\moc_uiextensionbase.cpp debug\moc_SelectedExtensZone.cpp debug\moc_RinggroupsZone.cpp debug\moc_QueueZone.cpp debug\moc_OperatorZone.cpp debug\moc_MainWidget.cpp debug\moc_FastFuncZone.cpp debug\moc_ExtensionsZone.cpp debug\moc_MainWindow.cpp debug\moc_SettingsWidget.cpp debug\moc_OpSettingsZone.cpp debug\moc_RecordingFileZone.cpp debug\moc_BaseWidget.cpp debug\moc_UiPhoneBook.cpp debug\moc_EventPlanEditor.cpp debug\moc_SectionZone.cpp debug\moc_UiPhoneBookList.cpp debug\moc_PlanListZone.cpp debug\moc_EventWidget.cpp debug\moc_PlanZone.cpp debug\moc_EventExtensionsZone.cpp debug\moc_FunctionZone.cpp debug\moc_DescriptionZone.cpp debug\moc_EventExten.cpp debug\moc_EventChooser.cpp debug\moc_CallLogWidget.cpp debug\moc_EventLog.cpp debug\moc_ftpclient.cpp debug\moc_DialPad.cpp debug\moc_SMSWidget.cpp debug\moc_PlaySoundWidget.cpp debug\moc_MeetMeWidget.cpp debug\moc_TimingBroadcastZone.cpp debug\moc_TimedBroadcastEditor.cpp debug\moc_dlgemergencycall.cpp debug\moc_videolinkagewidget.cpp debug\moc_videowidget.cpp debug\moc_playcontrol.cpp debug\moc_settingsdialog.cpp
 debug/moc_tools.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QStringList \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstringlist.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qlist.h \
@@ -803,7 +809,7 @@ debug/moc_tools.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QStringList \
 		misc/tools.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward misc\tools.h -o debug\moc_tools.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward misc\tools.h -o debug\moc_tools.cpp
 
 debug/moc_MessageClient.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -1127,7 +1133,7 @@ debug/moc_MessageClient.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui 
 		message_queue/MessageClient.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward message_queue\MessageClient.h -o debug\moc_MessageClient.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward message_queue\MessageClient.h -o debug\moc_MessageClient.cpp
 
 debug/moc_uiwebbrowser.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgets \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgetsDepends \
@@ -1585,7 +1591,7 @@ debug/moc_uiwebbrowser.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtW
 		ui/base/uiwebbrowser.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\uiwebbrowser.h -o debug\moc_uiwebbrowser.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\uiwebbrowser.h -o debug\moc_uiwebbrowser.cpp
 
 debug/moc_multitablewidgets.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -2044,7 +2050,7 @@ debug/moc_multitablewidgets.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/Qt
 		ui/base/multitablewidgets.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\multitablewidgets.h -o debug\moc_multitablewidgets.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\multitablewidgets.h -o debug\moc_multitablewidgets.cpp
 
 debug/moc_dingobutton.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QGroupBox \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qgroupbox.h \
@@ -2156,7 +2162,7 @@ debug/moc_dingobutton.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QGro
 		ui/base/dingobutton.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\dingobutton.h -o debug\moc_dingobutton.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\dingobutton.h -o debug\moc_dingobutton.cpp
 
 debug/moc_LoginForm.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qdialog.h \
@@ -2269,7 +2275,7 @@ debug/moc_LoginForm.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialo
 		ui/LoginForm.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\LoginForm.h -o debug\moc_LoginForm.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\LoginForm.h -o debug\moc_LoginForm.cpp
 
 debug/moc_uiextensionbase.cpp: ui/base/dingobutton.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QGroupBox \
@@ -2610,7 +2616,7 @@ debug/moc_uiextensionbase.cpp: ui/base/dingobutton.h \
 		ui/base/uiextensionbase.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\uiextensionbase.h -o debug\moc_uiextensionbase.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\uiextensionbase.h -o debug\moc_uiextensionbase.cpp
 
 debug/moc_SelectedExtensZone.cpp: ui/base/multitablewidgets.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
@@ -3082,7 +3088,7 @@ debug/moc_SelectedExtensZone.cpp: ui/base/multitablewidgets.h \
 		ui/mainwidget/SelectedExtensZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\SelectedExtensZone.h -o debug\moc_SelectedExtensZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\SelectedExtensZone.h -o debug\moc_SelectedExtensZone.cpp
 
 debug/moc_RinggroupsZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -3553,7 +3559,7 @@ debug/moc_RinggroupsZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui
 		ui/mainwidget/RinggroupsZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\RinggroupsZone.h -o debug\moc_RinggroupsZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\RinggroupsZone.h -o debug\moc_RinggroupsZone.cpp
 
 debug/moc_QueueZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgets \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgetsDepends \
@@ -4011,7 +4017,7 @@ debug/moc_QueueZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidg
 		ui/mainwidget/QueueZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\QueueZone.h -o debug\moc_QueueZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\QueueZone.h -o debug\moc_QueueZone.cpp
 
 debug/moc_OperatorZone.cpp: ui/base/tablewidget.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgets \
@@ -4484,7 +4490,7 @@ debug/moc_OperatorZone.cpp: ui/base/tablewidget.h \
 		ui/mainwidget/OperatorZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\OperatorZone.h -o debug\moc_OperatorZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\OperatorZone.h -o debug\moc_OperatorZone.cpp
 
 debug/moc_MainWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -4949,7 +4955,7 @@ debug/moc_MainWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		ui/mainwidget/MainWidget.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\MainWidget.h -o debug\moc_MainWidget.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\MainWidget.h -o debug\moc_MainWidget.cpp
 
 debug/moc_FastFuncZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -5415,7 +5421,7 @@ debug/moc_FastFuncZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		ui/mainwidget/FastFuncZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\FastFuncZone.h -o debug\moc_FastFuncZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\FastFuncZone.h -o debug\moc_FastFuncZone.cpp
 
 debug/moc_ExtensionsZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -5889,7 +5895,7 @@ debug/moc_ExtensionsZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui
 		ui/mainwidget/ExtensionsZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\ExtensionsZone.h -o debug\moc_ExtensionsZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\mainwidget\ExtensionsZone.h -o debug\moc_ExtensionsZone.cpp
 
 debug/moc_MainWindow.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -6353,7 +6359,7 @@ debug/moc_MainWindow.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		ui/MainWindow.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\MainWindow.h -o debug\moc_MainWindow.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\MainWindow.h -o debug\moc_MainWindow.cpp
 
 debug/moc_SettingsWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -6817,7 +6823,7 @@ debug/moc_SettingsWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui
 		ui/settings/SettingsWidget.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\settings\SettingsWidget.h -o debug\moc_SettingsWidget.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\settings\SettingsWidget.h -o debug\moc_SettingsWidget.cpp
 
 debug/moc_OpSettingsZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -7281,7 +7287,7 @@ debug/moc_OpSettingsZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui
 		ui/settings/OpSettingsZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\settings\OpSettingsZone.h -o debug\moc_OpSettingsZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\settings\OpSettingsZone.h -o debug\moc_OpSettingsZone.cpp
 
 debug/moc_RecordingFileZone.cpp: misc/ftpclient.h \
 		misc/singleton.h \
@@ -7744,7 +7750,7 @@ debug/moc_RecordingFileZone.cpp: misc/ftpclient.h \
 		ui/settings/RecordingFileZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\settings\RecordingFileZone.h -o debug\moc_RecordingFileZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\settings\RecordingFileZone.h -o debug\moc_RecordingFileZone.cpp
 
 debug/moc_BaseWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgets \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgetsDepends \
@@ -8202,7 +8208,7 @@ debug/moc_BaseWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWid
 		ui/base/BaseWidget.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\BaseWidget.h -o debug\moc_BaseWidget.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\BaseWidget.h -o debug\moc_BaseWidget.cpp
 
 debug/moc_UiPhoneBook.cpp: ui/base/BaseWidget.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgets \
@@ -8661,7 +8667,7 @@ debug/moc_UiPhoneBook.cpp: ui/base/BaseWidget.h \
 		ui/phonebook/UiPhoneBook.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\phonebook\UiPhoneBook.h -o debug\moc_UiPhoneBook.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\phonebook\UiPhoneBook.h -o debug\moc_UiPhoneBook.cpp
 
 debug/moc_EventPlanEditor.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -9123,7 +9129,7 @@ debug/moc_EventPlanEditor.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGu
 		ui/eventplan/EventPlanEditor.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\eventplan\EventPlanEditor.h -o debug\moc_EventPlanEditor.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\eventplan\EventPlanEditor.h -o debug\moc_EventPlanEditor.cpp
 
 debug/moc_SectionZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgets \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgetsDepends \
@@ -9581,7 +9587,7 @@ debug/moc_SectionZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWi
 		ui/base/SectionZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\SectionZone.h -o debug\moc_SectionZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\base\SectionZone.h -o debug\moc_SectionZone.cpp
 
 debug/moc_UiPhoneBookList.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgets \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgetsDepends \
@@ -10040,7 +10046,7 @@ debug/moc_UiPhoneBookList.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/
 		ui/phonebook/UiPhoneBookList.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\phonebook\UiPhoneBookList.h -o debug\moc_UiPhoneBookList.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\phonebook\UiPhoneBookList.h -o debug\moc_UiPhoneBookList.cpp
 
 debug/moc_PlanListZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -10504,7 +10510,7 @@ debug/moc_PlanListZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		ui/settings/PlanListZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\settings\PlanListZone.h -o debug\moc_PlanListZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\settings\PlanListZone.h -o debug\moc_PlanListZone.cpp
 
 debug/moc_EventWidget.cpp: ui/base/BaseWidget.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgets \
@@ -10964,7 +10970,7 @@ debug/moc_EventWidget.cpp: ui/base/BaseWidget.h \
 		ui/event/EventWidget.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\EventWidget.h -o debug\moc_EventWidget.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\EventWidget.h -o debug\moc_EventWidget.cpp
 
 debug/moc_PlanZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -11427,7 +11433,7 @@ debug/moc_PlanZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		ui/event/PlanZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\PlanZone.h -o debug\moc_PlanZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\PlanZone.h -o debug\moc_PlanZone.cpp
 
 debug/moc_EventExtensionsZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -11903,7 +11909,7 @@ debug/moc_EventExtensionsZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/
 		ui/event/EventExtensionsZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\EventExtensionsZone.h -o debug\moc_EventExtensionsZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\EventExtensionsZone.h -o debug\moc_EventExtensionsZone.cpp
 
 debug/moc_FunctionZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QWidget \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qwidget.h \
@@ -12365,7 +12371,7 @@ debug/moc_FunctionZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QWi
 		ui/event/FunctionZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\FunctionZone.h -o debug\moc_FunctionZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\FunctionZone.h -o debug\moc_FunctionZone.cpp
 
 debug/moc_DescriptionZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QWidget \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qwidget.h \
@@ -12826,7 +12832,7 @@ debug/moc_DescriptionZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/
 		ui/event/DescriptionZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\DescriptionZone.h -o debug\moc_DescriptionZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\DescriptionZone.h -o debug\moc_DescriptionZone.cpp
 
 debug/moc_EventExten.cpp: ui/base/uiextensionbase.h \
 		ui/base/dingobutton.h \
@@ -13168,7 +13174,7 @@ debug/moc_EventExten.cpp: ui/base/uiextensionbase.h \
 		ui/event/EventExten.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\EventExten.h -o debug\moc_EventExten.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\EventExten.h -o debug\moc_EventExten.cpp
 
 debug/moc_EventChooser.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qdialog.h \
@@ -13274,7 +13280,7 @@ debug/moc_EventChooser.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDi
 		ui/event/EventChooser.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\EventChooser.h -o debug\moc_EventChooser.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\event\EventChooser.h -o debug\moc_EventChooser.cpp
 
 debug/moc_CallLogWidget.cpp: ui/base/BaseWidget.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgets \
@@ -13733,7 +13739,7 @@ debug/moc_CallLogWidget.cpp: ui/base/BaseWidget.h \
 		ui/calllog/CallLogWidget.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\calllog\CallLogWidget.h -o debug\moc_CallLogWidget.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\calllog\CallLogWidget.h -o debug\moc_CallLogWidget.cpp
 
 debug/moc_EventLog.cpp: ui/base/BaseWidget.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgets \
@@ -14195,7 +14201,7 @@ debug/moc_EventLog.cpp: ui/base/BaseWidget.h \
 		ui/eventlog/EventLog.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\eventlog\EventLog.h -o debug\moc_EventLog.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\eventlog\EventLog.h -o debug\moc_EventLog.cpp
 
 debug/moc_ftpclient.cpp: misc/singleton.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QMutex \
@@ -14518,7 +14524,7 @@ debug/moc_ftpclient.cpp: misc/singleton.h \
 		misc/ftpclient.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward misc\ftpclient.h -o debug\moc_ftpclient.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward misc\ftpclient.h -o debug\moc_ftpclient.cpp
 
 debug/moc_DialPad.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qdialog.h \
@@ -14631,7 +14637,7 @@ debug/moc_DialPad.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog 
 		ui/dialogs/DialPad.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\dialogs\DialPad.h -o debug\moc_DialPad.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\dialogs\DialPad.h -o debug\moc_DialPad.cpp
 
 debug/moc_SMSWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qdialog.h \
@@ -14761,7 +14767,7 @@ debug/moc_SMSWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialo
 		ui/dialogs/SMSWidget.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\dialogs\SMSWidget.h -o debug\moc_SMSWidget.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\dialogs\SMSWidget.h -o debug\moc_SMSWidget.cpp
 
 debug/moc_PlaySoundWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qdialog.h \
@@ -14877,7 +14883,7 @@ debug/moc_PlaySoundWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/
 		ui/dialogs/PlaySoundWidget.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\dialogs\PlaySoundWidget.h -o debug\moc_PlaySoundWidget.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\dialogs\PlaySoundWidget.h -o debug\moc_PlaySoundWidget.cpp
 
 debug/moc_MeetMeWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -15350,7 +15356,7 @@ debug/moc_MeetMeWidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		ui/meetme/MeetMeWidget.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\meetme\MeetMeWidget.h -o debug\moc_MeetMeWidget.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\meetme\MeetMeWidget.h -o debug\moc_MeetMeWidget.cpp
 
 debug/moc_TimingBroadcastZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgets \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QtWidgetsDepends \
@@ -15814,7 +15820,7 @@ debug/moc_TimingBroadcastZone.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidg
 		ui/settings/TimingBroadcastZone.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\settings\TimingBroadcastZone.h -o debug\moc_TimingBroadcastZone.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\settings\TimingBroadcastZone.h -o debug\moc_TimingBroadcastZone.cpp
 
 debug/moc_TimedBroadcastEditor.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
@@ -16276,7 +16282,7 @@ debug/moc_TimedBroadcastEditor.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui
 		ui/timedbroadcast/TimedBroadcastEditor.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\timedbroadcast\TimedBroadcastEditor.h -o debug\moc_TimedBroadcastEditor.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\timedbroadcast\TimedBroadcastEditor.h -o debug\moc_TimedBroadcastEditor.cpp
 
 debug/moc_dlgemergencycall.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qdialog.h \
@@ -16392,10 +16398,10 @@ debug/moc_dlgemergencycall.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets
 		ui/dialogs/dlgemergencycall.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\dialogs\dlgemergencycall.h -o debug\moc_dlgemergencycall.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\dialogs\dlgemergencycall.h -o debug\moc_dlgemergencycall.cpp
 
-debug/moc_videolinkagewidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QWidget \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qwidget.h \
+debug/moc_videolinkagewidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qdialog.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtguiglobal.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qglobal.h \
@@ -16421,6 +16427,7 @@ debug/moc_videolinkagewidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidge
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qversiontagging.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtgui-config.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qtwidgets-config.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qwidget.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qwindowdefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qobjectdefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qnamespace.h \
@@ -16516,6 +16523,7 @@ debug/moc_videolinkagewidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidge
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qlayoutitem.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qboxlayout.h \
 		VideoLinkage/videowidget.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QWidget \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QLabel \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qlabel.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QPropertyAnimation \
@@ -16523,9 +16531,22 @@ debug/moc_videolinkagewidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidge
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qvariantanimation.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qeasingcurve.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qabstractanimation.h \
+		VideoLinkage/playcontrol.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QObject \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QMutex \
+		VideoLinkage/sdk/include/vlc/vlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_structures.h \
+		VideoLinkage/sdk/include/vlc/libvlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_library.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_discoverer.h \
+		VideoLinkage/sdk/include/vlc/libvlc_events.h \
+		VideoLinkage/sdk/include/vlc/libvlc_vlm.h \
+		VideoLinkage/sdk/include/vlc/deprecated.h \
 		VideoLinkage/settingsdialog.h \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qdialog.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QScrollArea \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qscrollarea.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
@@ -16534,7 +16555,7 @@ debug/moc_videolinkagewidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidge
 		VideoLinkage/videolinkagewidget.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward VideoLinkage\videolinkagewidget.h -o debug\moc_videolinkagewidget.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward VideoLinkage\videolinkagewidget.h -o debug\moc_videolinkagewidget.cpp
 
 debug/moc_videowidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QWidget \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qwidget.h \
@@ -16644,10 +16665,94 @@ debug/moc_videowidget.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QWid
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qvariantanimation.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qeasingcurve.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qabstractanimation.h \
+		VideoLinkage/playcontrol.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QObject \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QMutex \
+		VideoLinkage/sdk/include/vlc/vlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_structures.h \
+		VideoLinkage/sdk/include/vlc/libvlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_library.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_discoverer.h \
+		VideoLinkage/sdk/include/vlc/libvlc_events.h \
+		VideoLinkage/sdk/include/vlc/libvlc_vlm.h \
+		VideoLinkage/sdk/include/vlc/deprecated.h \
 		VideoLinkage/videowidget.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward VideoLinkage\videowidget.h -o debug\moc_videowidget.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward VideoLinkage\videowidget.h -o debug\moc_videowidget.cpp
+
+debug/moc_playcontrol.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QObject \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qobject.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qobjectdefs.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qnamespace.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qglobal.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qconfig.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtcore-config.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsystemdetection.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qprocessordetection.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcompilerdetection.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtypeinfo.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsysinfo.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qlogging.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qflags.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qatomic.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qbasicatomic.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qatomic_bootstrap.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qgenericatomic.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qatomic_cxx11.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qatomic_msvc.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qglobalstatic.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qmutex.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qnumeric.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qversiontagging.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qobjectdefs_impl.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstring.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qchar.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qbytearray.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qrefcount.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qarraydata.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstringbuilder.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qlist.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qalgorithms.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qiterator.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qhashfunctions.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qpair.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qbytearraylist.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstringlist.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qregexp.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstringmatcher.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcoreevent.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qscopedpointer.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qmetatype.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qvarlengtharray.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcontainerfwd.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qobject_impl.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qwindowdefs.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtguiglobal.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtgui-config.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qwindowdefs_win.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QMutex \
+		VideoLinkage/sdk/include/vlc/vlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_structures.h \
+		VideoLinkage/sdk/include/vlc/libvlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_library.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_discoverer.h \
+		VideoLinkage/sdk/include/vlc/libvlc_events.h \
+		VideoLinkage/sdk/include/vlc/libvlc_vlm.h \
+		VideoLinkage/sdk/include/vlc/deprecated.h \
+		VideoLinkage/playcontrol.h \
+		debug/moc_predefs.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward VideoLinkage\playcontrol.h -o debug\moc_playcontrol.cpp
 
 debug/moc_settingsdialog.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qdialog.h \
@@ -16759,7 +16864,7 @@ debug/moc_settingsdialog.cpp: D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/Q
 		VideoLinkage/settingsdialog.h \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward VideoLinkage\settingsdialog.h -o debug\moc_settingsdialog.cpp
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward VideoLinkage\settingsdialog.h -o debug\moc_settingsdialog.cpp
 
 compiler_moc_source_make_all: debug/qftp.moc
 compiler_moc_source_clean:
@@ -16844,7 +16949,7 @@ debug/qftp.moc: misc/qftp.h \
 		misc/qftp.cpp \
 		debug/moc_predefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/bin/moc.exe
-	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -Ih:/Libs/vlc-qt/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward misc\qftp.cpp -o debug\qftp.moc
+	D:\Qt\Qt5.9.4\5.9.4\mingw53_32\bin\moc.exe $(DEFINES) --include debug/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/mkspecs/win32-g++ -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward misc\qftp.cpp -o debug\qftp.moc
 
 compiler_uic_make_all: ui_extensioncfg.h
 compiler_uic_clean:
@@ -26635,9 +26740,25 @@ debug/MainWindow.o: ui/MainWindow.cpp ui/MainWindow.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QGridLayout \
 		VideoLinkage/videowidget.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QPropertyAnimation \
+		VideoLinkage/playcontrol.h \
+		VideoLinkage/sdk/include/vlc/vlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_structures.h \
+		VideoLinkage/sdk/include/vlc/libvlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_library.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_discoverer.h \
+		VideoLinkage/sdk/include/vlc/libvlc_events.h \
+		VideoLinkage/sdk/include/vlc/libvlc_vlm.h \
+		VideoLinkage/sdk/include/vlc/deprecated.h \
 		VideoLinkage/settingsdialog.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QScrollArea \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QSettings
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QSettings \
+		ui/mainwidget/OperatorZone.h \
+		ui/mainwidget/ExtensionsZone.h \
+		CustomWidget/titlebar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\MainWindow.o ui\MainWindow.cpp
 
 debug/SettingsWidget.o: ui/settings/SettingsWidget.cpp ui/settings/SettingsWidget.h \
@@ -38619,8 +38740,8 @@ debug/qurlinfo.o: misc/qurlinfo.cpp misc/qurlinfo.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\qurlinfo.o misc\qurlinfo.cpp
 
 debug/videolinkagewidget.o: VideoLinkage/videolinkagewidget.cpp VideoLinkage/videolinkagewidget.h \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QWidget \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qwidget.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qdialog.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qtwidgetsglobal.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtguiglobal.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qglobal.h \
@@ -38646,6 +38767,7 @@ debug/videolinkagewidget.o: VideoLinkage/videolinkagewidget.cpp VideoLinkage/vid
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qversiontagging.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtgui-config.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qtwidgets-config.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qwidget.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qwindowdefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qobjectdefs.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qnamespace.h \
@@ -38741,6 +38863,7 @@ debug/videolinkagewidget.o: VideoLinkage/videolinkagewidget.cpp VideoLinkage/vid
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qlayoutitem.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qboxlayout.h \
 		VideoLinkage/videowidget.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QWidget \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QLabel \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qlabel.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QPropertyAnimation \
@@ -38748,9 +38871,22 @@ debug/videolinkagewidget.o: VideoLinkage/videolinkagewidget.cpp VideoLinkage/vid
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qvariantanimation.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qeasingcurve.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qabstractanimation.h \
+		VideoLinkage/playcontrol.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QObject \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QMutex \
+		VideoLinkage/sdk/include/vlc/vlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_structures.h \
+		VideoLinkage/sdk/include/vlc/libvlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_library.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_discoverer.h \
+		VideoLinkage/sdk/include/vlc/libvlc_events.h \
+		VideoLinkage/sdk/include/vlc/libvlc_vlm.h \
+		VideoLinkage/sdk/include/vlc/deprecated.h \
 		VideoLinkage/settingsdialog.h \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qdialog.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QScrollArea \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qscrollarea.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
@@ -38767,7 +38903,220 @@ debug/videolinkagewidget.o: VideoLinkage/videolinkagewidget.cpp VideoLinkage/vid
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QDateTime \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qdatetime.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QMap \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QMouseEvent
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QMouseEvent \
+		pbx/pbx.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGui \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QtGuiDepends \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QtCore \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QtCoreDepends \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qabstracteventdispatcher.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qeventloop.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qabstractnativeeventfilter.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qabstractproxymodel.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qabstractstate.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qabstracttransition.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qanimationgroup.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qarraydataops.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qarraydatapointer.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qbitarray.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qbuffer.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qbytearraymatcher.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcache.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcollator.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcommandlineoption.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcommandlineparser.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcoreapplication.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcryptographichash.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qdeadlinetimer.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qelapsedtimer.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qdir.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qfileinfo.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qdiriterator.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qendian.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qeventtransition.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qexception.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qfactoryinterface.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qfileselector.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QStringList \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qfilesystemwatcher.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qfinalstate.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qfuture.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qfutureinterface.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qrunnable.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qresultstore.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qfuturesynchronizer.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qfuturewatcher.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qhistorystate.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qidentityproxymodel.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qisenum.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qitemselectionmodel.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qjsonarray.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qjsonvalue.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qjsondocument.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qjsonobject.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qlibrary.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qlibraryinfo.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qversionnumber.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qlinkedlist.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qlockfile.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qloggingcategory.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qmath.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qmessageauthenticationcode.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qmetaobject.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qmimedata.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qmimedatabase.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qmimetype.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qobjectcleanuphandler.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qoperatingsystemversion.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qparallelanimationgroup.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qpauseanimation.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qplugin.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qpointer.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qpluginloader.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qprocess.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qqueue.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qreadwritelock.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qresource.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsavefile.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qscopedvaluerollback.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsemaphore.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsequentialanimationgroup.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsharedmemory.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsignalmapper.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsignaltransition.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsocketnotifier.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsortfilterproxymodel.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstack.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstandardpaths.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstate.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstatemachine.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstorageinfo.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstringlistmodel.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsystemsemaphore.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtemporarydir.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QScopedPointer \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtemporaryfile.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtextboundaryfinder.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtextcodec.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qthread.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qthreadpool.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qthreadstorage.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtimeline.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtimezone.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtranslator.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtypetraits.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/quuid.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qwaitcondition.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qwineventnotifier.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qxmlstream.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtcoreversion.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qabstracttextdocumentlayout.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtextlayout.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtextformat.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qpen.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtextoption.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qglyphrun.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qrawfont.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qfontdatabase.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtextcursor.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtextdocument.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qaccessible.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qaccessiblebridge.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qaccessibleobject.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qaccessibleplugin.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qbackingstore.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qwindow.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QEvent \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QMargins \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QRect \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qsurface.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qsurfaceformat.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qbitmap.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qclipboard.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qdesktopservices.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qdrag.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qgenericmatrix.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qgenericplugin.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qgenericpluginfactory.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qguiapplication.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qinputmethod.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qiconengine.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qiconengineplugin.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qimageiohandler.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qimagereader.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qimagewriter.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qmatrix4x4.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qvector3d.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qvector4d.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qquaternion.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qmovie.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qoffscreensurface.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopengl.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qt_windows.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE/GLES3/gl3.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE/GLES3/gl3platform.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE/KHR/khrplatform.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE/GLES2/gl2.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtANGLE/GLES2/gl2platform.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopengles2ext.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglext.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglbuffer.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglcontext.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QSurfaceFormat \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglversionfunctions.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopengldebug.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglextrafunctions.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglfunctions.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglframebufferobject.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglpaintdevice.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglpixeltransferoptions.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QSharedDataPointer \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglshaderprogram.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopengltexture.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopengltextureblitter.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QMatrix3x3 \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QMatrix4x4 \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopengltimerquery.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglvertexarrayobject.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qopenglwindow.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QPaintDeviceWindow \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qpaintdevicewindow.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QWindow \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QPaintDevice \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QOpenGLContext \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QImage \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qpagedpaintdevice.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qpagelayout.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qpagesize.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qpaintengine.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qpainter.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qpdfwriter.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qpicture.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qpictureformatplugin.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qpixmapcache.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qrasterwindow.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qscreen.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QList \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QSize \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QSizeF \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QTransform \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qsessionmanager.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qstandarditemmodel.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qstatictext.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qstylehints.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qsyntaxhighlighter.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtextobject.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtextdocumentfragment.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtextdocumentwriter.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtextlist.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtexttable.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtguiversion.h \
+		misc/singleton.h \
+		message_queue/MessageClient.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QThread \
+		message_queue/amqp_framing.h \
+		message_queue/amqp.h \
+		misc/logger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\videolinkagewidget.o VideoLinkage\videolinkagewidget.cpp
 
 debug/videowidget.o: VideoLinkage/videowidget.cpp VideoLinkage/videowidget.h \
@@ -38879,6 +39228,21 @@ debug/videowidget.o: VideoLinkage/videowidget.cpp VideoLinkage/videowidget.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qvariantanimation.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qeasingcurve.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qabstractanimation.h \
+		VideoLinkage/playcontrol.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QObject \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QMutex \
+		VideoLinkage/sdk/include/vlc/vlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_structures.h \
+		VideoLinkage/sdk/include/vlc/libvlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_library.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_discoverer.h \
+		VideoLinkage/sdk/include/vlc/libvlc_events.h \
+		VideoLinkage/sdk/include/vlc/libvlc_vlm.h \
+		VideoLinkage/sdk/include/vlc/deprecated.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QFont \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/QResizeEvent \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QDebug \
@@ -38893,26 +39257,90 @@ debug/videowidget.o: VideoLinkage/videowidget.cpp VideoLinkage/videowidget.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qboxlayout.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qlayout.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qlayoutitem.h \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qgridlayout.h \
-		h:/Libs/vlc-qt/include/VLCQtCore/Common.h \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QString \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QStringList \
-		h:/Libs/vlc-qt/include/VLCQtCore/SharedExportCore.h \
-		h:/Libs/vlc-qt/include/VLCQtCore/Instance.h \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QObject \
-		h:/Libs/vlc-qt/include/VLCQtCore/Enums.h \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QSizeF \
-		h:/Libs/vlc-qt/include/VLCQtCore/Media.h \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QUrl \
-		h:/Libs/vlc-qt/include/VLCQtCore/Audio.h \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QMap \
-		h:/Libs/vlc-qt/include/VLCQtCore/MediaPlayer.h \
-		h:/Libs/vlc-qt/include/VLCQtCore/Config.h \
-		h:/Libs/vlc-qt/include/VLCQtWidgets/WidgetVideo.h \
-		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QFrame \
-		h:/Libs/vlc-qt/include/VLCQtCore/VideoDelegate.h \
-		h:/Libs/vlc-qt/include/VLCQtWidgets/SharedExportWidgets.h
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/qgridlayout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\videowidget.o VideoLinkage\videowidget.cpp
+
+debug/playcontrol.o: VideoLinkage/playcontrol.cpp VideoLinkage/playcontrol.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QObject \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qobject.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qobjectdefs.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qnamespace.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qglobal.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qconfig-bootstrapped.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qconfig.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtcore-config.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsystemdetection.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qprocessordetection.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcompilerdetection.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtypeinfo.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsysinfo.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qlogging.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qflags.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qatomic.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qbasicatomic.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qatomic_bootstrap.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qgenericatomic.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qatomic_cxx11.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qatomic_msvc.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qglobalstatic.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qmutex.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qnumeric.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qversiontagging.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qobjectdefs_impl.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstring.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qchar.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qbytearray.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qrefcount.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qarraydata.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstringbuilder.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qlist.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qalgorithms.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qiterator.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qhashfunctions.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qpair.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qbytearraylist.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstringlist.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qregexp.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qstringmatcher.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcoreevent.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qscopedpointer.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qmetatype.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qvarlengtharray.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcontainerfwd.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qobject_impl.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qwindowdefs.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtguiglobal.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qtgui-config.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtGui/qwindowdefs_win.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QMutex \
+		VideoLinkage/sdk/include/vlc/vlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_structures.h \
+		VideoLinkage/sdk/include/vlc/libvlc.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_list_player.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_library.h \
+		VideoLinkage/sdk/include/vlc/libvlc_media_discoverer.h \
+		VideoLinkage/sdk/include/vlc/libvlc_events.h \
+		VideoLinkage/sdk/include/vlc/libvlc_vlm.h \
+		VideoLinkage/sdk/include/vlc/deprecated.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/QDebug \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qdebug.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qhash.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qmap.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qtextstream.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qiodevice.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qlocale.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qvariant.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qshareddata.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qvector.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qpoint.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qset.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qcontiguouscache.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsharedpointer.h \
+		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtCore/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\playcontrol.o VideoLinkage\playcontrol.cpp
 
 debug/settingsdialog.o: VideoLinkage/settingsdialog.cpp VideoLinkage/settingsdialog.h \
 		D:/Qt/Qt5.9.4/5.9.4/mingw53_32/include/QtWidgets/QDialog \
@@ -39210,6 +39638,9 @@ debug/moc_videolinkagewidget.o: debug/moc_videolinkagewidget.cpp
 
 debug/moc_videowidget.o: debug/moc_videowidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_videowidget.o debug\moc_videowidget.cpp
+
+debug/moc_playcontrol.o: debug/moc_playcontrol.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_playcontrol.o debug\moc_playcontrol.cpp
 
 debug/moc_settingsdialog.o: debug/moc_settingsdialog.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_settingsdialog.o debug\moc_settingsdialog.cpp
