@@ -1,4 +1,4 @@
-#ifndef UIEXTENSION_H
+﻿#ifndef UIEXTENSION_H
 #define UIEXTENSION_H
 
 #include "dingobutton.h"

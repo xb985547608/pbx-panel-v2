@@ -1,4 +1,4 @@
-#include "SectionZone.h"
+﻿#include "SectionZone.h"
 #include "misccomponents.h"
 #include "tablewidget.h"
 

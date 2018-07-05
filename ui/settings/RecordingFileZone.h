@@ -1,4 +1,4 @@
-#ifndef RECORDINGFILEZONE_H
+﻿#ifndef RECORDINGFILEZONE_H
 #define RECORDINGFILEZONE_H
 #include "misc/ftpclient.h"
 

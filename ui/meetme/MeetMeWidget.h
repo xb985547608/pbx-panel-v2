@@ -1,4 +1,4 @@
-#ifndef MEETMEWIDGET_H
+﻿#ifndef MEETMEWIDGET_H
 #define MEETMEWIDGET_H
 
 #include <QtGui>

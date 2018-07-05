@@ -1,4 +1,4 @@
-#include "CallLogWidget.h"
+﻿#include "CallLogWidget.h"
 #include "misc/Config.h"
 #include "misc/logger.h"
 #include "pbx/pbx.h"

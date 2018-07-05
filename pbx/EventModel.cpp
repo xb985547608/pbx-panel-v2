@@ -1,4 +1,4 @@
-#include "EventModel.h"
+﻿#include "EventModel.h"
 #include "misc/logger.h"
 
 EventModel::EventModel()

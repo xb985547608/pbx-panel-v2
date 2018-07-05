@@ -1,4 +1,4 @@
-#ifndef FASTFUNCZONE_H
+﻿#ifndef FASTFUNCZONE_H
 #define FASTFUNCZONE_H
 
 #include <QtGui>

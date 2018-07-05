@@ -1,4 +1,4 @@
-#ifndef DIALPAD_H
+﻿#ifndef DIALPAD_H
 #define DIALPAD_H
 
 #include <QDialog>

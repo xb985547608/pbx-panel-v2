@@ -1,8 +1,18 @@
-#include "FunctionZone.h"
+﻿#include "FunctionZone.h"
 #include "ui/base/misccomponents.h"
 #include "misc/Config.h"
 #include "DescriptionZone.h"
-#include "unistd.h"
+
+#ifdef WIN32
+static void usleep(qint64 uMsec)
+{
+    QTime dieTime = QTime::currentTime().addMSecs(uMsec / 1000);
+    while( QTime::currentTime() < dieTime )
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+#else
+//#include <unistd.h>
+#endif
 
 FunctionZone::FunctionZone(EventWidget* eventWidget, QWidget *parent) :
     QWidget(parent),

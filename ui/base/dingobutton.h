@@ -1,4 +1,4 @@
-#ifndef DINGOBUTTON_H
+﻿#ifndef DINGOBUTTON_H
 #define DINGOBUTTON_H
 
 #include <QGroupBox>

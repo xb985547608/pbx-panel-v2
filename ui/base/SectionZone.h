@@ -1,4 +1,4 @@
-#ifndef SECTIONZONE_H
+﻿#ifndef SECTIONZONE_H
 #define SECTIONZONE_H
 
 #ifndef V4

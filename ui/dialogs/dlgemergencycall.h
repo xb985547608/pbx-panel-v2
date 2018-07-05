@@ -1,4 +1,4 @@
-#ifndef DLGEMERGENCYCALL_H
+﻿#ifndef DLGEMERGENCYCALL_H
 #define DLGEMERGENCYCALL_H
 
 #include <QDialog>

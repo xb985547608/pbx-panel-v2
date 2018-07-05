@@ -1,4 +1,4 @@
-#ifndef UIWEBBROWSER_H
+﻿#ifndef UIWEBBROWSER_H
 #define UIWEBBROWSER_H
 
 #ifndef V4

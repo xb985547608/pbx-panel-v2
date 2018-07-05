@@ -1,4 +1,4 @@
-#ifndef librabbitmq_amqp_h
+﻿#ifndef librabbitmq_amqp_h
 #define librabbitmq_amqp_h
 
 /*

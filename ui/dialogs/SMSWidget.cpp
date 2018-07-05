@@ -1,4 +1,4 @@
-#include "SMSWidget.h"
+﻿#include "SMSWidget.h"
 #include "ui/base/misccomponents.h"
 #include "message_queue/RPCCommand.h"
 #include "misc/Config.h"

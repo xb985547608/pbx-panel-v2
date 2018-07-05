@@ -1,4 +1,4 @@
-#ifndef EVENTEXTENSIONSZONE_H
+﻿#ifndef EVENTEXTENSIONSZONE_H
 #define EVENTEXTENSIONSZONE_H
 
 #include <QtGui>

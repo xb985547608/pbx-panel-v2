@@ -1,4 +1,4 @@
-#include "videowidget.h"
+﻿#include "videowidget.h"
 #include <QFont>
 #include <QResizeEvent>
 #include <QDebug>

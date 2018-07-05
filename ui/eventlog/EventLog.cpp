@@ -1,4 +1,4 @@
-#include "EventLog.h"
+﻿#include "EventLog.h"
 #include "ui/base/misccomponents.h"
 #include "pbx/EventModel.h"
 #include "message_queue/RPCCommand.h"

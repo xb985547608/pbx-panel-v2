@@ -1,4 +1,4 @@
-#include "dlgemergencycall.h"
+﻿#include "dlgemergencycall.h"
 #include <QMessageBox>
 
 

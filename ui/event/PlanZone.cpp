@@ -1,9 +1,13 @@
-#include "PlanZone.h"
+﻿#include "PlanZone.h"
 #include "ui/base/multitablewidgets.h"
 #include "ui/base/misccomponents.h"
 #include "message_queue/RPCCommand.h"
 #include "DescriptionZone.h"
 #include "EventExtensionsZone.h"
+
+#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
 
 PlanZone::PlanZone(EventWidget* eventWidget, QWidget *parent) :
     QWidget(parent),

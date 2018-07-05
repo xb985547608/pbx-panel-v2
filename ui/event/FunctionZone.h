@@ -1,4 +1,4 @@
-#ifndef FUNCTIONZONE_H
+﻿#ifndef FUNCTIONZONE_H
 #define FUNCTIONZONE_H
 
 #include <QWidget>

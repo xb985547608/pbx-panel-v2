@@ -1,4 +1,4 @@
-#ifndef logger_h
+﻿#ifndef logger_h
 #define logger_h
 
 #include <cstdio>
@@ -10,13 +10,21 @@
 #include <pthread.h>
 #endif
 
-
+#if 1
+#define LOG(level, fmt, ...) do { \
+    if (!Logger::Instance()->shouldLog(level)) \
+        break; \
+    Logger::Instance()->log("[%s]%s(%d): ", Logger::getLevelName(level).c_str(), __FILE__, __LINE__); \
+    Logger::Instance()->log(fmt, ##__VA_ARGS__); \
+    } while(0)
+#else
 #define LOG(level, fmt, args...) do { \
     if (!Logger::Instance()->shouldLog(level)) \
         break; \
     Logger::Instance()->log("[%s]%s(%d): ", Logger::getLevelName(level).c_str(), __FILE__, __LINE__); \
     Logger::Instance()->log(fmt, ##args); \
     } while(0)
+#endif
 
 class Logger : public Singleton<Logger>
 {

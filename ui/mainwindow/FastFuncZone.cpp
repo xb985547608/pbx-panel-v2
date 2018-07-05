@@ -1,4 +1,4 @@
-#include "FastFuncZone.h"
+﻿#include "FastFuncZone.h"
 #include "misc/Config.h"
 #include "ui/base/misccomponents.h"
 

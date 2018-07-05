@@ -1,4 +1,4 @@
-#ifndef QUEUEZONE_H
+﻿#ifndef QUEUEZONE_H
 #define QUEUEZONE_H
 
 #include <QWidget>

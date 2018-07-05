@@ -1,4 +1,4 @@
-#ifndef EVENTCHOOSER_H
+﻿#ifndef EVENTCHOOSER_H
 #define EVENTCHOOSER_H
 
 #include <QDialog>

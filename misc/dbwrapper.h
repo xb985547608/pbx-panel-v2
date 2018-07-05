@@ -1,4 +1,4 @@
-#ifndef DBWRAPPER_H
+﻿#ifndef DBWRAPPER_H
 #define DBWRAPPER_H
 
 #include <QObject>

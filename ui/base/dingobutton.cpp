@@ -1,4 +1,4 @@
-#include <QtGui>
+﻿#include <QtGui>
 #include "dingobutton.h"
 
 DingoButton::DingoButton(QWidget *parent) :

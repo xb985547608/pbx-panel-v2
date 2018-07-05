@@ -1,4 +1,4 @@
-#ifndef UIPHONEBOOKLIST_H
+﻿#ifndef UIPHONEBOOKLIST_H
 #define UIPHONEBOOKLIST_H
 
 #ifndef V4

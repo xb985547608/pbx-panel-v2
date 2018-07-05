@@ -1,8 +1,4 @@
-#include "MessageClient.h"
-#include "misc/tools.h"
-#include "misc/logger.h"
-#include "misc/Config.h"
-#ifdef WIN32
+﻿#ifdef WIN32
 #include "winsock2.h"
 #else
 #include <stdint.h>
@@ -10,6 +6,11 @@
 extern "C" {
 #include <assert.h>
 }
+
+#include "MessageClient.h"
+#include "misc/tools.h"
+#include "misc/logger.h"
+#include "misc/Config.h"
 
 QMutex RpcLock;
 

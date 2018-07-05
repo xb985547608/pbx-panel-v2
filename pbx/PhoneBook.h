@@ -1,4 +1,4 @@
-#ifndef PHONEBOOK_H
+﻿#ifndef PHONEBOOK_H
 #define PHONEBOOK_H
 
 #include <QtGui>

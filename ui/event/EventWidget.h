@@ -1,4 +1,4 @@
-#ifndef EMERGENCYEVENTWIDGET_H
+﻿#ifndef EMERGENCYEVENTWIDGET_H
 #define EMERGENCYEVENTWIDGET_H
 
 #include "ui/base/BaseWidget.h"

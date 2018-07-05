@@ -1,4 +1,4 @@
-#include "multitablewidgets.h"
+﻿#include "multitablewidgets.h"
 #include "misccomponents.h"
 
 static QMutex sRefreshLock;

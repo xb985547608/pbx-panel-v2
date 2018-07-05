@@ -1,4 +1,4 @@
-#ifndef EVENTPLANEDITOR_H
+﻿#ifndef EVENTPLANEDITOR_H
 #define EVENTPLANEDITOR_H
 
 #include <QtGui>

@@ -1,4 +1,4 @@
-#include "uiwebbrowser.h"
+﻿#include "uiwebbrowser.h"
 #include "misc/cwebpage.h"
 #include "misc/Config.h"
 

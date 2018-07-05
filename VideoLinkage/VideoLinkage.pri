@@ -1,5 +1,6 @@
-LIBS       += -L$$PWD/sdk/lib -lvlc -lvlccore
+win32: LIBS += -L$$PWD/sdk/lib/ -llibvlccore -llibvlc
 INCLUDEPATH += $$PWD/sdk/include
+DEPENDPATH += $$PWD/sdk/include
 
 HEADERS += \
     $$PWD/videolinkagewidget.h \

@@ -1,4 +1,4 @@
-#include "QueueZone.h"
+﻿#include "QueueZone.h"
 #include "ui/base/misccomponents.h"
 #include "ui/base/tablewidget.h"
 

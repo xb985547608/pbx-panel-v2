@@ -1,4 +1,4 @@
-#include "dbwrapper.h"
+﻿#include "dbwrapper.h"
 #include <QtGui>
 #include <QString>
 #include <QFile>

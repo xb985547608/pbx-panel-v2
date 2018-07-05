@@ -1,4 +1,4 @@
-#ifndef MESSAGECLIENT_H
+﻿#ifndef MESSAGECLIENT_H
 #define MESSAGECLIENT_H
 
 #include <QtGui>

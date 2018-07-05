@@ -1,4 +1,4 @@
-#ifndef EVENTEXTEN_H
+﻿#ifndef EVENTEXTEN_H
 #define EVENTEXTEN_H
 
 #include "ui/base/uiextensionbase.h"

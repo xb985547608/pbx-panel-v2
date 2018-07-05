@@ -1,4 +1,4 @@
-#ifndef PLAYSOUNDWIDGET_H
+﻿#ifndef PLAYSOUNDWIDGET_H
 #define PLAYSOUNDWIDGET_H
 
 #include <QDialog>

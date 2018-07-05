@@ -1,4 +1,4 @@
-#ifndef BASEWIDGET_H
+﻿#ifndef BASEWIDGET_H
 #define BASEWIDGET_H
 
 #ifndef V4

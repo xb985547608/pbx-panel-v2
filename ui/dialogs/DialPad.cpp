@@ -1,4 +1,4 @@
-#include "DialPad.h"
+﻿#include "DialPad.h"
 #include "ui/base/misccomponents.h"
 #include "misc/Config.h"
 #include "misc/logger.h"

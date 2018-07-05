@@ -1,4 +1,4 @@
-#include "ExtensionsZone.h"
+﻿#include "ExtensionsZone.h"
 #include "SelectedExtensZone.h"
 #include "ui/base/misccomponents.h"
 #include "message_queue/RPCCommand.h"
@@ -9,6 +9,7 @@
 static QStringList sCallbacks;
 static ExtensionsZone* sExtensionsZone = NULL;
 static void EventCallback(MessageClient::EventType e, QMap<QString, QString>& eventMessage) {
+    Q_UNUSED(e)
     if (sExtensionsZone != NULL)
         sExtensionsZone->eventMessageReceived(eventMessage);
 }
@@ -450,12 +451,14 @@ void TextArea::setExtensCount(int cnt)
 
 void TextArea::setOnlineExtensCount(int cnt)
 {
+    Q_UNUSED(cnt)
 //    QString txtCnt = QString("%1").arg(cnt);
 //    mOnlineExtensCount->setText(txtCnt);
 }
 
 void TextArea::setConferenceRoomCount(int cnt)
 {
+    Q_UNUSED(cnt)
 //    QString txtCnt = QString("%1").arg(cnt);
 //    mConferenceRoomCount->setText(txtCnt);
 }

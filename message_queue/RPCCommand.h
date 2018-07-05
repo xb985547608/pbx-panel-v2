@@ -1,4 +1,4 @@
-#ifndef RPCCOMMAND_H
+﻿#ifndef RPCCOMMAND_H
 #define RPCCOMMAND_H
 #include <QtGui>
 #include <pbx/pbx.h>

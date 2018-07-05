@@ -1,4 +1,4 @@
-#ifndef PLANZONE_H
+﻿#ifndef PLANZONE_H
 #define PLANZONE_H
 
 #include <QtGui>

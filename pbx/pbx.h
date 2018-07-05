@@ -1,4 +1,4 @@
-#ifndef PBX_H
+﻿#ifndef PBX_H
 #define PBX_H
 
 #include <QtGui>
@@ -43,8 +43,9 @@ public:
     };
 
 
-    typedef struct _struct_extension {
-        _struct_extension();
+    class Extension {
+    public:
+        Extension();
         QString name;
         QString displayName;
         QString number;
@@ -57,7 +58,7 @@ public:
         QMap<QString, PeerInfo> peers;
         PBX::PeerState getState();
         RollCallState rollCallState;
-    } Extension;
+    };
 
     typedef struct _struct_current_call {
         QString channel;
