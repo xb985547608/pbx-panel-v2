@@ -1,11 +1,21 @@
-#include "RPCCommand.h"
+﻿#include "RPCCommand.h"
 #include "MessageClient.h"
 #include "misc/logger.h"
 #include "misc/Config.h"
-#include <unistd.h>
 #include "ui/mainwidget/QueueZone.h"
 #include "misc/dbwrapper.h"
 #include "misc/ftpclient.h"
+
+#ifdef WIN32
+static void usleep(qint64 uMsec)
+{
+    QTime dieTime = QTime::currentTime().addMSecs(uMsec / 1000);
+    while( QTime::currentTime() < dieTime )
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+#else
+//#include <unistd.h>
+#endif
 
 QString RPCCommand::mLastErrorMessage = "";
 QString RPCCommand::mSessionId = "";

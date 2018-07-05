@@ -1,4 +1,4 @@
-#ifndef OPERATORZONE_H
+﻿#ifndef OPERATORZONE_H
 #define OPERATORZONE_H
 
 #include "ui/base/tablewidget.h"

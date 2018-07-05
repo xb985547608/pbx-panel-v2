@@ -1,4 +1,4 @@
-#include "LoginForm.h"
+﻿#include "LoginForm.h"
 #include "misc/Config.h"
 #include "base/misccomponents.h"
 #include "misc/dbwrapper.h"

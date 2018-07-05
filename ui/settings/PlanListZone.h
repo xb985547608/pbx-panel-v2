@@ -1,4 +1,4 @@
-#ifndef PLANLISTZONE_H
+﻿#ifndef PLANLISTZONE_H
 #define PLANLISTZONE_H
 
 #include <QtGui>

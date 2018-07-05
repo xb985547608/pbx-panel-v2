@@ -1,11 +1,10 @@
-#include <QtGui>
+﻿#include <QtGui>
 #include "ui/MainWindow.h"
 #include "misc/logger.h"
 #include "misc/dbwrapper.h"
 #include "message_queue/MessageClient.h"
 #include "message_queue/RPCCommand.h"
 #include "misc/Config.h"
-#include <winsock2.h>
 
 static bool initialiseLogger()
 {
@@ -61,7 +60,7 @@ static bool checkSingleton(QApplication& a)
 #endif
     QStringList args = a.arguments();
     if (args.contains(RESTART_FLAG)) {
-        QMessageBox::StandardButton btn = QMessageBox::warning(NULL, "与pbx的通讯出现故障", "请确认网络连接是否正常\n点击Yes重新连接，No退出",
+        QMessageBox::StandardButton btn = QMessageBox::warning(NULL, "与pbx的通讯出现故障", "请确认网络连接是否正常\n点击Yes重新连接，No退出.",
                              QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
         if (btn == QMessageBox::No)
             return false;

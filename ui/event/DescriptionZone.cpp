@@ -1,4 +1,4 @@
-#include "DescriptionZone.h"
+﻿#include "DescriptionZone.h"
 #include "ui/base/tablewidget.h"
 #include "ui/base/misccomponents.h"
 #include "time.h"

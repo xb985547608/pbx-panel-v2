@@ -1,4 +1,4 @@
-#include "settingsdialog.h"
+﻿#include "settingsdialog.h"
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>

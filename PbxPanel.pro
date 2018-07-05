@@ -21,7 +21,7 @@ DEFINES += OEM
 DEFINES += V5
 
 #win32: LIBS += -lole32 -lws2_32 -L$$PWD/lib -lcwebpage -lrabbitmq "D:\Qt\Qt5.1.1\5.1.1\mingw48_32\bin\Qt5Ftp.dll"
-win32: LIBS += -lole32 -lws2_32 -L$$PWD/lib -lcwebpage -lrabbitmq
+win32: LIBS += -lole32 -lws2_32 -L$$PWD/lib -lrabbitmq #-lcwebpage 暂时不用这个库
 
 
 SOURCES += main.cpp \
@@ -30,7 +30,7 @@ SOURCES += main.cpp \
     misc/logger.cpp \
     message_queue/MessageClient.cpp \
     misc/Config.cpp \
-    ui/base/uiwebbrowser.cpp \
+#    ui/base/uiwebbrowser.cpp \
     ui/base/tablewidget.cpp \
     ui/base/multitablewidgets.cpp \
     ui/base/misccomponents.cpp \
@@ -85,10 +85,10 @@ HEADERS += \
     misc/tools.h \
     misc/singleton.h \
     misc/logger.h \
-    misc/cwebpage.h \
+#    misc/cwebpage.h \
     message_queue/MessageClient.h \
     misc/Config.h \
-    ui/base/uiwebbrowser.h \
+#    ui/base/uiwebbrowser.h \
     ui/base/tablewidget.h \
     ui/base/multitablewidgets.h \
     ui/base/misccomponents.h \
@@ -144,4 +144,3 @@ OTHER_FILES += \
 RC_FILE = panel.rc
 
 include ( $$PWD/VideoLinkage/VideoLinkage.pri )
-

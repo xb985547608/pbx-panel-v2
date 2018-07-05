@@ -1,4 +1,4 @@
-#include "OperatorZone.h"
+﻿#include "OperatorZone.h"
 #include "message_queue/RPCCommand.h"
 #include "message_queue/MessageClient.h"
 #include "ui/base/misccomponents.h"

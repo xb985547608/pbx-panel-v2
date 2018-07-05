@@ -1,4 +1,4 @@
-#include "OpSettingsZone.h"
+﻿#include "OpSettingsZone.h"
 #include "ui/base/tablewidget.h"
 #include "message_queue/RPCCommand.h"
 #include "ui/base/misccomponents.h"

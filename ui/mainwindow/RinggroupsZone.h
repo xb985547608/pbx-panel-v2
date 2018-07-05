@@ -1,4 +1,4 @@
-#ifndef RINGGROUPSZONE_H
+﻿#ifndef RINGGROUPSZONE_H
 #define RINGGROUPSZONE_H
 
 #include <QtGui>

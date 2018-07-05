@@ -1,4 +1,4 @@
-#ifndef PLAYCONTROL_H
+﻿#ifndef PLAYCONTROL_H
 #define PLAYCONTROL_H
 
 /**

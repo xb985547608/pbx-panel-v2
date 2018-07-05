@@ -1,4 +1,4 @@
-#ifndef SMSWIDGET_H
+﻿#ifndef SMSWIDGET_H
 #define SMSWIDGET_H
 
 #include <QDialog>

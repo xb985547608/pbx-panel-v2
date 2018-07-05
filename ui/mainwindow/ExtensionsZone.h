@@ -1,4 +1,4 @@
-#ifndef EXTENSIONSZONE_H
+﻿#ifndef EXTENSIONSZONE_H
 #define EXTENSIONSZONE_H
 
 #include <QtGui>

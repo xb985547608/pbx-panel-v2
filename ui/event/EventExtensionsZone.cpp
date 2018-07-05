@@ -1,4 +1,4 @@
-#include "EventExtensionsZone.h"
+﻿#include "EventExtensionsZone.h"
 #include "ui/base/misccomponents.h"
 #include "misc/logger.h"
 

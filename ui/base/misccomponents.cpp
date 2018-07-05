@@ -1,4 +1,4 @@
-#include "misccomponents.h"
+﻿#include "misccomponents.h"
 #include "misc/Config.h"
 #include "misc/logger.h"
 

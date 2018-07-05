@@ -1,4 +1,4 @@
-#ifndef SETTINGSWIDGET_H
+﻿#ifndef SETTINGSWIDGET_H
 #define SETTINGSWIDGET_H
 
 #include <QtGui>

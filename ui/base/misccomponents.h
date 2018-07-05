@@ -1,4 +1,4 @@
-#ifndef MISCCOMPONENTS_H
+﻿#ifndef MISCCOMPONENTS_H
 #define MISCCOMPONENTS_H
 
 #include <QToolButton>

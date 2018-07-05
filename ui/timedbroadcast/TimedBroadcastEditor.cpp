@@ -1,4 +1,4 @@
-#include "TimedBroadcastEditor.h"
+﻿#include "TimedBroadcastEditor.h"
 #include "ui/MainWindow.h"
 #include "ui/base/SectionZone.h"
 #include "ui/base/misccomponents.h"

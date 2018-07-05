@@ -1,10 +1,20 @@
-#include "ftpclient.h"
+﻿#include "ftpclient.h"
 #include "logger.h"
 #include "misc/tools.h"
 #include "config.h"
-#include "unistd.h"
 #include <QMutex>
 #include <QMessageBox>
+
+#ifdef WIN32
+static void usleep(qint64 uMsec)
+{
+    QTime dieTime = QTime::currentTime().addMSecs(uMsec / 1000);
+    while( QTime::currentTime() < dieTime )
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+#else
+//#include <unistd.h>
+#endif
 
 const int FTPClient::MaxRetryTimes = 3;
 static QMutex TransferLock;

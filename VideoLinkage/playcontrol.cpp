@@ -1,4 +1,4 @@
-#include "playcontrol.h"
+﻿#include "playcontrol.h"
 #include <QDebug>
 
 static const char *argv[7]= {"--intf=dummy",

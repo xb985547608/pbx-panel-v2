@@ -1,4 +1,4 @@
-#include "videolinkagewidget.h"
+﻿#include "videolinkagewidget.h"
 #include <QPushButton>
 #include <QDebug>
 #include <QKeyEvent>

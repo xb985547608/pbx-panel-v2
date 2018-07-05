@@ -1,4 +1,4 @@
-#include "pbx.h"
+﻿#include "pbx.h"
 #include "message_queue/RPCCommand.h"
 #include "misc/logger.h"
 #include "misc/tools.h"
@@ -114,7 +114,7 @@ QString PBX::RingGroup::asString()
     return ret.left(ret.lastIndexOf("-"));
 }
 
-PBX::Extension::_struct_extension()
+PBX::Extension::Extension()
 {
     state = PBX::eOffline;
     tech = "SIP";

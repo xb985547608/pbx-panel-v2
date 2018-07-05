@@ -1,4 +1,4 @@
-#include "tools.h"
+﻿#include "tools.h"
 #include <cstdio>
 #include <time.h>
 #include <QMutex>

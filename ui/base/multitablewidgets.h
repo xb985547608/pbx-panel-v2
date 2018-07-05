@@ -1,4 +1,4 @@
-#ifndef MULTITABLEWIDGETS_H
+﻿#ifndef MULTITABLEWIDGETS_H
 #define MULTITABLEWIDGETS_H
 /*
  * 多个TabWidget组成的界面
@@ -41,7 +41,7 @@ public:
     /*
         textArea位置见上图
     */
-    explicit MultiTableWidgets(int itemsPerPage, int itemsPerLine, QWidget *parent = 0, QWidget *textArea = NULL, ControlBtnPosition pos = CtrlBtnBelowWidget,bool mShowSetType = false);
+    MultiTableWidgets(int itemsPerPage, int itemsPerLine, QWidget *parent = 0, QWidget *textArea = NULL, ControlBtnPosition pos = CtrlBtnBelowWidget,bool mShowSetType = false);
     void appendWidget(QWidget* , bool needRefresh = false);
     /*
      * @needRefresh: 移除item后是否刷新

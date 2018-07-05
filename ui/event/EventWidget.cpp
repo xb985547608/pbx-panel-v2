@@ -1,4 +1,4 @@
-#include "EventWidget.h"
+﻿#include "EventWidget.h"
 #include "misc/Config.h"
 #include "PlanZone.h"
 #include "FunctionZone.h"
@@ -9,7 +9,17 @@
 #include "ui/mainwidget/QueueZone.h"
 #include "ui/dialogs/SMSWidget.h"
 #include "ui/dialogs/PlaySoundWidget.h"
-#include "unistd.h"
+
+#ifdef WIN32
+static void usleep(qint64 uMsec)
+{
+    QTime dieTime = QTime::currentTime().addMSecs(uMsec / 1000);
+    while( QTime::currentTime() < dieTime )
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
+#else
+//#include <unistd.h>
+#endif
 
 EventWidget::EventWidget(EventModel::EventType type, MainWindow *mainWindow, QWidget *parent) :
     BaseWidget(

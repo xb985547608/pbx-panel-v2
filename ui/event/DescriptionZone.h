@@ -1,4 +1,4 @@
-#ifndef DESCRIPTIONZONE_H
+﻿#ifndef DESCRIPTIONZONE_H
 #define DESCRIPTIONZONE_H
 
 #include <QWidget>

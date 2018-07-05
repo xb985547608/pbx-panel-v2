@@ -1,4 +1,4 @@
-#ifndef EVENTLOG_H
+﻿#ifndef EVENTLOG_H
 #define EVENTLOG_H
 
 #include "ui/base/BaseWidget.h"

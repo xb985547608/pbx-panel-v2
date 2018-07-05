@@ -1,4 +1,4 @@
-#ifndef EVENTMODEL_H
+﻿#ifndef EVENTMODEL_H
 #define EVENTMODEL_H
 
 #include <QtGui>

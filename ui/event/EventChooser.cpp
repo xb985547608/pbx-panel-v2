@@ -1,4 +1,4 @@
-#include "EventChooser.h"
+﻿#include "EventChooser.h"
 #include "ui/base/multitablewidgets.h"
 #include "ui/base/misccomponents.h"
 #include "message_queue/RPCCommand.h"

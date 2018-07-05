@@ -1,4 +1,4 @@
-#include "ExtensionsZone.h"
+﻿#include "ExtensionsZone.h"
 #include "SelectedExtensZone.h"
 #include "ui/base/misccomponents.h"
 #include "message_queue/RPCCommand.h"

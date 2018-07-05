@@ -1,4 +1,4 @@
-#ifndef VIDEOLINKAGEWIDGET_H
+﻿#ifndef VIDEOLINKAGEWIDGET_H
 #define VIDEOLINKAGEWIDGET_H
 
 #include <QDialog>

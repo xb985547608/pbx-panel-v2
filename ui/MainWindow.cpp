@@ -1,4 +1,4 @@
-#include "MainWindow.h"
+﻿#include "MainWindow.h"
 #include "LoginForm.h"
 //#include "base/BaseWidget.h"
 #include "mainwidget/MainWidget.h"
@@ -16,7 +16,6 @@
 #include "VideoLinkage/videolinkagewidget.h"
 #include "mainwidget/OperatorZone.h"
 #include "mainwidget/ExtensionsZone.h"
-#include "CustomWidget/titlebar.h"
 
 static MainWindow* sMainWindow = NULL;
 static void EventCallback(MessageClient::EventType e, QMap<QString, QString>& eventMessage) {

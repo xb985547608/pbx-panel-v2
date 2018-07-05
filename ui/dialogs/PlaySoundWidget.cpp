@@ -1,4 +1,4 @@
-#include "PlaySoundWidget.h"
+﻿#include "PlaySoundWidget.h"
 #include "misc/Config.h"
 #include "ui/base/misccomponents.h"
 #include "message_queue/RPCCommand.h"

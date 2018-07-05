@@ -1,4 +1,4 @@
-#ifndef SELECTEDEXTENSZONE_H
+﻿#ifndef SELECTEDEXTENSZONE_H
 #define SELECTEDEXTENSZONE_H
 #include "ui/base/multitablewidgets.h"
 #include "ui/base/dingobutton.h"

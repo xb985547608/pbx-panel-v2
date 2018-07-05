@@ -1,4 +1,4 @@
-#include "MainWindow.h"
+﻿#include "MainWindow.h"
 #include "misc/Config.h"
 #include "ui/base/misccomponents.h"
 #include "message_queue/RPCCommand.h"

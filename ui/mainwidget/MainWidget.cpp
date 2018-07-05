@@ -1,4 +1,4 @@
-#include "MainWidget.h"
+﻿#include "MainWidget.h"
 #include "ui/MainWindow.h"
 #include "ui/base/misccomponents.h"
 #include "ui/base/BaseWidget.h"

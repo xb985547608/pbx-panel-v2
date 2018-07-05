@@ -1,4 +1,4 @@
-#ifndef OPSETTINGSZONE_H
+﻿#ifndef OPSETTINGSZONE_H
 #define OPSETTINGSZONE_H
 
 #include <QtGui>
