@@ -1,4 +1,8 @@
-﻿#include "videolinkagewidget.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "videolinkagewidget.h"
 #include <QPushButton>
 #include <QDebug>
 #include <QKeyEvent>
@@ -13,7 +17,7 @@
 #include "../misc/logger.h"
 
 VideoLinkageWidget::VideoLinkageWidget(QWidget *parent) :
-    QDialog(parent)
+    QWidget(parent)
 {
     /* 实例9个视频窗口 */
     for (int i=0; i<9; i++) {
@@ -101,7 +105,7 @@ void VideoLinkageWidget::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Escape) {
         event->accept();
     } else {
-        QDialog::keyPressEvent(event);
+        QWidget::keyPressEvent(event);
     }
 }
 

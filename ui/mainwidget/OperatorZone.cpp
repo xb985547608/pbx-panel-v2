@@ -1,4 +1,8 @@
-﻿#include "OperatorZone.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "OperatorZone.h"
 #include "message_queue/RPCCommand.h"
 #include "message_queue/MessageClient.h"
 #include "ui/base/misccomponents.h"

@@ -11,7 +11,7 @@ MAKEFILE      = Makefile.Release
 
 CC            = cl
 CXX           = cl
-DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DOEM -DV5 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DNDEBUG
+DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DWHITE -DV5 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SQL_LIB -DQT_CORE_LIB -DNDEBUG
 CFLAGS        = -nologo -Zc:wchar_t -FS -Zc:strictStrings -O2 -MD -W3 -w44456 -w44457 -w44458 $(DEFINES)
 CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -O2 -MD -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -EHsc $(DEFINES)
 INCPATH       = -I. -I. -IVideoLinkage\sdk\include -ID:\Qt\Qt5.9.4\5.9.4\msvc2015\include -ID:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets -ID:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui -ID:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtANGLE -ID:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtNetwork -ID:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtSql -ID:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore -Irelease -I. -ID:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\win32-msvc 
@@ -301,6 +301,8 @@ DIST          =  message_queue\amqp_framing.h \
 		ui\settings\TimingBroadcastZone.h \
 		ui\timedbroadcast\TimedBroadcastEditor.h \
 		ui\dialogs\dlgemergencycall.h \
+		misc\qftp.h \
+		misc\qurlinfo.h \
 		VideoLinkage\videolinkagewidget.h \
 		VideoLinkage\videowidget.h \
 		VideoLinkage\playcontrol.h \
@@ -752,7 +754,7 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) PbxPanel.zip $(SOURCES) $(DIST) PbxPanel.pro D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\spec_pre.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\common\angle.conf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\common\msvc-desktop.conf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\qconfig.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3danimation.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3danimation_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickanimation.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickanimation_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickscene2d.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickscene2d_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3drender.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axbase.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axserver.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_charts.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_core.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_core_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_dbus.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_designer.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_gui.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_help.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_help_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_location.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_location_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_network.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_network_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_nfc.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_opengl.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_positioning.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qml.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quick.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_remoteobjects.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_remoteobjects_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_repparser.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_repparser_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_script.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_script_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_scxml.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_sensors.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_serialport.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_sql.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_svg.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_testlib.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_uitools.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webengine.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webengine_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webenginecore.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webenginecore_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webenginewidgets.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webenginewidgets_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_websockets.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webview.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webview_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_widgets.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_winextras.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_xml.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_zlib_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\qt_functions.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\qt_config.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\win32-msvc\qmake.conf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\exclusive_builds.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\common\msvc-version.conf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\toolchain.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\default_pre.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\win32\default_pre.prf VideoLinkage\VideoLinkage.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\resolve_config.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\exclusive_builds_post.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\default_post.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\build_pass.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\precompile_header.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\warn_on.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\qt.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\resources.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\moc.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\win32\opengl.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\uic.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\qmake_use.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\file_copies.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\win32\windows.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\testcase_targets.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\exceptions.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\yacc.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\lex.prf PbxPanel.pro pbx_panel.qrc D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\qtmain.prl D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\Qt5Widgets.prl D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\Qt5Gui.prl D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\Qt5Network.prl D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\Qt5Sql.prl D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\Qt5Core.prl en.ts en.ts  pbx_panel.qrc D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\data\dummy.cpp message_queue\amqp_framing.h message_queue\amqp.h misc\tools.h misc\singleton.h misc\logger.h message_queue\MessageClient.h misc\Config.h ui\base\tablewidget.h ui\base\multitablewidgets.h ui\base\misccomponents.h ui\base\dingobutton.h message_queue\RPCCommand.h pbx\pbx.h pbx\PhoneBook.h ui\LoginForm.h misc\dbwrapper.h ui\base\uiextensionbase.h ui\mainwidget\SelectedExtensZone.h ui\mainwidget\RinggroupsZone.h ui\mainwidget\QueueZone.h ui\mainwidget\OperatorZone.h ui\mainwidget\MainWidget.h ui\mainwidget\FastFuncZone.h ui\mainwidget\ExtensionsZone.h ui\MainWindow.h ui\settings\SettingsWidget.h ui\settings\OpSettingsZone.h pbx\EventModel.h ui\settings\RecordingFileZone.h ui\base\BaseWidget.h ui\phonebook\UiPhoneBook.h ui\eventplan\EventPlanEditor.h ui\base\SectionZone.h ui\phonebook\UiPhoneBookList.h ui\settings\PlanListZone.h ui\event\EventWidget.h ui\event\PlanZone.h ui\event\EventExtensionsZone.h ui\event\FunctionZone.h ui\event\DescriptionZone.h ui\event\EventExten.h ui\event\EventChooser.h ui\calllog\CallLogWidget.h ui\eventlog\EventLog.h misc\ftpclient.h ui\dialogs\DialPad.h ui\dialogs\SMSWidget.h ui\dialogs\PlaySoundWidget.h ui\meetme\MeetMeWidget.h ui\settings\TimingBroadcastZone.h ui\timedbroadcast\TimedBroadcastEditor.h ui\dialogs\dlgemergencycall.h VideoLinkage\videolinkagewidget.h VideoLinkage\videowidget.h VideoLinkage\playcontrol.h VideoLinkage\settingsdialog.h main.cpp misc\tools.cpp misc\singleton.cpp misc\logger.cpp message_queue\MessageClient.cpp misc\Config.cpp ui\base\tablewidget.cpp ui\base\multitablewidgets.cpp ui\base\misccomponents.cpp ui\base\dingobutton.cpp message_queue\RPCCommand.cpp pbx\pbx.cpp pbx\PhoneBook.cpp ui\LoginForm.cpp misc\dbwrapper.cpp ui\base\uiextensionbase.cpp ui\mainwidget\SelectedExtensZone.cpp ui\mainwidget\RinggroupsZone.cpp ui\mainwidget\QueueZone.cpp ui\mainwidget\OperatorZone.cpp ui\mainwidget\MainWidget.cpp ui\mainwidget\FastFuncZone.cpp ui\mainwidget\ExtensionsZone.cpp ui\MainWindow.cpp ui\settings\SettingsWidget.cpp ui\settings\OpSettingsZone.cpp pbx\EventModel.cpp ui\settings\RecordingFileZone.cpp ui\base\BaseWidget.cpp ui\phonebook\UiPhoneBook.cpp ui\eventplan\EventPlanEditor.cpp ui\base\SectionZone.cpp ui\phonebook\UiPhoneBookList.cpp ui\settings\PlanListZone.cpp ui\event\PlanZone.cpp ui\event\EventWidget.cpp ui\event\EventExtensionsZone.cpp ui\event\FunctionZone.cpp ui\event\DescriptionZone.cpp ui\event\EventExten.cpp ui\event\EventChooser.cpp ui\calllog\CallLogWidget.cpp ui\eventlog\EventLog.cpp misc\ftpclient.cpp ui\dialogs\DialPad.cpp ui\dialogs\SMSWidget.cpp ui\dialogs\PlaySoundWidget.cpp ui\meetme\MeetMeWidget.cpp ui\settings\TimingBroadcastZone.cpp ui\timedbroadcast\TimedBroadcastEditor.cpp ui\dialogs\dlgemergencycall.cpp misc\qftp.cpp misc\qurlinfo.cpp VideoLinkage\videolinkagewidget.cpp VideoLinkage\videowidget.cpp VideoLinkage\playcontrol.cpp VideoLinkage\settingsdialog.cpp VideoLinkage\extensioncfg.ui    
+	$(ZIP) PbxPanel.zip $(SOURCES) $(DIST) PbxPanel.pro D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\spec_pre.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\common\angle.conf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\common\msvc-desktop.conf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\qconfig.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3danimation.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3danimation_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickanimation.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickanimation_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickscene2d.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3dquickscene2d_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3drender.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axbase.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axserver.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_charts.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_core.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_core_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_dbus.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_designer.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_gui.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_help.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_help_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_location.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_location_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_network.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_network_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_nfc.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_opengl.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_positioning.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qml.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quick.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_remoteobjects.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_remoteobjects_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_repparser.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_repparser_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_script.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_script_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_scxml.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_sensors.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_serialport.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_sql.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_svg.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_testlib.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_uitools.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webengine.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webengine_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webenginecore.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webenginecore_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webenginewidgets.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webenginewidgets_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_websockets.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webview.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_webview_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_widgets.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_winextras.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_xml.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\modules\qt_lib_zlib_private.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\qt_functions.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\qt_config.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\win32-msvc\qmake.conf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\exclusive_builds.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\common\msvc-version.conf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\toolchain.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\default_pre.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\win32\default_pre.prf VideoLinkage\VideoLinkage.pri D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\resolve_config.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\exclusive_builds_post.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\default_post.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\build_pass.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\precompile_header.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\warn_on.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\qt.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\resources.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\moc.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\win32\opengl.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\uic.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\qmake_use.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\file_copies.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\win32\windows.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\testcase_targets.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\exceptions.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\yacc.prf D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\lex.prf PbxPanel.pro pbx_panel.qrc D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\qtmain.prl D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\Qt5Widgets.prl D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\Qt5Gui.prl D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\Qt5Network.prl D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\Qt5Sql.prl D:\Qt\Qt5.9.4\5.9.4\msvc2015\lib\Qt5Core.prl en.ts en.ts  pbx_panel.qrc D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\data\dummy.cpp message_queue\amqp_framing.h message_queue\amqp.h misc\tools.h misc\singleton.h misc\logger.h message_queue\MessageClient.h misc\Config.h ui\base\tablewidget.h ui\base\multitablewidgets.h ui\base\misccomponents.h ui\base\dingobutton.h message_queue\RPCCommand.h pbx\pbx.h pbx\PhoneBook.h ui\LoginForm.h misc\dbwrapper.h ui\base\uiextensionbase.h ui\mainwidget\SelectedExtensZone.h ui\mainwidget\RinggroupsZone.h ui\mainwidget\QueueZone.h ui\mainwidget\OperatorZone.h ui\mainwidget\MainWidget.h ui\mainwidget\FastFuncZone.h ui\mainwidget\ExtensionsZone.h ui\MainWindow.h ui\settings\SettingsWidget.h ui\settings\OpSettingsZone.h pbx\EventModel.h ui\settings\RecordingFileZone.h ui\base\BaseWidget.h ui\phonebook\UiPhoneBook.h ui\eventplan\EventPlanEditor.h ui\base\SectionZone.h ui\phonebook\UiPhoneBookList.h ui\settings\PlanListZone.h ui\event\EventWidget.h ui\event\PlanZone.h ui\event\EventExtensionsZone.h ui\event\FunctionZone.h ui\event\DescriptionZone.h ui\event\EventExten.h ui\event\EventChooser.h ui\calllog\CallLogWidget.h ui\eventlog\EventLog.h misc\ftpclient.h ui\dialogs\DialPad.h ui\dialogs\SMSWidget.h ui\dialogs\PlaySoundWidget.h ui\meetme\MeetMeWidget.h ui\settings\TimingBroadcastZone.h ui\timedbroadcast\TimedBroadcastEditor.h ui\dialogs\dlgemergencycall.h misc\qftp.h misc\qurlinfo.h VideoLinkage\videolinkagewidget.h VideoLinkage\videowidget.h VideoLinkage\playcontrol.h VideoLinkage\settingsdialog.h main.cpp misc\tools.cpp misc\singleton.cpp misc\logger.cpp message_queue\MessageClient.cpp misc\Config.cpp ui\base\tablewidget.cpp ui\base\multitablewidgets.cpp ui\base\misccomponents.cpp ui\base\dingobutton.cpp message_queue\RPCCommand.cpp pbx\pbx.cpp pbx\PhoneBook.cpp ui\LoginForm.cpp misc\dbwrapper.cpp ui\base\uiextensionbase.cpp ui\mainwidget\SelectedExtensZone.cpp ui\mainwidget\RinggroupsZone.cpp ui\mainwidget\QueueZone.cpp ui\mainwidget\OperatorZone.cpp ui\mainwidget\MainWidget.cpp ui\mainwidget\FastFuncZone.cpp ui\mainwidget\ExtensionsZone.cpp ui\MainWindow.cpp ui\settings\SettingsWidget.cpp ui\settings\OpSettingsZone.cpp pbx\EventModel.cpp ui\settings\RecordingFileZone.cpp ui\base\BaseWidget.cpp ui\phonebook\UiPhoneBook.cpp ui\eventplan\EventPlanEditor.cpp ui\base\SectionZone.cpp ui\phonebook\UiPhoneBookList.cpp ui\settings\PlanListZone.cpp ui\event\PlanZone.cpp ui\event\EventWidget.cpp ui\event\EventExtensionsZone.cpp ui\event\FunctionZone.cpp ui\event\DescriptionZone.cpp ui\event\EventExten.cpp ui\event\EventChooser.cpp ui\calllog\CallLogWidget.cpp ui\eventlog\EventLog.cpp misc\ftpclient.cpp ui\dialogs\DialPad.cpp ui\dialogs\SMSWidget.cpp ui\dialogs\PlaySoundWidget.cpp ui\meetme\MeetMeWidget.cpp ui\settings\TimingBroadcastZone.cpp ui\timedbroadcast\TimedBroadcastEditor.cpp ui\dialogs\dlgemergencycall.cpp misc\qftp.cpp misc\qurlinfo.cpp VideoLinkage\videolinkagewidget.cpp VideoLinkage\videowidget.cpp VideoLinkage\playcontrol.cpp VideoLinkage\settingsdialog.cpp VideoLinkage\extensioncfg.ui    
 
 clean: compiler_clean 
 	-$(DEL_FILE) release\main.obj release\tools.obj release\singleton.obj release\logger.obj release\MessageClient.obj release\Config.obj release\tablewidget.obj release\multitablewidgets.obj release\misccomponents.obj release\dingobutton.obj release\RPCCommand.obj release\pbx.obj release\PhoneBook.obj release\LoginForm.obj release\dbwrapper.obj release\uiextensionbase.obj release\SelectedExtensZone.obj release\RinggroupsZone.obj release\QueueZone.obj release\OperatorZone.obj release\MainWidget.obj release\FastFuncZone.obj release\ExtensionsZone.obj release\MainWindow.obj release\SettingsWidget.obj release\OpSettingsZone.obj release\EventModel.obj release\RecordingFileZone.obj release\BaseWidget.obj release\UiPhoneBook.obj release\EventPlanEditor.obj release\SectionZone.obj release\UiPhoneBookList.obj release\PlanListZone.obj release\PlanZone.obj release\EventWidget.obj release\EventExtensionsZone.obj release\FunctionZone.obj release\DescriptionZone.obj release\EventExten.obj release\EventChooser.obj release\CallLogWidget.obj release\EventLog.obj release\ftpclient.obj release\DialPad.obj release\SMSWidget.obj release\PlaySoundWidget.obj release\MeetMeWidget.obj release\TimingBroadcastZone.obj release\TimedBroadcastEditor.obj release\dlgemergencycall.obj release\qftp.obj release\qurlinfo.obj release\videolinkagewidget.obj release\videowidget.obj release\playcontrol.obj release\settingsdialog.obj release\qrc_pbx_panel.obj release\moc_tools.obj release\moc_MessageClient.obj release\moc_multitablewidgets.obj release\moc_dingobutton.obj release\moc_LoginForm.obj release\moc_uiextensionbase.obj release\moc_SelectedExtensZone.obj release\moc_RinggroupsZone.obj release\moc_QueueZone.obj release\moc_OperatorZone.obj release\moc_MainWidget.obj release\moc_FastFuncZone.obj release\moc_ExtensionsZone.obj release\moc_MainWindow.obj release\moc_SettingsWidget.obj release\moc_OpSettingsZone.obj release\moc_RecordingFileZone.obj release\moc_BaseWidget.obj release\moc_UiPhoneBook.obj release\moc_EventPlanEditor.obj
@@ -797,6 +799,7 @@ release\qrc_pbx_panel.cpp: pbx_panel.qrc \
 		images\btn_sound_record_list.png \
 		images\icon_unchecked.png \
 		images\icon_check_failed.png \
+		images\banner-white.png \
 		images\btn_pickup_small.png \
 		images\icon_play_record.png \
 		images\btn_monitor.png \
@@ -836,6 +839,7 @@ release\qrc_pbx_panel.cpp: pbx_panel.qrc \
 		images\btn_override_small.png \
 		images\icon_cdr.png \
 		images\banner-white-hbnyjt.png \
+		images\image_splash_white.png \
 		images\icon_phone_book.png \
 		images\loading.png \
 		images\banner_head.png \
@@ -849,9 +853,9 @@ compiler_moc_predefs_clean:
 release\moc_predefs.h: D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\data\dummy.cpp
 	cl -BxD:\Qt\Qt5.9.4\5.9.4\msvc2015\bin\qmake.exe -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -O2 -MD -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E D:\Qt\Qt5.9.4\5.9.4\msvc2015\mkspecs\features\data\dummy.cpp 2>NUL >release\moc_predefs.h
 
-compiler_moc_header_make_all: release\moc_tools.cpp release\moc_MessageClient.cpp release\moc_multitablewidgets.cpp release\moc_dingobutton.cpp release\moc_LoginForm.cpp release\moc_uiextensionbase.cpp release\moc_SelectedExtensZone.cpp release\moc_RinggroupsZone.cpp release\moc_QueueZone.cpp release\moc_OperatorZone.cpp release\moc_MainWidget.cpp release\moc_FastFuncZone.cpp release\moc_ExtensionsZone.cpp release\moc_MainWindow.cpp release\moc_SettingsWidget.cpp release\moc_OpSettingsZone.cpp release\moc_RecordingFileZone.cpp release\moc_BaseWidget.cpp release\moc_UiPhoneBook.cpp release\moc_EventPlanEditor.cpp release\moc_SectionZone.cpp release\moc_UiPhoneBookList.cpp release\moc_PlanListZone.cpp release\moc_EventWidget.cpp release\moc_PlanZone.cpp release\moc_EventExtensionsZone.cpp release\moc_FunctionZone.cpp release\moc_DescriptionZone.cpp release\moc_EventExten.cpp release\moc_EventChooser.cpp release\moc_CallLogWidget.cpp release\moc_EventLog.cpp release\moc_ftpclient.cpp release\moc_DialPad.cpp release\moc_SMSWidget.cpp release\moc_PlaySoundWidget.cpp release\moc_MeetMeWidget.cpp release\moc_TimingBroadcastZone.cpp release\moc_TimedBroadcastEditor.cpp release\moc_dlgemergencycall.cpp release\moc_videolinkagewidget.cpp release\moc_videowidget.cpp release\moc_playcontrol.cpp release\moc_settingsdialog.cpp
+compiler_moc_header_make_all: release\moc_tools.cpp release\moc_MessageClient.cpp release\moc_multitablewidgets.cpp release\moc_dingobutton.cpp release\moc_LoginForm.cpp release\moc_uiextensionbase.cpp release\moc_SelectedExtensZone.cpp release\moc_RinggroupsZone.cpp release\moc_QueueZone.cpp release\moc_OperatorZone.cpp release\moc_MainWidget.cpp release\moc_FastFuncZone.cpp release\moc_ExtensionsZone.cpp release\moc_MainWindow.cpp release\moc_SettingsWidget.cpp release\moc_OpSettingsZone.cpp release\moc_RecordingFileZone.cpp release\moc_BaseWidget.cpp release\moc_UiPhoneBook.cpp release\moc_EventPlanEditor.cpp release\moc_SectionZone.cpp release\moc_UiPhoneBookList.cpp release\moc_PlanListZone.cpp release\moc_EventWidget.cpp release\moc_PlanZone.cpp release\moc_EventExtensionsZone.cpp release\moc_FunctionZone.cpp release\moc_DescriptionZone.cpp release\moc_EventExten.cpp release\moc_EventChooser.cpp release\moc_CallLogWidget.cpp release\moc_EventLog.cpp release\moc_ftpclient.cpp release\moc_DialPad.cpp release\moc_SMSWidget.cpp release\moc_PlaySoundWidget.cpp release\moc_MeetMeWidget.cpp release\moc_TimingBroadcastZone.cpp release\moc_TimedBroadcastEditor.cpp release\moc_dlgemergencycall.cpp release\moc_qftp.cpp release\moc_videolinkagewidget.cpp release\moc_videowidget.cpp release\moc_playcontrol.cpp release\moc_settingsdialog.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) release\moc_tools.cpp release\moc_MessageClient.cpp release\moc_multitablewidgets.cpp release\moc_dingobutton.cpp release\moc_LoginForm.cpp release\moc_uiextensionbase.cpp release\moc_SelectedExtensZone.cpp release\moc_RinggroupsZone.cpp release\moc_QueueZone.cpp release\moc_OperatorZone.cpp release\moc_MainWidget.cpp release\moc_FastFuncZone.cpp release\moc_ExtensionsZone.cpp release\moc_MainWindow.cpp release\moc_SettingsWidget.cpp release\moc_OpSettingsZone.cpp release\moc_RecordingFileZone.cpp release\moc_BaseWidget.cpp release\moc_UiPhoneBook.cpp release\moc_EventPlanEditor.cpp release\moc_SectionZone.cpp release\moc_UiPhoneBookList.cpp release\moc_PlanListZone.cpp release\moc_EventWidget.cpp release\moc_PlanZone.cpp release\moc_EventExtensionsZone.cpp release\moc_FunctionZone.cpp release\moc_DescriptionZone.cpp release\moc_EventExten.cpp release\moc_EventChooser.cpp release\moc_CallLogWidget.cpp release\moc_EventLog.cpp release\moc_ftpclient.cpp release\moc_DialPad.cpp release\moc_SMSWidget.cpp release\moc_PlaySoundWidget.cpp release\moc_MeetMeWidget.cpp release\moc_TimingBroadcastZone.cpp release\moc_TimedBroadcastEditor.cpp release\moc_dlgemergencycall.cpp release\moc_videolinkagewidget.cpp release\moc_videowidget.cpp release\moc_playcontrol.cpp release\moc_settingsdialog.cpp
+	-$(DEL_FILE) release\moc_tools.cpp release\moc_MessageClient.cpp release\moc_multitablewidgets.cpp release\moc_dingobutton.cpp release\moc_LoginForm.cpp release\moc_uiextensionbase.cpp release\moc_SelectedExtensZone.cpp release\moc_RinggroupsZone.cpp release\moc_QueueZone.cpp release\moc_OperatorZone.cpp release\moc_MainWidget.cpp release\moc_FastFuncZone.cpp release\moc_ExtensionsZone.cpp release\moc_MainWindow.cpp release\moc_SettingsWidget.cpp release\moc_OpSettingsZone.cpp release\moc_RecordingFileZone.cpp release\moc_BaseWidget.cpp release\moc_UiPhoneBook.cpp release\moc_EventPlanEditor.cpp release\moc_SectionZone.cpp release\moc_UiPhoneBookList.cpp release\moc_PlanListZone.cpp release\moc_EventWidget.cpp release\moc_PlanZone.cpp release\moc_EventExtensionsZone.cpp release\moc_FunctionZone.cpp release\moc_DescriptionZone.cpp release\moc_EventExten.cpp release\moc_EventChooser.cpp release\moc_CallLogWidget.cpp release\moc_EventLog.cpp release\moc_ftpclient.cpp release\moc_DialPad.cpp release\moc_SMSWidget.cpp release\moc_PlaySoundWidget.cpp release\moc_MeetMeWidget.cpp release\moc_TimingBroadcastZone.cpp release\moc_TimedBroadcastEditor.cpp release\moc_dlgemergencycall.cpp release\moc_qftp.cpp release\moc_videolinkagewidget.cpp release\moc_videowidget.cpp release\moc_playcontrol.cpp release\moc_settingsdialog.cpp
 release\moc_tools.cpp: D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QStringList \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qstringlist.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qlist.h \
@@ -16305,6 +16309,62 @@ release\moc_dlgemergencycall.cpp: D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\bin\moc.exe
 	D:\Qt\Qt5.9.4\5.9.4\msvc2015\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/mkspecs/win32-msvc -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ui\dialogs\dlgemergencycall.h -o release\moc_dlgemergencycall.cpp
 
+release\moc_qftp.cpp: D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qstring.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qchar.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qglobal.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qconfig-bootstrapped.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qconfig.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qtcore-config.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qsystemdetection.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qprocessordetection.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qcompilerdetection.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qtypeinfo.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qsysinfo.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qlogging.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qflags.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qatomic.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qbasicatomic.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qatomic_bootstrap.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qgenericatomic.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qatomic_cxx11.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qatomic_msvc.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qglobalstatic.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qmutex.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qnumeric.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qversiontagging.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qbytearray.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qrefcount.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qnamespace.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qarraydata.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qstringbuilder.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qobject.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qobjectdefs.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qobjectdefs_impl.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qlist.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qalgorithms.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qiterator.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qhashfunctions.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qpair.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qbytearraylist.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qstringlist.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qregexp.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qstringmatcher.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qcoreevent.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qscopedpointer.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qmetatype.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qvarlengtharray.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qcontainerfwd.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qobject_impl.h \
+		misc\qurlinfo.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qdatetime.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qshareddata.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qhash.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qiodevice.h \
+		misc\qftp.h \
+		release\moc_predefs.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\bin\moc.exe
+	D:\Qt\Qt5.9.4\5.9.4\msvc2015\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include release/moc_predefs.h -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/mkspecs/win32-msvc -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2 -IH:/workspace/pbx/pbx-panel-v2/pbx-panel-v2/VideoLinkage/sdk/include -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtWidgets -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtGui -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtANGLE -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtNetwork -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtSql -ID:/Qt/Qt5.9.4/5.9.4/msvc2015/include/QtCore -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++ -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -ID:/Qt/Qt5.9.4/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward misc\qftp.h -o release\moc_qftp.cpp
+
 release\moc_videolinkagewidget.cpp: D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QDialog \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qdialog.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qtwidgetsglobal.h \
@@ -17371,8 +17431,8 @@ release\main.obj: main.cpp D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\QtGui \
 		misc/tools.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h
+		misc/qftp.h \
+		misc/qurlinfo.h
 
 release\tools.obj: misc\tools.cpp misc/tools.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QStringList \
@@ -18070,8 +18130,8 @@ release\MessageClient.obj: message_queue\MessageClient.cpp message_queue/Message
 		misc/logger.h \
 		misc/Config.h \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h
+		misc/qftp.h \
+		misc/qurlinfo.h
 
 release\Config.obj: misc\Config.cpp misc\config.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\QtGui \
@@ -18395,8 +18455,8 @@ release\Config.obj: misc\Config.cpp misc\config.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QSettings \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QDir
 
@@ -19660,8 +19720,8 @@ release\misccomponents.obj: ui\base\misccomponents.cpp ui/base/misccomponents.h 
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		misc/logger.h
 
 release\dingobutton.obj: ui\base\dingobutton.cpp D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\QtGui \
@@ -20323,8 +20383,8 @@ release\RPCCommand.obj: message_queue\RPCCommand.cpp message_queue/RPCCommand.h 
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		ui/mainwidget/QueueZone.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QtWidgets \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QtWidgetsDepends \
@@ -21464,8 +21524,8 @@ release\LoginForm.obj: ui\LoginForm.cpp ui/LoginForm.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		ui/base/misccomponents.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QToolButton \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qtoolbutton.h \
@@ -21890,8 +21950,8 @@ release\dbwrapper.obj: misc\dbwrapper.cpp misc/dbwrapper.h \
 		misc/tools.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h
+		misc/qftp.h \
+		misc/qurlinfo.h
 
 release\uiextensionbase.obj: ui\base\uiextensionbase.cpp ui/base/uiextensionbase.h \
 		ui/base/dingobutton.h \
@@ -22236,8 +22296,8 @@ release\uiextensionbase.obj: ui\base\uiextensionbase.cpp ui/base/uiextensionbase
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h
+		misc/qftp.h \
+		misc/qurlinfo.h
 
 release\SelectedExtensZone.obj: ui\mainwidget\SelectedExtensZone.cpp ui/mainwidget/SelectedExtensZone.h \
 		ui/base/multitablewidgets.h \
@@ -23202,8 +23262,8 @@ release\RinggroupsZone.obj: ui\mainwidget\RinggroupsZone.cpp ui/mainwidget/Ringg
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		misc/logger.h
 
 release\QueueZone.obj: ui\mainwidget\QueueZone.cpp ui/mainwidget/QueueZone.h \
@@ -24161,8 +24221,8 @@ release\OperatorZone.obj: ui\mainwidget\OperatorZone.cpp ui/mainwidget/OperatorZ
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		ui/mainwidget/FastFuncZone.h
 
 release\MainWidget.obj: ui\mainwidget\MainWidget.cpp ui/mainwidget/MainWidget.h \
@@ -24647,8 +24707,8 @@ release\MainWidget.obj: ui\mainwidget\MainWidget.cpp ui/mainwidget/MainWidget.h 
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QString \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		ui/mainwidget/ExtensionsZone.h \
 		ui/base/multitablewidgets.h \
 		ui/base/tablewidget.h \
@@ -25130,8 +25190,8 @@ release\FastFuncZone.obj: ui\mainwidget\FastFuncZone.cpp ui/mainwidget/FastFuncZ
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		ui/base/misccomponents.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QToolButton \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QPushButton \
@@ -25650,8 +25710,8 @@ release\ExtensionsZone.obj: ui\mainwidget\ExtensionsZone.cpp ui/mainwidget/Exten
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h
+		misc/qftp.h \
+		misc/qurlinfo.h
 
 release\MainWindow.obj: ui\MainWindow.cpp ui/MainWindow.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\QtGui \
@@ -26140,8 +26200,8 @@ release\MainWindow.obj: ui\MainWindow.cpp ui/MainWindow.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QString \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		message_queue/RPCCommand.h \
 		pbx/pbx.h \
 		ui/meetme/MeetMeWidget.h \
@@ -26650,8 +26710,8 @@ release\SettingsWidget.obj: ui\settings\SettingsWidget.cpp ui/settings/SettingsW
 		misc/ftpclient.h \
 		misc/singleton.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QMutex \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		misc/Config.h \
 		misc/tools.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QString \
@@ -27770,8 +27830,8 @@ release\RecordingFileZone.obj: ui\settings\RecordingFileZone.cpp ui/settings/Rec
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\qtexttable.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\qvalidator.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\qtguiversion.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QtWidgets \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QtWidgetsDepends \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qtwidgetsglobal.h \
@@ -28394,8 +28454,8 @@ release\BaseWidget.obj: ui\base\BaseWidget.cpp ui/base/BaseWidget.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		ui/MainWindow.h \
 		ui/dialogs/dlgemergencycall.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QDialog \
@@ -28870,8 +28930,8 @@ release\UiPhoneBook.obj: ui\phonebook\UiPhoneBook.cpp ui/phonebook/UiPhoneBook.h
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		ui/phonebook/UiPhoneBookList.h \
 		pbx/PhoneBook.h \
 		message_queue/RPCCommand.h \
@@ -29370,8 +29430,8 @@ release\EventPlanEditor.obj: ui\eventplan\EventPlanEditor.cpp ui/eventplan/Event
 		misc/logger.h \
 		ui/phonebook/UiPhoneBook.h \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h
+		misc/qftp.h \
+		misc/qurlinfo.h
 
 release\SectionZone.obj: ui\base\SectionZone.cpp ui/base/SectionZone.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QtWidgets \
@@ -30313,8 +30373,8 @@ release\UiPhoneBookList.obj: ui\phonebook\UiPhoneBookList.cpp ui/phonebook/UiPho
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h
+		misc/qftp.h \
+		misc/qurlinfo.h
 
 release\PlanListZone.obj: ui\settings\PlanListZone.cpp ui/settings/PlanListZone.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\QtGui \
@@ -31745,8 +31805,8 @@ release\EventWidget.obj: ui\event\EventWidget.cpp ui/event/EventWidget.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		ui/event/PlanZone.h \
 		ui/base/multitablewidgets.h \
 		ui/base/tablewidget.h \
@@ -32726,8 +32786,8 @@ release\FunctionZone.obj: ui\event\FunctionZone.cpp ui/event/FunctionZone.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		ui/event/DescriptionZone.h
 
 release\DescriptionZone.obj: ui\event\DescriptionZone.cpp ui/event/DescriptionZone.h \
@@ -34472,8 +34532,8 @@ release\CallLogWidget.obj: ui\calllog\CallLogWidget.cpp ui/calllog/CallLogWidget
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		misc/logger.h \
 		pbx/pbx.h \
 		message_queue/MessageClient.h \
@@ -34963,8 +35023,8 @@ release\EventLog.obj: ui\eventlog\EventLog.cpp ui/eventlog/EventLog.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		misc/logger.h
 
 release\ftpclient.obj: misc\ftpclient.cpp misc/ftpclient.h \
@@ -35284,8 +35344,8 @@ release\ftpclient.obj: misc\ftpclient.cpp misc/ftpclient.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\qtexttable.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\qvalidator.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\qtguiversion.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		misc/logger.h \
 		misc/tools.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QString \
@@ -35648,8 +35708,8 @@ release\DialPad.obj: ui\dialogs\DialPad.cpp ui/dialogs/DialPad.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		misc/logger.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QMessageBox \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qmessagebox.h
@@ -36013,8 +36073,8 @@ release\SMSWidget.obj: ui\dialogs\SMSWidget.cpp ui/dialogs/SMSWidget.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QTreeView \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qtreeview.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qabstractitemview.h \
@@ -36367,8 +36427,8 @@ release\PlaySoundWidget.obj: ui\dialogs\PlaySoundWidget.cpp ui/dialogs/PlaySound
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		ui/base/misccomponents.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QToolButton \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qtoolbutton.h \
@@ -36887,8 +36947,8 @@ release\MeetMeWidget.obj: ui\meetme\MeetMeWidget.cpp ui/meetme/MeetMeWidget.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QProcess \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVector \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		misc/logger.h \
 		ui/base/misccomponents.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QToolButton \
@@ -37866,8 +37926,8 @@ release\TimedBroadcastEditor.obj: ui\timedbroadcast\TimedBroadcastEditor.cpp ui/
 		misc/logger.h \
 		ui/phonebook/UiPhoneBook.h \
 		misc/ftpclient.h \
-		misc\qftp.h \
-		misc\qurlinfo.h \
+		misc/qftp.h \
+		misc/qurlinfo.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QTimeEdit \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QHBoxLayout
 
@@ -37986,7 +38046,7 @@ release\dlgemergencycall.obj: ui\dialogs\dlgemergencycall.cpp ui/dialogs/dlgemer
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QMessageBox \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qmessagebox.h
 
-release\qftp.obj: misc\qftp.cpp misc\qftp.h \
+release\qftp.obj: misc\qftp.cpp misc/qftp.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qstring.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qchar.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qglobal.h \
@@ -38033,7 +38093,7 @@ release\qftp.obj: misc\qftp.cpp misc\qftp.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qvarlengtharray.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qcontainerfwd.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qobject_impl.h \
-		misc\qurlinfo.h \
+		misc/qurlinfo.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qdatetime.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qshareddata.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qhash.h \
@@ -38065,7 +38125,7 @@ release\qftp.obj: misc\qftp.cpp misc\qftp.h \
 		release\qftp.moc \
 		release\moc_qftp.cpp
 
-release\qurlinfo.obj: misc\qurlinfo.cpp misc\qurlinfo.h \
+release\qurlinfo.obj: misc\qurlinfo.cpp misc/qurlinfo.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qdatetime.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qstring.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qchar.h \
@@ -38846,9 +38906,45 @@ release\settingsdialog.obj: VideoLinkage\settingsdialog.cpp VideoLinkage/setting
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qabstractbutton.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\qicon.h \
 		ui_extensioncfg.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QVariant \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QAction \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qaction.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qactiongroup.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QApplication \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qapplication.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qcoreapplication.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qeventloop.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qdesktopwidget.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\qguiapplication.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\qinputmethod.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QButtonGroup \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qbuttongroup.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QHBoxLayout \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qboxlayout.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qlayout.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qlayoutitem.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qgridlayout.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QHeaderView \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qheaderview.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qabstractitemview.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qabstractitemmodel.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qitemselectionmodel.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qabstractitemdelegate.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qstyleoption.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qabstractspinbox.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtGui\qvalidator.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\qregularexpression.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qslider.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qabstractslider.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qstyle.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qtabbar.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qtabwidget.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qrubberband.h \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QSpacerItem \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QVBoxLayout \
+		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QWidget \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QScrollBar \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qscrollbar.h \
-		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qabstractslider.h \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtCore\QDebug \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\QMessageBox \
 		D:\Qt\Qt5.9.4\5.9.4\msvc2015\include\QtWidgets\qmessagebox.h

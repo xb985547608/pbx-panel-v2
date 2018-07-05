@@ -1,4 +1,8 @@
-﻿#include "MeetMeWidget.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "MeetMeWidget.h"
 #include "message_queue/RPCCommand.h"
 #include "misc/Config.h"
 #include "misc/logger.h"

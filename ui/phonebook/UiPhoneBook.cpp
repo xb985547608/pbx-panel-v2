@@ -1,4 +1,8 @@
-﻿#include "UiPhoneBook.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "UiPhoneBook.h"
 #include "misc/Config.h"
 #include "ui/base/BaseWidget.h"
 #include "UiPhoneBookList.h"

@@ -1,4 +1,8 @@
-﻿#include "TimingBroadcastZone.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "TimingBroadcastZone.h"
 #include "ui/base/misccomponents.h"
 #include "PlanListZone.h"
 #include "ui/timedbroadcast/TimedBroadcastEditor.h"

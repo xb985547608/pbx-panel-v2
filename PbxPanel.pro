@@ -13,16 +13,15 @@ TARGET = PbxPanel
 TEMPLATE = app
 INCLUDEPATH += $$PWD
 #DEFINES += EEPBX
-DEFINES += OEM
-#DEFINES += WHITE
+#DEFINES += OEM
+DEFINES += WHITE
 #DEFINES += HBNYJT
 #DEFINES += JXLC
 #DEFINES += LOCKTEL
 DEFINES += V5
 
 #win32: LIBS += -lole32 -lws2_32 -L$$PWD/lib -lcwebpage -lrabbitmq "D:\Qt\Qt5.1.1\5.1.1\mingw48_32\bin\Qt5Ftp.dll"
-win32: LIBS += -lole32 -lws2_32 -L$$PWD/lib -lrabbitmq #-lcwebpage 暂时不用这个库
-
+win32: LIBS += -lole32 -lws2_32 -L$$PWD/lib -lrabbitmq#-lcwebpage 暂时不用这个库
 
 SOURCES += main.cpp \
     misc/tools.cpp \
@@ -133,7 +132,9 @@ HEADERS += \
     ui/meetme/MeetMeWidget.h \
     ui/settings/TimingBroadcastZone.h \
     ui/timedbroadcast/TimedBroadcastEditor.h \
-    ui/dialogs/dlgemergencycall.h
+    ui/dialogs/dlgemergencycall.h \
+    misc/qftp.h \
+    misc/qurlinfo.h
 
 RESOURCES += \
     pbx_panel.qrc

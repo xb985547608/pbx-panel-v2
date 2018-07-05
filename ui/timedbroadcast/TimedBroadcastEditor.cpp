@@ -1,4 +1,8 @@
-﻿#include "TimedBroadcastEditor.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "TimedBroadcastEditor.h"
 #include "ui/MainWindow.h"
 #include "ui/base/SectionZone.h"
 #include "ui/base/misccomponents.h"

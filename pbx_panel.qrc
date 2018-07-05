@@ -61,5 +61,7 @@
         <file>images/banner-szfy.png</file>
         <file>images/banner-white-hbnyjt.png</file>
         <file>images/banner_head_juxing.png</file>
+        <file>images/banner-white.png</file>
+        <file>images/image_splash_white.png</file>
     </qresource>
 </RCC>

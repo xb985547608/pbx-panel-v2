@@ -1,4 +1,8 @@
-﻿#include "MainWindow.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "MainWindow.h"
 #include "LoginForm.h"
 //#include "base/BaseWidget.h"
 #include "mainwidget/MainWidget.h"
@@ -173,7 +177,7 @@ MainWindow::MainWindow(QStringList args, QWidget *parent) :
     loadActivity(BaseWidget::eMainWidget, params);
 
     /************************ 视频联动 ************************/
-    VideoLinkageWidget *v = new VideoLinkageWidget(this);
+    VideoLinkageWidget *v = new VideoLinkageWidget();
     MainWidget *mainWidget = dynamic_cast<MainWidget *>(getActivity(BaseWidget::eMainWidget));
     Q_ASSERT_X(mainWidget != NULL, "MainWindow::MainWindow()", "MainWidget create error!!");
     connect(mainWidget->getOperatorZone(), &OperatorZone::operatorExtenStateChagne,

@@ -1,4 +1,8 @@
-﻿#include "EventChooser.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "EventChooser.h"
 #include "ui/base/multitablewidgets.h"
 #include "ui/base/misccomponents.h"
 #include "message_queue/RPCCommand.h"

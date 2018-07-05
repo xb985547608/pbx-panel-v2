@@ -1,4 +1,8 @@
-﻿#include "BaseWidget.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "BaseWidget.h"
 #include "misc/Config.h"
 #include "ui/MainWindow.h"
 #include "ui/base/misccomponents.h"

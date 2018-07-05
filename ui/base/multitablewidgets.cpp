@@ -1,4 +1,8 @@
-﻿#include "multitablewidgets.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "multitablewidgets.h"
 #include "misccomponents.h"
 
 static QMutex sRefreshLock;

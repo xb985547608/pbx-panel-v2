@@ -1,4 +1,8 @@
-﻿#include "UiPhoneBookList.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "UiPhoneBookList.h"
 #include "ui/base/misccomponents.h"
 #include "ui/base/tablewidget.h"
 #include "message_queue/RPCCommand.h"

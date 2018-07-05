@@ -1,4 +1,8 @@
-﻿#include <QtGui>
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include <QtGui>
 #include "dingobutton.h"
 
 DingoButton::DingoButton(QWidget *parent) :

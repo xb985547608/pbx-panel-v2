@@ -1,4 +1,8 @@
-﻿#include "PlaySoundWidget.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "PlaySoundWidget.h"
 #include "misc/Config.h"
 #include "ui/base/misccomponents.h"
 #include "message_queue/RPCCommand.h"

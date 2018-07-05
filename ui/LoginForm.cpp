@@ -1,4 +1,8 @@
-﻿#include "LoginForm.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "LoginForm.h"
 #include "misc/Config.h"
 #include "base/misccomponents.h"
 #include "misc/dbwrapper.h"

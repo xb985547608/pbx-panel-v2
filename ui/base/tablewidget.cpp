@@ -1,4 +1,8 @@
-﻿#include "tablewidget.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "tablewidget.h"
 
 TableWidget::TableWidget(int itemsPerLine, QWidget *parent) :
     QWidget(parent),

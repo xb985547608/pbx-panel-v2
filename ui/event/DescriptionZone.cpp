@@ -1,4 +1,8 @@
-﻿#include "DescriptionZone.h"
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include "DescriptionZone.h"
 #include "ui/base/tablewidget.h"
 #include "ui/base/misccomponents.h"
 #include "time.h"
