@@ -70,7 +70,7 @@ void MiscComponents::setTextToHeader(QLabel *header, QString text)
     painter.setPen(Qt::white);
     painter.setFont(font);
 //    painter.drawText(800,15,1035,50, Qt::AlignVCenter, text);
-    painter.drawText(950,15,1185,50, Qt::AlignBottom, text);
+    painter.drawText(950,10,1185,50, Qt::AlignBottom, text);
     painter.end();
     headWidget->setPixmap(pixmap);
     headWidget->setScaledContents(true);

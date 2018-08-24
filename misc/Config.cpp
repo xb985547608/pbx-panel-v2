@@ -106,7 +106,9 @@ bool Config::initialise(QString path)
     this->Res_image_splash = ":images/image_splash";
 #else //OEM AND WHITE版本
 #ifdef WHITE
-    this->Res_image_splash = ":images/image_splash_white";
+//    this->Res_image_splash = ":images/image_splash_white";
+    this->Res_image_splash = ":images/logo_hongtuo.png";
+
 #else
     this->Res_image_splash = ":images/image_splash_oem";
 #endif
@@ -144,6 +146,7 @@ bool Config::initialise(QString path)
 #endif
 #ifdef WHITE
     Res_image_banner = ":images/banner-white";
+    Res_image_banner = ":images/banner-hongtuo.png";
 #endif
 #ifdef SZFY//神州飞扬
     Res_image_banner = ":images/banner-szfy";

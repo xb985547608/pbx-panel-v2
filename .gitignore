@@ -2,4 +2,6 @@ debug
 release
 *.stash
 object_script*
-Makefile*
+Makefile.*
+*.user
+*.log

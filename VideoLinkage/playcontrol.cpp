@@ -55,6 +55,8 @@ bool PlayControl::play(QString url)
         qDebug() << "#PlayControl# play(),  call libvlc_media_new_location() error, url:" << url;
         return false;
     }
+    libvlc_media_add_option(mpVlcMedia, "--network-cacheing=300");
+
     libvlc_media_player_set_media(mpVlcMediaPlayer, mpVlcMedia);
 
     return libvlc_media_player_play(mpVlcMediaPlayer) == 0;

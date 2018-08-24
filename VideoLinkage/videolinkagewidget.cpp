@@ -221,6 +221,8 @@ void VideoLinkageWidget::open(QStringList extensions)
         if (index >= 9)
             break;
     }
+
+    activateWindow();
 }
 
 void VideoLinkageWidget::close(QStringList extensions)
