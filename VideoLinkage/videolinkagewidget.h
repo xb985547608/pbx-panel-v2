@@ -10,7 +10,7 @@
 
 class OperatorExten;
 
-#define OPERATOR_RING_GROUNP  "2000"
+#define OPERATOR_RING_GROUNP  "97000"
 
 class VideoLinkageWidget : public QWidget
 {

@@ -74,36 +74,49 @@ bool MessageClient::RPCClient::initialise(
     mRoutingkey = rpcRoutingkey;
     mExchange = rpcExchange;
     mConnection = amqp_new_connection();
+
+    /* 获取连接服务器的套接字 */
     mSockfd = amqp_open_socket(host.toStdString().c_str(), port);
     if (mSockfd < 0) {
         LOG(Logger::Warn, "rpc_call: Opening socket failed\n");
         return false;
     }
     amqp_set_sockfd(mConnection, mSockfd);
-    rpc_reply = amqp_login(mConnection, "/", 0, 131072, 0, AMQP_SASL_METHOD_PLAIN, user.toStdString().c_str(), passwd.toStdString().c_str());
+
+    /* 登录服务器 */
+    rpc_reply = amqp_login(mConnection, "/", 0, 131072, 0, AMQP_SASL_METHOD_PLAIN,
+                           user.toStdString().c_str(), passwd.toStdString().c_str());
     if (!rabbit_mq_reply_is_ok(rpc_reply, "rpc_call: logging in"))
         return false;
+
+    /* 打开对应的通道 */
     amqp_channel_open(mConnection, 1);
     rpc_reply = amqp_get_rpc_reply(mConnection);
     if (!rabbit_mq_reply_is_ok(rpc_reply, "rpc_call: Openning channel"))
         return false;
+
     {
         /* 绑定以接收rpc响应 */
-        amqp_queue_declare_ok_t *r = amqp_queue_declare(mConnection, 1, amqp_empty_bytes_local, 0, 0, 0, 1, amqp_empty_table_local);
+        amqp_queue_declare_ok_t *r =
+                amqp_queue_declare(mConnection, 1, amqp_empty_bytes_local,
+                                   0, 0, 0, 1, amqp_empty_table_local);
         rpc_reply = amqp_get_rpc_reply(mConnection);
         if (!rabbit_mq_reply_is_ok(rpc_reply, "rpc_call: declaring queue"))
             return false;
+
         mQueueName = amqp_bytes_malloc_dup(r->queue);
-#ifndef QT_NO_DEBUG
+#ifndef PBX_NO_DEBUG
         char queueName[MAX_BUFFER_LEN] = { '\0' };
         memcpy(queueName, mQueueName.bytes, mQueueName.len);
-        LOG(Logger::DDebug, "rpc quename: %s\n", queueName);
+        LOG(Logger::Debug, "rpc quename: %s\n", queueName);
 #endif
+
         if (mQueueName.bytes == NULL) {
-            LOG(Logger::DDebug, "Out of memory while copying queue name");
+            LOG(Logger::Debug, "Out of memory while copying queue name");
             return false;
         }
-        amqp_basic_consume(mConnection, 1, mQueueName, amqp_empty_bytes_local, 0, 1, 0, amqp_empty_table_local);
+        amqp_basic_consume(mConnection, 1, mQueueName, amqp_empty_bytes_local,
+                           0, 1, 0, amqp_empty_table_local);
         rpc_reply = amqp_get_rpc_reply(mConnection);
         if (!rabbit_mq_reply_is_ok(rpc_reply, "Consuming"))
             return false;
@@ -185,7 +198,7 @@ QString MessageClient::RPCClient::rpcCall(const QString &params)
                 continue;
             }
             d = (amqp_basic_deliver_t *) frame.payload.method.decoded;
-#ifndef QT_NO_DEBUG
+#ifndef PBX_NO_DEBUG
             LOG(Logger::DDebug, "Delivery %u, exchange %.*s routingkey %.*s\n",
                 (unsigned) d->delivery_tag,
                 (int) d->exchange.len, (char *) d->exchange.bytes,
@@ -201,7 +214,7 @@ QString MessageClient::RPCClient::rpcCall(const QString &params)
                 break;
             }
             p = (amqp_basic_properties_t *) frame.payload.properties.decoded;
-#ifndef QT_NOT_DEBUG
+#ifndef PBX_NO_DEBUG
             if (p->_flags & AMQP_BASIC_CONTENT_TYPE_FLAG) {
                 LOG(Logger::DDebug, "\nContent-type: %.*s\n",
                        (int) p->content_type.len, (char *) p->content_type.bytes);
@@ -285,12 +298,15 @@ bool EventMonitor::initialise()
         return false;
     }
     amqp_set_sockfd(mConnection, sockfd);
-    /* 登录设备 */
-    rpc_reply = amqp_login(mConnection, "/", 0, 131072, 0, AMQP_SASL_METHOD_PLAIN, mUser.toStdString().c_str(), mPasswd.toStdString().c_str());
+
+    /* 登录服务器 */
+    rpc_reply = amqp_login(mConnection, "/", 0, 131072, 0, AMQP_SASL_METHOD_PLAIN,
+                           mUser.toStdString().c_str(), mPasswd.toStdString().c_str());
     if (!rabbit_mq_reply_is_ok(rpc_reply, "rabbit_mq_receiver_run: Logging in")){
         fireSystemEventCallback("receiver_thread_func loging in failed");
         return false;
     }
+
     /* 打开通道 */
     amqp_channel_open(mConnection, 1);
     rpc_reply = amqp_get_rpc_reply(mConnection);
@@ -299,8 +315,9 @@ bool EventMonitor::initialise()
         return false;
     }
     /* 声明一个队列 */
-    amqp_queue_declare_ok_t *r = amqp_queue_declare(mConnection, 1, amqp_empty_bytes_local, 0, 0, 0, 1,
-                            amqp_empty_table_local);
+    amqp_queue_declare_ok_t *r =
+            amqp_queue_declare(mConnection, 1, amqp_empty_bytes_local,
+                               0, 0, 0, 1, amqp_empty_table_local);
     rpc_reply = amqp_get_rpc_reply(mConnection);
     if (!rabbit_mq_reply_is_ok(rpc_reply, "rabbit_mq_receiver_run: Declaring queue")){
         fireSystemEventCallback("receiver_thread_func declaring queue failed");
@@ -322,7 +339,9 @@ bool EventMonitor::initialise()
         fireSystemEventCallback("receiver_thread_func binding queue failed");
         return false;
     }
-    amqp_basic_consume(mConnection, 1, queuename, amqp_empty_bytes_local, 0, 1, 0, amqp_empty_table_local);
+
+    amqp_basic_consume(mConnection, 1, queuename, amqp_empty_bytes_local,
+                       0, 1, 0, amqp_empty_table_local);
     rpc_reply = amqp_get_rpc_reply(mConnection);
     if (!rabbit_mq_reply_is_ok(rpc_reply, "rabbit_mq_receiver_run: Consuming")){
         fireSystemEventCallback("receiver_thread_func consuming failed");
@@ -339,7 +358,7 @@ void EventMonitor::run()
     int result;
 
     amqp_basic_deliver_t *d;
-#ifndef QT_NO_DEBUG
+#ifndef PBX_NO_DEBUG
     amqp_basic_properties_t *p;
 #endif
     size_t body_target;
@@ -370,7 +389,7 @@ void EventMonitor::run()
             LOG(Logger::DDebug, "rabbit_mq_receiver_run: Expected header!");
             break;
         }
-#ifndef QT_NO_DEBUG
+#ifndef PBX_NO_DEBUG
         p = (amqp_basic_properties_t *) frame.payload.properties.decoded;
         if (p->_flags & AMQP_BASIC_CONTENT_TYPE_FLAG) {
             LOG(Logger::DDebug, "\nContent-type: %.*s\n",
@@ -391,7 +410,7 @@ void EventMonitor::run()
                 break;
             }
             body_received += frame.payload.body_fragment.len;
-#ifndef QT_NO_DEBUG
+#ifndef PBX_NO_DEBUG
             assert(body_received <= body_target);
             /*
             amqp_dump(frame.payload.body_fragment.bytes,

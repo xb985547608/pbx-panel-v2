@@ -6,7 +6,6 @@
 
 QT       += core gui network sql widgets
 
-
 TRANSLATIONS+=en.ts
 
 TARGET = PbxPanel

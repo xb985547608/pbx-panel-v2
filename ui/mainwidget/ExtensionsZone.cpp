@@ -55,6 +55,7 @@ void ExtensionsZone::eventMessageReceived(QMap<QString, QString> &msg)
     PBX::Extension pbxExten = extens.value(number);
     emit extenStateChangedSignal(number, pbxExten.getState());
 }
+
 void ExtensionsZone::extenRollCallResultSlot(QString number, int rollCallResult)
 {
     UiExtension* uiExtension = NULL;

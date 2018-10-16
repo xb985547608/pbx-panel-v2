@@ -239,7 +239,7 @@ QStringList EventWidget::getChannels2Call()
             }
         }
     }
-#ifndef QT_NO_DEBUG
+#ifndef PBX_NO_DEBUG
     LOG(Logger::Debug, "channels to call: ");
     foreach (QString channel, channelsToCall)
         LOG(Logger::Debug, "%s\t", channel.toStdString().c_str());
@@ -375,7 +375,7 @@ void EventWidget::sendSms()
             return;
     }
     RPCCommand::sendSms(cfg->DefaultCallerIdName, number2Send, sms);
-#ifndef QT_NO_DEBUG
+#ifndef PBX_NO_DEBUG
     LOG(Logger::Debug, "send sms: ");
     foreach (QString number, number2Send)
         LOG(Logger::Debug, "%s,", number.toStdString().c_str());

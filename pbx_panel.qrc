@@ -65,5 +65,7 @@
         <file>images/image_splash_white.png</file>
         <file>images/banner-hongtuo.png</file>
         <file>images/logo_hongtuo.png</file>
+        <file>images/banner.png</file>
+        <file>images/image_splash.png</file>
     </qresource>
 </RCC>

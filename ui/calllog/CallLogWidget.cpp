@@ -67,7 +67,7 @@ void CallLogWidget::initFrames()
     mFrameRootBox->addLayout(hbox);
 
     //列表
-#ifndef QT_NO_DEBUG
+#ifndef PBX_NO_DEBUG
     mCdrListModel = new QStandardItemModel(0, 6, this);
 #else
     mCdrListModel = new QStandardItemModel(0, 5, this);
@@ -77,7 +77,7 @@ void CallLogWidget::initFrames()
     mCdrListModel->setHeaderData(2, Qt::Horizontal, tr("主叫"));
     mCdrListModel->setHeaderData(3, Qt::Horizontal, tr("被叫"));
     mCdrListModel->setHeaderData(4, Qt::Horizontal, tr("时长(秒)"));
-#ifndef QT_NO_DEBUG
+#ifndef PBX_NO_DEBUG
     mCdrListModel->setHeaderData(5, Qt::Horizontal, tr("userfield"));
 #endif
     QTreeView* cdrList = new QTreeView(this);
@@ -217,7 +217,7 @@ void CallLogWidget::onCdrViewDoubleClicked(const QModelIndex index)
 #ifndef EEPBX
     Config* cfg = Config::Instance();
 #endif
-    //#ifndef QT_NO_DEBUG
+    //#ifndef PBX_NO_DEBUG
     //    hostIp = cfg->mq_host;
     //#endif
 #ifndef EEPBX
@@ -278,7 +278,7 @@ void CallLogWidget::reloadCdrList(bool isEmergencyCall)
         mCdrListModel->setData(mCdrListModel->index(0, 2), cdr.src);
         mCdrListModel->setData(mCdrListModel->index(0, 3), cdr.dst);
         mCdrListModel->setData(mCdrListModel->index(0, 4), cdr.duration);
-#ifndef QT_NO_DEBUG
+#ifndef PBX_NO_DEBUG
         mCdrListModel->setData(mCdrListModel->index(0, 5), cdr.userField);
 #endif
     }

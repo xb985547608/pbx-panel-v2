@@ -9,11 +9,7 @@ QSqlDatabase DbWrapper::mDb;// = QSqlDatabase::addDatabase("QSQLITE");
 
 bool DbWrapper::openDb()
 {
-#ifdef QT_NO_DEBUG
     QString driverPath = mAppPath + "/qsqlite.dll";
-#else
-    QString driverPath = mAppPath + "/qsqlited5.dll";
-#endif
 
     QPluginLoader loader(driverPath);
     QObject *plugin = loader.instance();

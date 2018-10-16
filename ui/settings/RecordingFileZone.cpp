@@ -89,7 +89,7 @@ void RecordingFileZone::reloadList()
 
 void RecordingFileZone::onBtnUploadClicked()
 {
-#ifdef QT_NO_DEBUG
+#ifdef PBX_NO_DEBUG
     QString selectedFile = QFileDialog::getOpenFileName(this, tr("请选择扩音文件"), "", "sound file(*.wav *.gsm)");
 #else
     QString selectedFile = QFileDialog::getOpenFileName(this, tr("请选择扩音文件"), "", "");

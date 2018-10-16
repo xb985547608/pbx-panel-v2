@@ -1,4 +1,8 @@
-﻿#include <QtGui>
+﻿#if _MSC_VER >= 1600
+#pragma execution_character_set("utf-8")
+#endif
+
+#include <QtGui>
 #include "ui/MainWindow.h"
 #include "misc/logger.h"
 #include "misc/dbwrapper.h"
@@ -9,8 +13,8 @@
 static bool initialiseLogger()
 {
     Logger* logger = Logger::Instance();
-#ifndef QT_NO_DEBUG
-    if (!logger->initialise(Logger::Debug, "panel.log")) {
+#ifndef PBX_NO_DEBUG
+    if (!logger->initialise(Logger::DDebug/*, "panel.log"*/)) {
 #else
     if (!logger->initialise(Logger::Debug)) {
 #endif
@@ -48,9 +52,10 @@ static bool initialiasMessageClient()
     return true;
 }
 
+/* 保证每台PC单例运行 */
 static bool checkSingleton(QApplication& a)
 {
-#ifndef QT_NO_DEBUG
+#ifdef PBX_NO_DEBUG
     {
         QStringList args = a.arguments();
         foreach (QString arg, args) {

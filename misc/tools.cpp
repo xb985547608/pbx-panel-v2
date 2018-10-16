@@ -118,7 +118,7 @@ void CmdProcessor::nextJob()
 void CmdProcessor::onCommandFinished(int)
 {
     CmdProcessorJobLock.lock();
-#ifndef QT_NO_DEBUG
+#ifndef PBX_NO_DEBUG
     QString result = mProcessor->readAll();
     printf("CmdProcessor, result: %s\n", result.toStdString().c_str());
 #endif
