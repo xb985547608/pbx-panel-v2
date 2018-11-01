@@ -11,13 +11,9 @@
 #include <qwindowdefs.h>
 #include <QMutex>
 
-#ifdef __cplusplus
-extern "C"{
-#endif
-#include <vlc/vlc.h>
-#ifdef __cplusplus
-}
-#endif
+struct libvlc_media_player_t;
+struct libvlc_media_t;
+struct libvlc_instance_t;
 
 class PlayControl : public QObject
 {
@@ -27,7 +23,6 @@ public:
     ~PlayControl();
 
     bool isPlaying();
-
 public slots:
     bool play(QString url);
     void stop();

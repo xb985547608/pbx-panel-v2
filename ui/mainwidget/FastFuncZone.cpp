@@ -246,6 +246,9 @@ void FastFuncZone::onBtnGroupCallClicked()
                 mMainWidget->onBtnPhonebookClicked();
             } else {
                 QString dialedNumber = dialPad->getNumber();
+
+                emit callExtens(QStringList(dialedNumber));
+
                 LOG(Logger::Debug, "dialed number: %s\n", dialedNumber.toStdString().c_str());
                 //对单个号码，发起点对点呼叫
                 QMap<QString, QString> variables;
@@ -270,6 +273,12 @@ void FastFuncZone::onBtnGroupCallClicked()
         QList<PBX::Extension> extens = mMainWidget->getSelectedExtensZone()->getExtens();
         if (extens.size() == 0)
             return;
+
+        QStringList extensNum;
+        foreach (PBX::Extension e, extens)
+            extensNum.append(e.number);
+        emit callExtens(extensNum);
+
         //对单个号码，发起点对点呼叫
         if (extens.size() == 1) {
             PBX::Extension e = extens.at(0);

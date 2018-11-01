@@ -12,6 +12,7 @@ public:
     void selectedExtenCntChanged(int count);
     void enable3WayBtn(bool enable) { mBtn3Way->setEnabled(enable); }
 signals:
+    void callExtens(QStringList extens);
     
 private slots:
     //fast function

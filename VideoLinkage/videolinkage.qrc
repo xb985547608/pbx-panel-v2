@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/branch_closed.png</file>
+        <file>images/branch_closed-on.png</file>
+        <file>images/branch_open.png</file>
+        <file>images/branch_open-on.png</file>
+        <file>images/branch-end.png</file>
+        <file>images/branch-more.png</file>
+        <file>images/on-line.png</file>
+        <file>images/vline.png</file>
+        <file>images/down_arrow.png</file>
+        <file>images/down_arrow_disabled.png</file>
+        <file>images/up_arrow.png</file>
+        <file>images/up_arrow_disabled.png</file>
+    </qresource>
+</RCC>

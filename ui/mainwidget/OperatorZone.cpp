@@ -56,6 +56,7 @@ OperatorZone::OperatorZone(MainWidget *mw, QWidget *parent) :
         mOpExtens.insert(e.number, opExten);
         tWidget->appendItem(opExten);
     }
+
     QVBoxLayout* rootBox = new QVBoxLayout;
     rootBox->setMargin(0);
     rootBox->setSpacing(0);

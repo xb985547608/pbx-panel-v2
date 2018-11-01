@@ -17,6 +17,7 @@ public:
     void reset();
     bool isPlaying();
     QString ExtensionNum();
+    const QString &url() const { return mURL; }
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
@@ -39,6 +40,7 @@ private:
     QLabel *mpTimeLbl;
 
     PlayControl *mpPlayer;
+    QString mURL;
 };
 
 #endif // VIDEOWIDGET_H

@@ -141,11 +141,11 @@
          <property name="font">
           <font>
            <family>Arial</family>
-           <pointsize>16</pointsize>
+           <pointsize>14</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>rtsp://</string>
+          <string>URL1:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -189,11 +189,11 @@
          <property name="font">
           <font>
            <family>Arial</family>
-           <pointsize>16</pointsize>
+           <pointsize>14</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>rtsp://</string>
+          <string>URL2:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

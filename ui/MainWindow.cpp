@@ -20,6 +20,7 @@
 #include "VideoLinkage/videolinkagewidget.h"
 #include "mainwidget/OperatorZone.h"
 #include "mainwidget/ExtensionsZone.h"
+#include "mainwidget/FastFuncZone.h"
 
 static MainWindow* sMainWindow = NULL;
 static void EventCallback(MessageClient::EventType e, QMap<QString, QString>& eventMessage) {
@@ -180,10 +181,13 @@ MainWindow::MainWindow(QStringList args, QWidget *parent) :
     VideoLinkageWidget *v = new VideoLinkageWidget();
     MainWidget *mainWidget = dynamic_cast<MainWidget *>(getActivity(BaseWidget::eMainWidget));
     Q_ASSERT_X(mainWidget != NULL, "MainWindow::MainWindow()", "MainWidget create error!!");
+    v->operatorExtensChanged(mainWidget->getOperatorZone()->getOperatorExtens());
     connect(mainWidget->getOperatorZone(), &OperatorZone::operatorExtenStateChagne,
             v, &VideoLinkageWidget::operatorExtenStateChanged);
     connect(mainWidget->getExtensionsZone(), &ExtensionsZone::extenStateChangedSignal,
-            v, &VideoLinkageWidget::extenStateChanged);
+            v, static_cast<void(VideoLinkageWidget::*)(QString)>(&VideoLinkageWidget::extenStateChanged));
+    connect(mainWidget->getFastFuncZone(), &FastFuncZone::callExtens,
+            v, &VideoLinkageWidget::callExtens);
     v->move(rect().topRight());
     v->show();
     /************************ 视频联动 ************************/

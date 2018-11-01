@@ -18,6 +18,7 @@ public:
     void eventMessageReceived(QMap<QString, QString>& msg);
     void opExtenClicked(QString extenNumber);
     PBX::Extension getSelectedOpExten();
+    QStringList getOperatorExtens() const { return  mOpExtens.keys(); }
     
 signals:
     void operatorExtenStateChagne(QString number);

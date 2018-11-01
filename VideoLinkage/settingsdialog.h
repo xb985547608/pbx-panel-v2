@@ -19,13 +19,19 @@ public:
 
     bool contains(const QString &key) const;
     QStringList value(const QString &key) const;
+    void init();
+    QString getOperatorGroupChannel() const;
+
+signals:
+    void extenStreamChanged(const QString &e, const QStringList &urls);
+    void extenStreamRemoved(const QString &e);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
 private:
     void addConfigWidget(QString number, QStringList urls);
-    QFrame *makeConfigWidget();
+    QFrame *makeConfigWidget(QString extenName);
 
     void append(QString number, QStringList urls);
     void remove(QString number);

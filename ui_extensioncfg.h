@@ -101,7 +101,7 @@ public:
         label_2->setMaximumSize(QSize(60, 25));
         QFont font1;
         font1.setFamily(QStringLiteral("Arial"));
-        font1.setPointSize(16);
+        font1.setPointSize(14);
         label_2->setFont(font1);
         label_2->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
@@ -178,8 +178,8 @@ public:
     {
         ExtensionCfgWidget->setWindowTitle(QApplication::translate("ExtensionCfgWidget", "Form", Q_NULLPTR));
         label->setText(QApplication::translate("ExtensionCfgWidget", "\345\210\206\346\234\272\345\217\267:", Q_NULLPTR));
-        label_2->setText(QApplication::translate("ExtensionCfgWidget", "rtsp://", Q_NULLPTR));
-        label_3->setText(QApplication::translate("ExtensionCfgWidget", "rtsp://", Q_NULLPTR));
+        label_2->setText(QApplication::translate("ExtensionCfgWidget", "URL1:", Q_NULLPTR));
+        label_3->setText(QApplication::translate("ExtensionCfgWidget", "URL2:", Q_NULLPTR));
         save->setText(QApplication::translate("ExtensionCfgWidget", "\344\277\235\345\255\230", Q_NULLPTR));
         remove->setText(QApplication::translate("ExtensionCfgWidget", "\345\210\240\351\231\244", Q_NULLPTR));
     } // retranslateUi

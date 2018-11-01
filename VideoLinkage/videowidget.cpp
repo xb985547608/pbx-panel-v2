@@ -32,6 +32,8 @@ VideoWidget::VideoWidget(QWidget *parent) :
     grid->addWidget(mpExtensionLbl, 0, 0);
     grid->addWidget(mpTimeLbl, 0, 1);
     grid->addWidget(mpVideoWidget, 1, 0, 1, 2);
+
+    reset();
 }
 
 void VideoWidget::setInfo(QString extensionName, QString url)
@@ -39,9 +41,9 @@ void VideoWidget::setInfo(QString extensionName, QString url)
     if (url.isEmpty())
         return;
     mpExtensionLbl->setText(extensionName);
-
     mpVideoWidget->raise();
-    mpPlayer->play("rtsp://" + url);
+    mpPlayer->play(url);
+    mURL = url;
 }
 
 void VideoWidget::setTimeHint(const QDateTime &time)
@@ -55,13 +57,13 @@ void VideoWidget::reset()
 {
     mpExtensionLbl->setText("");
     mpTimeLbl->setText("");
-
     mpPlayer->stop();
+    mURL = "";
 }
 
 bool VideoWidget::isPlaying()
 {
-    return mpPlayer->isPlaying();
+    return !mURL.isEmpty();
 }
 
 QString VideoWidget::ExtensionNum()

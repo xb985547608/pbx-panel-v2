@@ -1,6 +1,20 @@
 ﻿#include "playcontrol.h"
 #include <QDebug>
 
+#if defined(_MSC_VER)
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#endif
+
+#if defined (_WIN32)
+#   define LIBVLC_USE_PTHREAD_CANCEL 1
+#endif
+
+#include <vlc/vlc.h>
+
+#include <vlc_common.h>
+#include <vlc_variables.h>
+
 static const char *argv[7]= {"--intf=dummy",
                       "--no-media-library",
                       "--no-stats",
@@ -10,6 +24,28 @@ static const char *argv[7]= {"--intf=dummy",
                       "--drop-late-frames"};
 
 libvlc_instance_t *PlayControl::mspVlcInstance = libvlc_new(7, argv);
+
+
+
+class VlcAudioCallbackHelper
+{
+public:
+
+    static int volumeCallback(vlc_object_t *obj,
+                            const char *name,
+                            vlc_value_t oldVal,
+                            vlc_value_t newVal,
+                            void *data)
+    {
+        Q_UNUSED(obj);
+        Q_UNUSED(name);
+        Q_UNUSED(oldVal);
+        Q_UNUSED(newVal);
+
+        libvlc_audio_set_volume((libvlc_media_player_t *)data, 0);
+        return VLC_SUCCESS;
+    }
+};
 
 PlayControl::PlayControl(WId id, QObject *parent) :
     QObject(parent),
@@ -22,6 +58,9 @@ PlayControl::PlayControl(WId id, QObject *parent) :
     libvlc_video_set_mouse_input(mpVlcMediaPlayer, false);
 
     libvlc_media_player_set_hwnd(mpVlcMediaPlayer, (void *)mVlcWId);
+
+    var_AddCallback((vlc_object_t *)mpVlcMediaPlayer, "mute",
+                    VlcAudioCallbackHelper::volumeCallback, mpVlcMediaPlayer);
 }
 
 PlayControl::~PlayControl()

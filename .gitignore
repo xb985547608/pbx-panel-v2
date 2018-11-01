@@ -3,5 +3,6 @@ release
 *.stash
 object_script*
 Makefile.*
+*.user.*
 *.user
 *.log

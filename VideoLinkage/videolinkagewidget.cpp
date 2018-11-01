@@ -4,14 +4,15 @@
 
 #include "videolinkagewidget.h"
 #include <QPushButton>
-#include <QDebug>
 #include <QKeyEvent>
 #include <QTimer>
 #include <QDateTime>
-#include <QMap>
 #include <QMouseEvent>
 #include <QStringList>
 #include <QMessageBox>
+#include <QGridLayout>
+#include <QComboBox>
+#include <QSizePolicy>
 
 #include "../pbx/pbx.h"
 #include "../misc/logger.h"
@@ -19,61 +20,77 @@
 VideoLinkageWidget::VideoLinkageWidget(QWidget *parent) :
     QWidget(parent)
 {
-    /* 实例9个视频窗口 */
-    for (int i=0; i<9; i++) {
+    /* 实例视频窗口 */
+    for (int i=0; i<VIDEOWIDGET_MAX_LENGTH; i++) {
         VideoWidget *vw = new VideoWidget(this);
         vw->setVisible(false);
         vw->installEventFilter(this);
         connect(vw, &VideoWidget::doubleClicked, this, &VideoLinkageWidget::fullScreen);
         mVideoWidgets.append(vw);
     }
-    /* top */
+    /* top-right */
     mpVideoWidgetsZone = new QFrame(this);
     mpVideoWidgetsZone->setObjectName("zone");
-    mpVideoWidgetsZone->setStyleSheet("QFrame#zone{background-color:black; border: 2px solid green}");
+    mpVideoWidgetsZone->setStyleSheet("QFrame#zone{background-color:black}");
     mpVideoWidgetsZone->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     mpGridLayout = new QGridLayout();
     mpGridLayout->setSpacing(0);
     mpGridLayout->setContentsMargins(0, 0, 0, 0);
     mpVideoWidgetsZone->setLayout(mpGridLayout);
 
-    /* bottom */
+    /* bottom-right */
     QFrame *operatorFrame = new QFrame(this);
     operatorFrame->setFixedHeight(50);
     operatorFrame->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     operatorFrame->setLineWidth(2);
-    QHBoxLayout *row = new QHBoxLayout();
-    operatorFrame->setLayout(row);
-    mpLayoutSelectCombo = new QComboBox(operatorFrame);
-    mpLayoutSelectCombo->addItems(QStringList()
-                                  << "1X1"
-                                  << "2X2"
-                                  << "3X3");
-    mpLayoutSelectCombo->setFixedWidth(80);
-    QPushButton *settingsBtn = new QPushButton("设置", operatorFrame);
-    settingsBtn->setFixedWidth(40);
+    {
+        QHBoxLayout *row = new QHBoxLayout();
+        operatorFrame->setLayout(row);
+        mpLayoutSelectCombo = new QComboBox(operatorFrame);
+        mpLayoutSelectCombo->addItems(QStringList()
+                                      << "1X1"
+                                      << "2X2"
+                                      << "3X3"
+                                      << "4x4");
+        mpLayoutSelectCombo->setFixedWidth(80);
+        QPushButton *settingsBtn = new QPushButton("设置", operatorFrame);
+        settingsBtn->setFixedWidth(40);
 
-    row->addStretch();
-    row->addWidget(mpLayoutSelectCombo);
-    row->addWidget(settingsBtn);
+        row->addStretch();
+        row->addWidget(mpLayoutSelectCombo);
+        row->addWidget(settingsBtn);
+
+        mpSettingsDialog = new SettingsDialog(this);
+        mOperatorGroupChannel = mpSettingsDialog->getOperatorGroupChannel();
+        connect(settingsBtn, &QPushButton::clicked, mpSettingsDialog, &SettingsDialog::exec);
+    }
+
+    /* left */
+    mpDeviceList = new DeviceList(this);
+    mpDeviceList->setFixedWidth(150);
 
     /* merge */
-    QVBoxLayout *col = new QVBoxLayout(this);
+    QVBoxLayout *col = new QVBoxLayout();
     col->addWidget(mpVideoWidgetsZone);
     col->addWidget(operatorFrame);
-
-    /* dialog */
-    mpSettingsDialog = new SettingsDialog(this);
+    QHBoxLayout *row = new QHBoxLayout(this);
+    row->addWidget(mpDeviceList);
+    row->addLayout(col);
 
     /* connect */
-    connect(mpLayoutSelectCombo, &QComboBox::currentTextChanged,
-            this, &VideoLinkageWidget::changeLayout);
-    connect(settingsBtn, &QPushButton::clicked, mpSettingsDialog, &SettingsDialog::exec);
+    connect(mpLayoutSelectCombo, &QComboBox::currentTextChanged, this, &VideoLinkageWidget::changeLayout);
+    connect(mpDeviceList, &DeviceList::extenStateChanged, this,
+            static_cast<void(VideoLinkageWidget::*)(const QString &, const QString &, bool)>(&VideoLinkageWidget::extenStateChanged));
+    connect(mpDeviceList, &DeviceList::closeAllSignal, this, &VideoLinkageWidget::closeAll);
+    connect(this, &VideoLinkageWidget::extenStateChangedSignal, mpDeviceList,
+            static_cast<void(DeviceList::*)(const QString &, bool)>(&DeviceList::changeState));
+    connect(mpSettingsDialog, &SettingsDialog::extenStreamChanged, this, &VideoLinkageWidget::extenStreamChanged);
+    connect(mpSettingsDialog, &SettingsDialog::extenStreamRemoved, this, &VideoLinkageWidget::extenStreamRemoved);
+    connect(mpSettingsDialog, &SettingsDialog::extenStreamChanged, mpDeviceList,
+            static_cast<void(DeviceList::*)(const QString &, const QStringList &)>(&DeviceList::changeState));
+    connect(mpSettingsDialog, &SettingsDialog::extenStreamRemoved, mpDeviceList, &DeviceList::removeExten);
 
-    mpLayoutSelectCombo->setCurrentText("3X3");
-
-    resize(800, 600);
-
+    /* 刷新视频窗口的时间标签 */
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, [this](){
         foreach (VideoWidget *vw, mVideoWidgets) {
@@ -81,6 +98,11 @@ VideoLinkageWidget::VideoLinkageWidget(QWidget *parent) :
         }
     });
     timer->start(1000);
+
+    mpLayoutSelectCombo->setCurrentIndex(0);
+    mpLayoutSelectCombo->setCurrentIndex(3);
+    mpSettingsDialog->init();
+    resize(800, 600);
 }
 
 bool VideoLinkageWidget::eventFilter(QObject *watched, QEvent *event)
@@ -94,7 +116,6 @@ bool VideoLinkageWidget::eventFilter(QObject *watched, QEvent *event)
         QKeyEvent *e = dynamic_cast<QKeyEvent *>(event);
         if (e->key() == Qt::Key_Escape) {
             emit w->doubleClicked();
-//            changeLayout(mpLayoutSelectCombo->currentText());
         }
     }
     return true;
@@ -117,14 +138,14 @@ void VideoLinkageWidget::closeEvent(QCloseEvent *event)
 
 void VideoLinkageWidget::changeLayout(const QString &text)
 {
-    int row = text.left(1).toInt();
-    int col = text.right(1).toInt();
+    (void)text;
+    int row = mpLayoutSelectCombo->currentIndex() + 1;
+    int col = row;
     QList<VideoWidget *> sortVideoWidgets;
-    int length = mVideoWidgets.count();
 
     /* 对窗口列表进行排序，被占用的窗口放在前面 */
     QList<VideoWidget *> temps = mVideoWidgets;
-    for (int i=0; i<length; i++) {
+    for (int i=0; i<VIDEOWIDGET_MAX_LENGTH; i++) {
         VideoWidget *vw = temps.takeLast();
         if (vw->isPlaying())
             sortVideoWidgets.prepend(vw);
@@ -138,14 +159,14 @@ void VideoLinkageWidget::changeLayout(const QString &text)
     int index = 0;
     for (int i=0; i<row; i++) {
         for (int j=0; j<col; j++) {
-            sortVideoWidgets.at(index)->setVisible(true);
+            sortVideoWidgets.at(index)->show();
             mpGridLayout->addWidget(sortVideoWidgets.at(index), i, j);
             index++;
         }
     }
 
-    for (; index<length; index++)
-        sortVideoWidgets.at(index)->setVisible(false);
+    for (; index<VIDEOWIDGET_MAX_LENGTH; index++)
+        sortVideoWidgets.at(index)->hide();
 
     /* 保存从新排序后的视频窗口列表 */
     mVideoWidgets = sortVideoWidgets;
@@ -168,189 +189,332 @@ void VideoLinkageWidget::fullScreen()
     }
 }
 
-void VideoLinkageWidget::open(QStringList extensions)
+void VideoLinkageWidget::open(const QMap<QString, QStringList> &extensions)
 {
     if (extensions.isEmpty())
         return;
 
-    QMap<QString, QStringList> items;
     int count = 0;
-
-    foreach (QString key, extensions) {
-        QStringList urls = mpSettingsDialog->value(key);
-        if (mpSettingsDialog->contains(key) && !urls.isEmpty()) {
-            items.insert(key, urls);
-            count += urls.count();
-        }
-    }
+    foreach (QStringList urls, extensions.values())
+        count += urls.count();
 
     int index = 0;
-    /* 排除被占用的视频窗口 */
-    while (mVideoWidgets.at(index)->isPlaying())
+    /* 跳过已在播放的视频窗口 */
+    while (mVideoWidgets.at(index)->isPlaying()) {
         index++;
-    if (index >= 9)
-        return;
-
-    if (count != 0)
-        mpLayoutSelectCombo->setEnabled(true);
-
-    /* 对其从新布局和排序 */
-    count += index;
-    if (count == 0) {
-        return;
-    } else if (count <= 1) {
-        mpLayoutSelectCombo->setCurrentIndex(0);
-    } else if (count <= 4) {
-        mpLayoutSelectCombo->setCurrentIndex(1);
-    } else {
-        mpLayoutSelectCombo->setCurrentIndex(2);
+        if (index >= VIDEOWIDGET_MAX_LENGTH)
+            break;
     }
 
-    foreach (QString key, items.keys()) {
-        if (mAlreadyUseExten.contains(key))
-            continue;
+    /* 重新布局和排序 */
+    int sum = count + index;
+    if (sum == 0) {
+        return;
+    } else if (sum <= 1) {
+        mpLayoutSelectCombo->setCurrentIndex(0);
+    } else if (sum <= 4) {
+        mpLayoutSelectCombo->setCurrentIndex(1);
+    } else if (sum <= 9) {
+        mpLayoutSelectCombo->setCurrentIndex(2);
+    } else {
+        mpLayoutSelectCombo->setCurrentIndex(3);
+        index = qBound(0, index, VIDEOWIDGET_MAX_LENGTH - count);
+    }
 
-        mAlreadyUseExten.append(key);
-        QStringList urls = items.value(key);
-        foreach (QString url, urls) {
-            mVideoWidgets.at(index)->setInfo(key, url);
-            index++;
-            if (index >= 9)
-                break;
-        }
-        if (index >= 9)
+    foreach (QString e, extensions.keys()) {
+        if (index >= VIDEOWIDGET_MAX_LENGTH)
             break;
+        QStringList urls = extensions.value(e);
+        foreach (QString url, urls) {
+            if (mVideoWidgets.at(index)->isPlaying()) {
+                QString e = mVideoWidgets.at(index)->ExtensionNum();
+                e = e.left(e.indexOf('/'));
+                mWaitPlayList.append(QPair<QString, QString>(e, mVideoWidgets.at(index)->url()));
+            }
+            mVideoWidgets.at(index)->setInfo(QString("%1/视频%2")
+                                             .arg(e)
+                                             .arg(mpSettingsDialog->value(e).indexOf(url) + 1), url);
+            index++;
+        }
     }
 
     activateWindow();
 }
 
-void VideoLinkageWidget::close(QStringList extensions)
+void VideoLinkageWidget::close(const QMap<QString, QStringList> &extensions)
 {
-    if (extensions.isEmpty() || mAlreadyUseExten.isEmpty())
+    if (extensions.isEmpty())
         return;
 
     bool isNeedLayout = false;
+    int idleCount = 0;
 
-    foreach (QString key, extensions) {
-        mAlreadyUseExten.removeAll(key);
+    foreach (QString e, extensions.keys()) {
         foreach (VideoWidget *vw, mVideoWidgets) {
-            if (vw->ExtensionNum() == key) {
-                vw->reset();
-                isNeedLayout = true;
+            foreach (QString url, extensions.value(e)) {
+                if (vw->ExtensionNum().indexOf(e) != -1 && url == vw->url()) {
+                    vw->reset();
+                    idleCount++;
+                    isNeedLayout = true;
+                }
             }
         }
     }
 
     if (isNeedLayout)
         changeLayout(mpLayoutSelectCombo->currentText());
+
+    if (idleCount && mWaitPlayList.size()) {
+        QMap<QString, QStringList> prepareOpen;
+        while (idleCount) {
+            QPair<QString, QString> item = mWaitPlayList.takeFirst();
+
+            if (prepareOpen.keys().contains(item.first)) {
+                prepareOpen[item.first] << item.second;
+            } else {
+                prepareOpen.insert(item.first, QStringList() << item.second);
+            }
+
+            idleCount--;
+        }
+        open(prepareOpen);
+    }
 }
 
-#if 1
+void VideoLinkageWidget::closeAll()
+{
+    foreach (VideoWidget *vw, mVideoWidgets) {
+        vw->reset();
+    }
+
+    foreach (QString e, mExtenStreamStatus.keys()) {
+        QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
+        foreach (QString url, streamStatus.keys()) {
+            if (streamStatus.value(url)) {
+                streamStatus[url] = false;
+            }
+        }
+    }
+}
+
+void VideoLinkageWidget::extenStateChanged(const QString &numer, const QString &url, bool isPlay)
+{
+    QMap<QString, bool> &streamStatus = mExtenStreamStatus[numer];
+    if (streamStatus.value(url) == isPlay)
+        return;
+
+    streamStatus[url] = isPlay;
+
+    QMap<QString, QStringList> prepare;
+    prepare.insert(numer, QStringList() << url);
+
+    if (isPlay)
+        open(prepare);
+    else
+        close(prepare);
+}
+
+void VideoLinkageWidget::extenStreamChanged(QString e, QStringList urls)
+{
+    if (urls.isEmpty())
+        return;
+
+    if (mExtenStreamStatus.keys().contains(e)) {
+        QMap<QString, QStringList> es;
+        es.insert(e, mExtenStreamStatus.value(e).keys());
+        close(es);
+    }
+
+    QMap<QString, bool> status;
+    foreach (QString url, urls)
+        status.insert(url, false);
+    mExtenStreamStatus.insert(e, status);
+}
+
+void VideoLinkageWidget::extenStreamRemoved(QString e)
+{
+    if (!mExtenStreamStatus.keys().contains(e))
+        return;
+
+    QMap<QString, QStringList> es;
+    es.insert(e, mExtenStreamStatus.value(e).keys());
+    close(es);
+
+    mExtenStreamStatus.remove(e);
+}
+
+void VideoLinkageWidget::operatorExtensChanged(QStringList extens)
+{
+    mOperatorExtens = extens;
+    mOperatorCallExtens.clear();
+}
+
 /* 处理调度员呼叫分机的情况 */
 void VideoLinkageWidget::operatorExtenStateChanged(QString number)
 {
-    if (!mActiveExtenNumber.keys().contains(number))
-        mActiveExtenNumber.insert(number, QStringList());
-
-    QStringList openNumbers;
-    QStringList closeNumbers;
-    QStringList activeCallExtens;
-
-    QMap<QString, PBX::Extension> exten = PBX::Instance()->getExtensionDetail(number);
-    if (!exten.contains(number))
+    if (!mOperatorExtens.contains(number))
         return;
 
-    LOG(Logger::Debug, "operatorExtenStateChanged %s\n", number.toLocal8Bit().data());
+    QStringList uncallExtens;
+    QMap<QString, QStringList> prepareClose;
 
-    if (exten.value(number).peers.count() != 0) {
-        foreach (PBX::PeerInfo peer, exten.value(number).peers.values()) {
-            if (peer.state == PBX::eIncall) {
-                /* 如果是本地发起的呼叫，且在配置中能找到分机的信息 */
-                if (peer.peerChannel.left(5) == "Local" &&
-                        mpSettingsDialog->contains(peer.number)) {
-                    /* 新加入的主呼分机 */
-                    if (!mActiveExtenNumber[number].contains(peer.number)) {
-                        mActiveExtenNumber[number].append(peer.number);
-                        openNumbers.append(peer.number);
-                    }
-                    activeCallExtens.append(peer.number);
-                }
-            }
-        }
 
-        foreach (QString extenNum, mActiveExtenNumber[number]) {
-            /* 发现一个退出通话的分机，关闭该分机的视频 */
-            if (!activeCallExtens.contains(extenNum)) {
-                mActiveExtenNumber[number].removeAll(extenNum);
-                closeNumbers.append(extenNum);
-            }
-        }
-    } else {
-        closeNumbers = mActiveExtenNumber[number];
-        mActiveExtenNumber.insert(number, QStringList());
+    foreach (QString e, mOperatorCallExtens) {
+        QMap<QString, PBX::Extension> exten = PBX::Instance()->getExtensionDetail(e);
+
+        if (exten[e].getState() <= PBX::eIdle)
+            uncallExtens.append(e);
     }
 
-    open(openNumbers);
-    close(closeNumbers);
+    foreach (QString e, uncallExtens) {
+        mOperatorCallExtens.removeAll(e);
+        if (!mExtenStreamStatus.keys().contains(e))
+            continue;
 
-    LOG(Logger::Debug, "open number: %s\n", openNumbers.join(',').toLocal8Bit().data());
-    LOG(Logger::Debug, "close number: %s\n", closeNumbers.join(',').toLocal8Bit().data());
+        QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
+        QStringList urls;
+        foreach (QString url, streamStatus.keys()) {
+            if (streamStatus.value(url)) {
+                streamStatus[url] = false;
+                urls.append(url);
+                emit extenStateChangedSignal(e, false);
+            }
+        }
+        prepareClose.insert(e, urls);
+    }
+
+    close(prepareClose);
+
+    LOG(Logger::Debug, "close number: %s, extens: %s\n", prepareClose.keys().join(',').toLocal8Bit().data(),
+        mOperatorCallExtens.join(',').toLocal8Bit().data());
 }
-#endif
-
 
 /* 处理分机呼叫调度员振铃组的情况 */
-void VideoLinkageWidget::extenStateChanged(QString number)
+void VideoLinkageWidget::extenStateChanged(QString e)
 {
-    if (!mpSettingsDialog->contains(number))
+    if (!mExtenStreamStatus.keys().contains(e))
         return;
 
-    QStringList openNumbers;
-    QStringList closeNumbers;
+    QMap<QString, QStringList> prepareOpen;
+    QMap<QString, QStringList> prepareClose;
 
-    QMap<QString, PBX::Extension> exten = PBX::Instance()->getExtensionDetail(number);
-    if (!exten.contains(number))
+    QMap<QString, PBX::Extension> exten = PBX::Instance()->getExtensionDetail(e);
+    if (!exten.contains(e))
         return;
 
-    LOG(Logger::Debug, "extenStateChanged %s\n", number.toLocal8Bit().data());
+    LOG(Logger::Debug, "extenStateChanged %s\n", e.toLocal8Bit().data());
 
-    bool isPasv = false;  //调度员是否被呼
+    bool isPasv = false;  //调度员所在的振铃组是否被呼
     bool isBroadcast = false;
-    foreach (PBX::PeerInfo peer, exten.value(number).peers.values()) {
+    foreach (PBX::PeerInfo peer, exten.value(e).peers.values()) {
         if (peer.state == PBX::eIncall) {
-            /* 如果分机呼叫的是调度员所在的振铃组号码，且在配置中能找到分机的信息 */
-            if (peer.number == OPERATOR_RING_GROUNP) {
+            /* 如果分机呼叫的是调度员所在的振铃组号码 */
+            if (peer.number == mOperatorGroupChannel) {
                 isPasv = true;
-                if (!mPasvExtenNumber.contains(number)) {
-                    mPasvExtenNumber.append(number);
-                    openNumbers.append(number);
+                if (!mPasvExtenNumber.contains(e)) {
+                    mPasvExtenNumber.append(e);
+
+                    QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
+                    QStringList urls;
+                    foreach (QString url, streamStatus.keys()) {
+                        if (!streamStatus.value(url)) {
+                            streamStatus[url] = true;
+                            urls.append(url);
+                        }
+                    }
+                    emit extenStateChangedSignal(e, true);
+                    prepareOpen.insert(e, urls);
                 }
             } else if (peer.number.isEmpty() && peer.name.isEmpty()) {
                 isBroadcast = true;
-                if (!mBroadcastExtenNumber.contains(number)) {
-                    mBroadcastExtenNumber.append(number);
-                    openNumbers.append(number);
+                if (!mBroadcastExtenNumber.contains(e)) {
+                    mBroadcastExtenNumber.append(e);
+
+                    QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
+                    QStringList urls;
+                    foreach (QString url, streamStatus.keys()) {
+                        if (!streamStatus.value(url)) {
+                            streamStatus[url] = true;
+                            urls.append(url);
+                        }
+                    }
+                    emit extenStateChangedSignal(e, true);
+                    prepareOpen.insert(e, urls);
                 }
             }
         }
     }
 
     /* 如果没有呼叫调度员所在的振铃组且在mPasvExtenNumber中包含改分机号，则清理 */
-    if (!isPasv && mPasvExtenNumber.contains(number)) {
-        mPasvExtenNumber.removeAll(number);
-        closeNumbers.append(number);
+    if (!isPasv && mPasvExtenNumber.contains(e)) {
+        mPasvExtenNumber.removeAll(e);
+
+        QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
+        QStringList urls;
+        foreach (QString url, streamStatus.keys()) {
+            if (streamStatus.value(url)) {
+                streamStatus[url] = false;
+                urls.append(url);
+            }
+        }
+        emit extenStateChangedSignal(e, false);
+        prepareClose.insert(e, urls);
     }
 
-    if (!isBroadcast && mBroadcastExtenNumber.contains(number)) {
-        mBroadcastExtenNumber.removeAll(number);
-        closeNumbers.append(number);
+    if (!isBroadcast && mBroadcastExtenNumber.contains(e)) {
+        mBroadcastExtenNumber.removeAll(e);
+
+        QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
+        QStringList urls;
+        foreach (QString url, streamStatus.keys()) {
+            if (streamStatus.value(url)) {
+                streamStatus[url] = false;
+                urls.append(url);
+            }
+        }
+        emit extenStateChangedSignal(e, false);
+        prepareClose.insert(e, urls);
     }
 
-    open(openNumbers);
-    close(closeNumbers);
+    open(prepareOpen);
+    close(prepareClose);
 
-    LOG(Logger::Debug, "open number: %s\n", openNumbers.join(',').toLocal8Bit().data());
-    LOG(Logger::Debug, "close number: %s\n", closeNumbers.join(',').toLocal8Bit().data());
+    LOG(Logger::Debug, "open number: %s\n", prepareOpen.keys().join(',').toLocal8Bit().data());
+    LOG(Logger::Debug, "close number: %s\n", prepareClose.keys().join(',').toLocal8Bit().data());
+}
+
+void VideoLinkageWidget::callExtens(QStringList extens)
+{    
+    foreach (QString oe, mOperatorExtens)
+        extens.removeAll(oe);
+
+    if (extens.isEmpty())
+        return;
+
+    QMap<QString, QStringList> prepareOpen;
+
+    foreach (QString e, extens) {
+        if (!mExtenStreamStatus.keys().contains(e))
+            continue;
+
+
+        if (!mOperatorCallExtens.contains(e))
+            mOperatorCallExtens.append(e);
+        QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
+        QStringList urls;
+        foreach (QString url, streamStatus.keys()) {
+            if (!streamStatus.value(url)) {
+                streamStatus[url] = true;
+                urls.append(url);
+            }
+        }
+        emit extenStateChangedSignal(e, true);
+        prepareOpen.insert(e, urls);
+    }
+
+    open(prepareOpen);
+
+    LOG(Logger::Debug, "open number: %s, extens: %s\n", prepareOpen.keys().join(',').toLocal8Bit().data(),
+        mOperatorCallExtens.join(',').toLocal8Bit().data());
 }
 
