@@ -75,7 +75,9 @@ SOURCES += main.cpp \
     ui/timedbroadcast/TimedBroadcastEditor.cpp \
     ui/dialogs/dlgemergencycall.cpp \
     misc/qftp.cpp \
-    misc/qurlinfo.cpp
+    misc/qurlinfo.cpp \
+    misc/UDPNotifier.cpp \
+    misc/TCPNotifier.cpp
 
 HEADERS += \
     message_queue/amqp_framing.h \
@@ -133,7 +135,9 @@ HEADERS += \
     ui/timedbroadcast/TimedBroadcastEditor.h \
     ui/dialogs/dlgemergencycall.h \
     misc/qftp.h \
-    misc/qurlinfo.h
+    misc/qurlinfo.h \
+    misc/UDPNotifier.h \
+    misc/TCPNotifier.hpp
 
 RESOURCES += \
     pbx_panel.qrc

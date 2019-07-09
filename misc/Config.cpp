@@ -180,6 +180,13 @@ bool Config::initialise(QString path)
 #else
     Window_Title = OEM_TITLE + VERSION_NAME;
 #endif
+
+    notifierUDPIP_ = settings->value("notifier/udpip", "127.0.0.1").toString();
+    notifierUDPPort_ = settings->value("notifier/udpport", 8888).toInt();
+
+    notifierTCPServerIP_ = settings->value("notifier/tcpip", "127.0.0.1").toString();
+    notifierTCPServerPort_ = settings->value("notifier/tcpport", 8888).toInt();
+
     initStyleSheets();
     delete settings;
     mFtpClient = NULL;

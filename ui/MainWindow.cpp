@@ -192,6 +192,16 @@ MainWindow::MainWindow(QStringList args, QWidget *parent) :
     v->show();
     /************************ 视频联动 ************************/
 
+    udpNotifier_ = new UDPNotifier(this);
+    udpNotifier_->initialize();
+    connect(mainWidget->getExtensionsZone(), &ExtensionsZone::extenStateChangedSignal,
+            udpNotifier_, &UDPNotifier::handleExtenStateChanged);
+
+    tcpNotifier_ = new TCPNotifier(this);
+    tcpNotifier_->initialize();
+    connect(mainWidget->getExtensionsZone(), &ExtensionsZone::extenStateChangedSignal,
+            tcpNotifier_, &TCPNotifier::handleExtenStateChanged);
+
     sMainWindow = this;
     sCallbackUuid = MessageClient::Instance()->getEventMonitor()->addCallback(EventCallback);
     connect(this, SIGNAL(onHAEventReceivedSignal(QString)), this, SLOT(onHAEventReceivedSlot(QString)));

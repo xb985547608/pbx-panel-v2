@@ -4,6 +4,8 @@
 #include <QtGui>
 #include "ui/base/BaseWidget.h"
 #include "ui/dialogs/dlgemergencycall.h"
+#include "misc/UDPNotifier.h"
+#include "misc/TCPNotifier.hpp"
 
 const QString RESTART_FLAG = "dingo restart flag";
 class MainWidget;
@@ -48,6 +50,8 @@ private:
 
     DlgEmergencyCall *m_dlgEmergencyCall;
 
+    UDPNotifier *udpNotifier_;
+    TCPNotifier *tcpNotifier_;
 
 #ifdef EEPBX
     int storageCheckTimer;

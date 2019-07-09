@@ -165,6 +165,11 @@ class Config : public Singleton<Config>
 #ifndef LOCKTEL
     QString OEM_TITLE;
 #endif
+
+    QString notifierUDPIP_;
+    int     notifierUDPPort_;
+    QString notifierTCPServerIP_;
+    int     notifierTCPServerPort_;
 private :
     CmdProcessor* mCmdProcessor;
     FTPClient* mFtpClient;

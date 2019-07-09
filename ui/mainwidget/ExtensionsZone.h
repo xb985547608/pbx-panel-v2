@@ -20,7 +20,7 @@ public:
     void toggleExten(bool, QString extNumber = "");
     void eventMessageReceived(QMap<QString, QString>& msg);
 signals:
-    void extenStateChangedSignal(QString extenNumber, int state);
+    void extenStateChangedSignal(const QString &extenNumber, int state);
     void extenRollCallResultSignal(QString extenNumber, int rollCallResult); //当收到分机点名结果消息时触发
 public slots:
     void extenStateChangedSlot(QString number, int state);
