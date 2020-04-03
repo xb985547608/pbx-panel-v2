@@ -263,6 +263,10 @@ void CallLogWidget::reloadCdrList(bool isEmergencyCall)
     if (mSelectedStartTime.toTime_t() == QDateTime(Config::Instance()->InvalidDate).toTime_t()
             || mSelectedEndTime.toTime_t() == QDateTime(Config::Instance()->InvalidDate).toTime_t())
         endtime = endtime.addYears(1000);
+
+    starttime = starttime.addYears(-10);
+    endtime = endtime.addYears(-10);
+
     QList<PBX::CDR> cdrs = RPCCommand::getCDR(starttime, endtime);
     QString emergencyNumber = Config::Instance()->EmergencyNumber;
     for (int i=0;i<cdrs.size();i++) {
@@ -273,7 +277,7 @@ void CallLogWidget::reloadCdrList(bool isEmergencyCall)
         mCdrListModel->insertRow(0);
         mCdrListModel->setData(mCdrListModel->index(0, 0), cdr.id, Qt::UserRole);
         mCdrListModel->setData(mCdrListModel->index(0, 0), false, Qt::CheckStateRole);
-        mCdrListModel->setData(mCdrListModel->index(0, 1), cdr.calldate);
+        mCdrListModel->setData(mCdrListModel->index(0, 1), cdr.calldate.addYears(10));
         mCdrListModel->setData(mCdrListModel->index(0, 1), cdr.userField, Qt::UserRole);
         mCdrListModel->setData(mCdrListModel->index(0, 2), cdr.src);
         mCdrListModel->setData(mCdrListModel->index(0, 3), cdr.dst);
