@@ -145,8 +145,8 @@ bool Config::initialise(QString path)
     Res_image_banner = ":images/banner-oem";
 #endif
 #ifdef WHITE
-//    Res_image_banner = ":images/banner-white";
-    Res_image_banner = ":images/banner.png";
+    Res_image_banner = ":images/banner-white";
+//    Res_image_banner = ":images/banner.png";
 #endif
 #ifdef SZFY//神州飞扬
     Res_image_banner = ":images/banner-szfy";
