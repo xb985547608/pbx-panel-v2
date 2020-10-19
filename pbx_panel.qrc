@@ -67,5 +67,8 @@
         <file>images/logo_hongtuo.png</file>
         <file>images/banner.png</file>
         <file>images/image_splash.png</file>
+        <file>images/banner_jzck.jpg</file>
+        <file>alert.wav</file>
+        <file>alert.gif</file>
     </qresource>
 </RCC>

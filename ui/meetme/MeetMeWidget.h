@@ -23,6 +23,9 @@ private slots:
     void onRoomBtnClicked(); //左侧会议室列表的会议室按钮被点击后，触发此slot
     void roomStatusChangeSlot(QString roomid);
     void onBtnInviteClicked();
+
+    void showAlertInfo(QString number);
+
 private:
     QWidget* getLeftFrame();
     QWidget* getRightFrame();
@@ -37,6 +40,8 @@ private:
 
     int mUserCount; //当前显示的会议室的人数
     QString mCurrentRoom; //当前显示的会议室的id
+
+    QPointer<QDialog> alertDialog;
 
     void reloadRoomWidget(QStringList& rooms);
     void reloadMembersWidget(QString roomid);

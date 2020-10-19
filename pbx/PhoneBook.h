@@ -7,7 +7,7 @@ class PhoneBook
 {
 public:
     PhoneBook() {}
-    QString toXmlString();
+    QString toXmlString() const;
     QString id;
     QString company;
     QString department;

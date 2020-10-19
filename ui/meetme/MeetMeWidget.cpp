@@ -12,6 +12,9 @@
 #include "ui/dialogs/DialPad.h"
 #include "ui/MainWindow.h"
 #include "ui/phonebook/UiPhoneBookList.h"
+#include <QSoundEffect>
+#include <QMovie>
+#include <QBoxLayout>
 
 static MeetMeWidget* sMeetMeWidget = NULL;
 static void EventCallback(MessageClient::EventType e, QMap<QString, QString>& eventMessage) {
@@ -27,7 +30,48 @@ void MeetMeWidget::eventMessageReceived(QMap<QString, QString>& msg)
     QString event = msg.value("Event");
     if (event != "MeetMeJoin" && event != "MeetMeLeave" && event != "MeetMeMute")
         return;
+
     if (event == "MeetMeJoin" || event == "MeetMeLeave") {
+
+        /// ================================
+        Config* cfg = Config::Instance();
+        QMap<QString, QString> meetmeRinggroups = cfg->meetmeRinggroups_;
+        QString roomNumber = msg.value("Meetme");
+
+        qDebug() << __FUNCTION__ << cfg->meetmeRinggroups_;
+
+        if (meetmeRinggroups.contains(roomNumber) && event == "MeetMeJoin") {
+            auto rooms = RPCCommand::getMeetmeInfo(roomNumber);
+            QMap<QString, PBX::MeetmeMember> roomInfo;
+            if (rooms.size() == 1)
+                roomInfo = *rooms.begin();
+
+            if (roomInfo.size() == 1 && roomInfo.begin()->userNum == "1") {
+                /// 呼叫会议室对应的振铃组成员
+                QString ringgroupNumber = meetmeRinggroups.value(roomNumber);
+                QMap<QString, PBX::RingGroup> ringgroups = RPCCommand::getRinggroups(ringgroupNumber);
+                if (ringgroups.contains(ringgroupNumber)) {
+                    QStringList extens = ringgroups[ringgroupNumber].extenNumbers;
+                    qDebug() << __FUNCTION__ << "alert call:";
+                    for (auto exten: extens) {
+                        RPCCommand::makeConferenceCall("SIP/"+exten, cfg->OperatorGroupCallContext,
+                                                       exten, roomNumber, roomNumber, false);
+
+                        qDebug() <<"\t" << exten;
+                    }
+
+                    QMetaObject::invokeMethod(this, "showAlertInfo", Qt::QueuedConnection, Q_ARG(QString, roomInfo.begin()->callerid));
+                }
+            } else {
+                /// 静音非首位成员
+                for (auto member: roomInfo) {
+                    if (member.userNum != "1" && !member.isMuted)
+                        RPCCommand::meetmeMute(roomNumber, member.userNum, true);
+                }
+            }
+        }
+        /// ===============================!
+
         emit roomStatusChangeSignal(msg.value("Meetme"));
         return;
     }
@@ -194,6 +238,67 @@ void MeetMeWidget::onBtnInviteClicked()
         }
     }
     delete dp;
+}
+
+void MeetMeWidget::showAlertInfo(QString number)
+{
+    static QMap<QString, PhoneBook> phonebooks;
+    if (phonebooks.isEmpty()) {
+        phonebooks = RPCCommand::getPhonebook("");
+    }
+
+    PhoneBook phonebook;
+    for (auto val: phonebooks){
+        if (val.extenNumber == number) {
+            phonebook = val;
+            break;
+        }
+    }
+
+    if (alertDialog.isNull()) {
+        QSoundEffect effect;
+        effect.setSource(QUrl::fromLocalFile(":/alert.wav"));
+        //    effect.setLoopCount(1);
+        effect.setLoopCount(QSoundEffect::Infinite);
+        effect.setVolume(0.8f);
+        effect.play();
+
+        QDialog *dig = new QDialog(this);
+        dig->setWindowTitle("紧急报警");
+        dig->setStyleSheet("background: white; font-size: 16px; color: #333333");
+
+        QLabel *left = new QLabel(dig);
+        QMovie *movie = new QMovie(":/alert.gif", QByteArray(), left);
+        left->setMovie(movie);
+        movie->setScaledSize({200,200});
+        movie->start();
+
+        QLabel *right = new QLabel(number+" 触发报警", dig);
+        right->setTextFormat(Qt::RichText);
+        right->setText(QString("<p style=\"font-family: ’微软雅黑‘; font-size: 24px; font-weight: bold; text-align: center; color: red\">··· 报警分机 ···</p>"
+                               "<p style=\"font-family: ’微软雅黑‘; font-size: 20px; font-weight: bold; text-align: center; line-height: 18px\">%1(%2)</p>")
+                       .arg(phonebook.name, number));
+        right->setObjectName("AlertText");
+
+        QHBoxLayout *row = new QHBoxLayout(dig);
+        row->setContentsMargins(20,10,20,20);
+        row->setSpacing(12);
+        row->addWidget(left, 0, Qt::AlignCenter);
+        row->addWidget(right, 0, Qt::AlignCenter);
+
+        alertDialog = dig;
+        dig->setFixedSize(640, 320);
+        dig->exec();
+        alertDialog = nullptr;
+
+        dig->deleteLater();
+        effect.stop();
+    } else {
+        QLabel *right = alertDialog.data()->findChild<QLabel*>("AlertText");
+        if (right)
+            right->setText(right->text().append(QString("<p style=\"font-family: ’微软雅黑‘; font-size: 16px; font-weight: bold; text-align: center; line-height: 14px\">%1(%2)</p>")
+                                                .arg(phonebook.name, number)));
+    }
 }
 
 Member::Member(QString roomId, PBX::MeetmeMember m, PBX::Extension e, QWidget *parent) :

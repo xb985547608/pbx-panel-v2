@@ -1,6 +1,6 @@
 ﻿#include "PhoneBook.h"
 
-QString PhoneBook::toXmlString()
+QString PhoneBook::toXmlString() const
 {
     QString xmlString = QString(
                 "<PhoneBook>"

@@ -145,7 +145,7 @@ bool Config::initialise(QString path)
     Res_image_banner = ":images/banner-oem";
 #endif
 #ifdef WHITE
-    Res_image_banner = ":images/banner-white";
+    Res_image_banner = ":images/banner_jzck.jpg";
 //    Res_image_banner = ":images/banner.png";
 #endif
 #ifdef SZFY//神州飞扬
@@ -186,6 +186,13 @@ bool Config::initialise(QString path)
 
     notifierTCPServerIP_ = settings->value("notifier/tcpip", "127.0.0.1").toString();
     notifierTCPServerPort_ = settings->value("notifier/tcpport", 8888).toInt();
+
+    {
+        settings->beginGroup("MeetmeRinggroups");
+        for (auto key: settings->allKeys())
+            meetmeRinggroups_.insert(key, settings->value(key).toString());
+        settings->endGroup();
+    }
 
     initStyleSheets();
     delete settings;

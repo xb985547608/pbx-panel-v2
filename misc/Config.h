@@ -170,6 +170,8 @@ class Config : public Singleton<Config>
     int     notifierUDPPort_;
     QString notifierTCPServerIP_;
     int     notifierTCPServerPort_;
+
+    QMap<QString, QString> meetmeRinggroups_;
 private :
     CmdProcessor* mCmdProcessor;
     FTPClient* mFtpClient;

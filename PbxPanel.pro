@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network sql widgets
+QT       += core gui network sql widgets multimedia
 
 TRANSLATIONS+=en.ts
 
@@ -18,6 +18,8 @@ DEFINES += WHITE
 #DEFINES += JXLC
 #DEFINES += LOCKTEL
 DEFINES += V5
+
+DESTDIR = $$PWD/bin
 
 #win32: LIBS += -lole32 -lws2_32 -L$$PWD/lib -lcwebpage -lrabbitmq "D:\Qt\Qt5.1.1\5.1.1\mingw48_32\bin\Qt5Ftp.dll"
 win32: LIBS += -lole32 -lws2_32 -L$$PWD/lib -lrabbitmq#-lcwebpage 暂时不用这个库
