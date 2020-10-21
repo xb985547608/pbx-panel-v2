@@ -70,5 +70,7 @@
         <file>images/banner_jzck.jpg</file>
         <file>alert.wav</file>
         <file>alert.gif</file>
+        <file>images/banner-zdtf.png</file>
+        <file>images/image_splash_zdtf.png</file>
     </qresource>
 </RCC>
