@@ -121,8 +121,10 @@ void CallLogWidget::onBtnQueryClicked()
 
 void CallLogWidget::onBtnEmergencyQueryClicked()
 {
-    mSelectedStartTime = QDateTime(Config::Instance()->InvalidDate);
-    mSelectedEndTime = QDateTime(Config::Instance()->InvalidDate);
+//    mSelectedStartTime = QDateTime(Config::Instance()->InvalidDate);
+//    mSelectedEndTime = QDateTime(Config::Instance()->InvalidDate);
+    mSelectedStartTime = mStartDateTimeEdit->dateTime();
+    mSelectedEndTime = mEndDateTimeEdit->dateTime();
     reloadCdrList(true);
 }
 
@@ -271,7 +273,7 @@ void CallLogWidget::reloadCdrList(bool isEmergencyCall)
     QString emergencyNumber = Config::Instance()->EmergencyNumber;
     for (int i=0;i<cdrs.size();i++) {
         PBX::CDR cdr = cdrs.at(i);
-        if(isEmergencyCall && !cdr.src.startsWith(emergencyNumber)){
+        if(isEmergencyCall && cdr.src != emergencyNumber && cdr.dst != emergencyNumber){
             continue;
         }
         mCdrListModel->insertRow(0);

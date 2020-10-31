@@ -256,10 +256,14 @@ void VideoLinkageWidget::close(const QMap<QString, QStringList> &extensions)
                     vw->reset();
                     idleCount++;
                     isNeedLayout = true;
+
+                    qDebug() << __FUNCTION__ << "- close url:" << url << e;
                 }
             }
         }
     }
+
+    qDebug() << extensions;
 
     if (isNeedLayout)
         changeLayout(mpLayoutSelectCombo->currentText());
@@ -277,6 +281,8 @@ void VideoLinkageWidget::close(const QMap<QString, QStringList> &extensions)
 
             idleCount--;
         }
+
+        qDebug() << __FUNCTION__ << "- open:" << prepareOpen;
         open(prepareOpen);
     }
 }
@@ -312,6 +318,8 @@ void VideoLinkageWidget::extenStateChanged(const QString &numer, const QString &
         open(prepare);
     else
         close(prepare);
+
+    qDebug() << __FUNCTION__ << (isPlay ? "- open" : "- close") << prepare;
 }
 
 void VideoLinkageWidget::extenStreamChanged(QString e, QStringList urls)
@@ -358,6 +366,9 @@ void VideoLinkageWidget::operatorExtenStateChanged(QString number)
     QStringList uncallExtens;
     QMap<QString, QStringList> prepareClose;
 
+    QMap<QString, PBX::Extension> opexten = PBX::Instance()->getExtensionDetail(number);
+    if (opexten[number].getState() > PBX::eIdle)
+        return;
 
     foreach (QString e, mOperatorCallExtens) {
         QMap<QString, PBX::Extension> exten = PBX::Instance()->getExtensionDetail(e);
@@ -383,7 +394,9 @@ void VideoLinkageWidget::operatorExtenStateChanged(QString number)
         prepareClose.insert(e, urls);
     }
 
-    close(prepareClose);
+//    close(prepareClose);
+
+    qDebug() << __FUNCTION__ << "- close:" << prepareClose.keys() << "->" << number << opexten[number].getState();
 
     LOG(Logger::Debug, "close number: %s, extens: %s\n", prepareClose.keys().join(',').toLocal8Bit().data(),
         mOperatorCallExtens.join(',').toLocal8Bit().data());
@@ -402,82 +415,73 @@ void VideoLinkageWidget::extenStateChanged(QString e)
     if (!exten.contains(e))
         return;
 
-    LOG(Logger::Debug, "extenStateChanged %s\n", e.toLocal8Bit().data());
+    LOG(Logger::Debug, "extenStateChanged %s %d\n", e.toLocal8Bit().data(), exten[e].getState());
 
     bool isPasv = false;  //调度员所在的振铃组是否被呼
     bool isBroadcast = false;
-    foreach (PBX::PeerInfo peer, exten.value(e).peers.values()) {
-        if (peer.state == PBX::eIncall) {
-            /* 如果分机呼叫的是调度员所在的振铃组号码 */
-            if (peer.number == mOperatorGroupChannel) {
-                isPasv = true;
-                if (!mPasvExtenNumber.contains(e)) {
-                    mPasvExtenNumber.append(e);
 
-                    QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
-                    QStringList urls;
-                    foreach (QString url, streamStatus.keys()) {
-                        if (!streamStatus.value(url)) {
-                            streamStatus[url] = true;
-                            urls.append(url);
-                        }
-                    }
-                    emit extenStateChangedSignal(e, true);
-                    prepareOpen.insert(e, urls);
-                }
-            } else if (peer.number.isEmpty() && peer.name.isEmpty()) {
-                isBroadcast = true;
-                if (!mBroadcastExtenNumber.contains(e)) {
-                    mBroadcastExtenNumber.append(e);
+    if (exten[e].getState() > PBX::eIdle) {
+        foreach (PBX::PeerInfo peer, exten.value(e).peers.values()) {
+            if (peer.state == PBX::eIncall) {
+                /* 如果分机呼叫的是调度员所在的振铃组号码 */
+                if (peer.number == mOperatorGroupChannel) {
+                    isPasv = true;
+                    if (!mPasvExtenNumber.contains(e)) {
+                        mPasvExtenNumber.append(e);
 
-                    QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
-                    QStringList urls;
-                    foreach (QString url, streamStatus.keys()) {
-                        if (!streamStatus.value(url)) {
-                            streamStatus[url] = true;
-                            urls.append(url);
+                        QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
+                        QStringList urls;
+                        foreach (QString url, streamStatus.keys()) {
+                            if (!streamStatus.value(url)) {
+                                streamStatus[url] = true;
+                                urls.append(url);
+                            }
                         }
+                        emit extenStateChangedSignal(e, true);
+                        prepareOpen.insert(e, urls);
                     }
-                    emit extenStateChangedSignal(e, true);
-                    prepareOpen.insert(e, urls);
+                } else if (peer.number.isEmpty() && peer.name.isEmpty()) {
+                    isBroadcast = true;
+                    if (!mBroadcastExtenNumber.contains(e)) {
+                        mBroadcastExtenNumber.append(e);
+
+                        QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
+                        QStringList urls;
+                        foreach (QString url, streamStatus.keys()) {
+                            if (!streamStatus.value(url)) {
+                                streamStatus[url] = true;
+                                urls.append(url);
+                            }
+                        }
+                        emit extenStateChangedSignal(e, true);
+                        prepareOpen.insert(e, urls);
+                    }
                 }
             }
         }
-    }
-
-    /* 如果没有呼叫调度员所在的振铃组且在mPasvExtenNumber中包含改分机号，则清理 */
-    if (!isPasv && mPasvExtenNumber.contains(e)) {
-        mPasvExtenNumber.removeAll(e);
-
+    } else {
         QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
         QStringList urls;
         foreach (QString url, streamStatus.keys()) {
-            if (streamStatus.value(url)) {
-                streamStatus[url] = false;
-                urls.append(url);
-            }
+            streamStatus[url] = false;
+            urls.append(url);
         }
-        emit extenStateChangedSignal(e, false);
-        prepareClose.insert(e, urls);
-    }
 
-    if (!isBroadcast && mBroadcastExtenNumber.contains(e)) {
-        mBroadcastExtenNumber.removeAll(e);
+        if (!isPasv && mPasvExtenNumber.contains(e))
+            mPasvExtenNumber.removeAll(e);
 
-        QMap<QString, bool> &streamStatus = mExtenStreamStatus[e];
-        QStringList urls;
-        foreach (QString url, streamStatus.keys()) {
-            if (streamStatus.value(url)) {
-                streamStatus[url] = false;
-                urls.append(url);
-            }
-        }
+        if (!isBroadcast && mBroadcastExtenNumber.contains(e))
+            mBroadcastExtenNumber.removeAll(e);
+
         emit extenStateChangedSignal(e, false);
         prepareClose.insert(e, urls);
     }
 
     open(prepareOpen);
     close(prepareClose);
+
+    qDebug() << __FUNCTION__ << "- open:" << prepareOpen << "->" << e << exten[e].getState();
+    qDebug() << __FUNCTION__ << "- close:" << prepareClose << "->" << e << exten[e].getState();
 
     LOG(Logger::Debug, "open number: %s\n", prepareOpen.keys().join(',').toLocal8Bit().data());
     LOG(Logger::Debug, "close number: %s\n", prepareClose.keys().join(',').toLocal8Bit().data());
@@ -514,6 +518,7 @@ void VideoLinkageWidget::callExtens(QStringList extens)
 
     open(prepareOpen);
 
+    qDebug() << __FUNCTION__ << "- open:" << prepareOpen.keys() << "->" << extens;
     LOG(Logger::Debug, "open number: %s, extens: %s\n", prepareOpen.keys().join(',').toLocal8Bit().data(),
         mOperatorCallExtens.join(',').toLocal8Bit().data());
 }

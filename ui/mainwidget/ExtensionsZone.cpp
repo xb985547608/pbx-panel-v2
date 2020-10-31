@@ -32,6 +32,15 @@ void ExtensionsZone::eventMessageReceived(QMap<QString, QString> &msg)
         number = channel.left(channel.lastIndexOf("-"));
         number = number.right(number.length() - (number.lastIndexOf("/") + 1));
         LOG(Logger::Debug, "number: %s\n", number.toStdString().c_str());
+
+        if (number == "")
+            return;
+        //QMap<QString, PBX::Extension> extens = RPCCommand::getExtensionDetailed(number);
+        QMap<QString, PBX::Extension> extens = PBX::Instance()->getExtensionDetail(number, true);
+        if (!extens.contains(number))
+            return;
+        PBX::Extension pbxExten = extens.value(number);
+        emit extenStateChangedSignal(number, pbxExten.getState());
     }
     else if (msg.value("Event") == "RollCallResult") {
         PBX::RollCallState rollCallState = PBX::eUnChecked;
@@ -46,14 +55,6 @@ void ExtensionsZone::eventMessageReceived(QMap<QString, QString> &msg)
         emit extenRollCallResultSignal(number, rollCallState);
         return;
     }
-    if (number == "")
-        return;
-    //QMap<QString, PBX::Extension> extens = RPCCommand::getExtensionDetailed(number);
-    QMap<QString, PBX::Extension> extens = PBX::Instance()->getExtensionDetail(number);
-    if (!extens.contains(number))
-        return;
-    PBX::Extension pbxExten = extens.value(number);
-    emit extenStateChangedSignal(number, pbxExten.getState());
 }
 
 void ExtensionsZone::extenRollCallResultSlot(QString number, int rollCallResult)

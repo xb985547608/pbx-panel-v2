@@ -40,6 +40,7 @@ void OperatorZone::eventMessageReceived(QMap<QString, QString> &msg)
         return;
     PBX::Extension pbxExten = extens.value(number);
     */
+    PBX::Instance()->getExtensionDetail("", true);
     OperatorExten* e = mOpExtens.value(number);
     e->onStateChanged();
     emit operatorExtenStateChagne(e->getPbxExten().number);

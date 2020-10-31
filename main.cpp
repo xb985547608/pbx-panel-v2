@@ -14,7 +14,7 @@ static bool initialiseLogger()
 {
     Logger* logger = Logger::Instance();
 #ifndef PBX_NO_DEBUG
-    if (!logger->initialise(Logger::DDebug/*, "panel.log"*/)) {
+    if (!logger->initialise(Logger::DDebug, "panel.log")) {
 #else
     if (!logger->initialise(Logger::Debug)) {
 #endif
@@ -106,6 +106,22 @@ bool initialiseLocalDB(QApplication& a)
     return true;
 }
 
+
+void messageOutput(QtMsgType type, const QMessageLogContext& context, const QString& msg)
+{
+    //    qt_message_output(type, context, msg);
+    QString logMessage = qFormatLogMessage(type, context, msg);
+
+    // print nothing if message pattern didn't apply / was empty.
+    // (still print empty lines, e.g. because message itself was empty)
+    if (logMessage.isNull())
+        return;
+
+    logMessage.append(QLatin1Char('\n'));
+    logMessage.prepend(QString("[%1] - ").arg(QDateTime::currentDateTime().toString("yyyy-MM-ss hh:mm:ss.zzz")));
+    OutputDebugString(reinterpret_cast<const wchar_t*>(logMessage.utf16()));
+}
+
 int main(int argc, char *argv[])
 {
     int ret = 1;
@@ -116,6 +132,8 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 #endif
     QApplication a(argc, argv);
+
+    qInstallMessageHandler(messageOutput);
 
     QTranslator translator;
     bool b = false;

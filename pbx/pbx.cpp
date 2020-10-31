@@ -97,7 +97,10 @@ PBX::Extension PBX::getExtensionDetail(PBX::Extension &e) {
     return e;
 }
 
-QMap<QString, PBX::Extension> PBX::getExtensionDetail(QString number) {
+QMap<QString, PBX::Extension> PBX::getExtensionDetail(QString number, bool update) {
+    if (update)
+        mExtensions = RPCCommand::getExtensionDetailed();
+
     if (number == "")
         return mExtensions;
     QMap<QString, PBX::Extension> extens;

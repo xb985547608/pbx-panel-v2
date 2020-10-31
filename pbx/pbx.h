@@ -87,7 +87,7 @@ public:
     virtual ~PBX() {}
     bool initialise();
     PBX::Extension getExtensionDetail(PBX::Extension& e);
-    QMap<QString, PBX::Extension> getExtensionDetail(QString number = "");
+    QMap<QString, PBX::Extension> getExtensionDetail(QString number = "", bool update = false);
 
     void eventMessageReceived(MessageClient::EventType, QMap<QString, QString> &msg);
     /*

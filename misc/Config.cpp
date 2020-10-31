@@ -50,7 +50,8 @@ bool Config::initialise(QString path)
     this->OnlineExtensionGroupName = "在线分机";
     this->OnlineExtensionGroupNumber = "number_of_online_exten";
     this->DefaultCallerId = "000000";
-    this->EmergencyNumber = "888";
+//    this->EmergencyNumber = "888";
+    this->EmergencyNumber = settings->value("emergency/number", "2006").toString();
 #ifdef EEPBX
     this->RpcTimeout = 30;
 #else
@@ -107,8 +108,8 @@ bool Config::initialise(QString path)
 #else //OEM AND WHITE版本
 #ifdef WHITE
 //    this->Res_image_splash = ":images/image_splash_white";
-//    this->Res_image_splash = ":images/image_splash.png";
-    this->Res_image_splash = ":images/image_splash_zdtf.png";
+    this->Res_image_splash = ":images/image_splash.png";
+//    this->Res_image_splash = ":images/image_splash_zdtf.png";
 
 #else
     this->Res_image_splash = ":images/image_splash_oem";
@@ -146,8 +147,8 @@ bool Config::initialise(QString path)
     Res_image_banner = ":images/banner-oem";
 #endif
 #ifdef WHITE
-    Res_image_banner = ":images/banner-zdtf.png";
-//    Res_image_banner = ":images/banner_jzck.jpg";
+//    Res_image_banner = ":images/banner-zdtf.png";
+    Res_image_banner = ":images/banner_jzck.jpg";
 //    Res_image_banner = ":images/banner.png";
 #endif
 #ifdef SZFY//神州飞扬
